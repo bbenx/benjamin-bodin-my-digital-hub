@@ -4,14 +4,15 @@ const links = [
   {
     icon: Instagram,
     label: "Instagram",
-    href: "https://instagram.com/benjaminbodin",
-    display: "@benjaminbodin",
+    href: "https://instagram.com/_benjaminbodin",
+    display: "@_benjaminbodin",
+    iconClassName: "text-pink-500 group-hover:text-pink-400",
   },
   {
     icon: ExternalLink,
     label: "Book",
-    href: "https://benjaminbodin.com/book",
-    display: "Mon Book",
+    href: "https://benjaminbodin.book.fr/",
+    display: "benjaminbodin.book.fr",
   },
   {
     icon: Mail,
@@ -58,7 +59,7 @@ const Index = () => {
               rel="noopener noreferrer"
               className="group flex items-center gap-4 px-6 py-4 rounded-lg border border-border bg-card hover:border-primary/40 transition-all duration-300"
             >
-              <link.icon className="w-5 h-5 text-primary/70 group-hover:text-primary transition-colors" />
+              <link.icon className={`w-5 h-5 transition-colors ${link.iconClassName ?? "text-primary/70 group-hover:text-primary"}`} />
               <div className="flex flex-col">
                 <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
                   {link.label}
