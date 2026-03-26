@@ -4,14 +4,15 @@ const links = [
   {
     icon: Instagram,
     label: "Instagram",
-    href: "https://instagram.com/benjaminbodin",
-    display: "@benjaminbodin",
+    href: "https://instagram.com/_benjaminbodin",
+    display: "@_benjaminbodin",
+    iconClassName: "text-pink-500 group-hover:text-pink-400",
   },
   {
     icon: ExternalLink,
     label: "Book",
-    href: "https://benjaminbodin.com/book",
-    display: "Mon Book",
+    href: "https://benjaminbodin.book.fr/",
+    display: "benjaminbodin.book.fr",
   },
   {
     icon: Mail,
