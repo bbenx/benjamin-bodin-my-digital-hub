@@ -1,4 +1,4 @@
-import { Instagram, Mail, ExternalLink } from "lucide-react";
+import { Instagram, Mail, Camera } from "lucide-react";
 
 const links = [
   {
@@ -6,10 +6,9 @@ const links = [
     label: "Instagram",
     href: "https://instagram.com/_benjaminbodin",
     display: "@_benjaminbodin",
-    iconClassName: "text-pink-500 group-hover:text-pink-400",
   },
   {
-    icon: ExternalLink,
+    icon: Camera,
     label: "Book",
     href: "https://benjaminbodin.book.fr/",
     display: "benjaminbodin.book.fr",
@@ -17,8 +16,8 @@ const links = [
   {
     icon: Mail,
     label: "Email",
-    href: "mailto:contact@benjaminbodin.com",
-    display: "contact@benjaminbodin.com",
+    href: "mailto:benjaminbodin.model@gmail.com",
+    display: "benjaminbodin.model@gmail.com",
   },
 ];
 
@@ -59,7 +58,7 @@ const Index = () => {
               rel="noopener noreferrer"
               className="group flex items-center gap-4 px-6 py-4 rounded-lg border border-border bg-card hover:border-primary/40 transition-all duration-300"
             >
-              <link.icon className={`w-5 h-5 transition-colors ${link.iconClassName ?? "text-primary/70 group-hover:text-primary"}`} />
+              <link.icon className="w-5 h-5 transition-colors text-primary/70 group-hover:text-primary" />
               <div className="flex flex-col">
                 <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
                   {link.label}
