@@ -1,4 +1,4 @@
-import { Instagram, Mail, ExternalLink } from "lucide-react";
+import { Instagram, Mail, Camera } from "lucide-react";
 
 const links = [
   {
@@ -6,10 +6,9 @@ const links = [
     label: "Instagram",
     href: "https://instagram.com/_benjaminbodin",
     display: "@_benjaminbodin",
-    iconClassName: "text-pink-500 group-hover:text-pink-400",
   },
   {
-    icon: ExternalLink,
+    icon: Camera,
     label: "Book",
     href: "https://benjaminbodin.book.fr/",
     display: "benjaminbodin.book.fr",
@@ -17,8 +16,8 @@ const links = [
   {
     icon: Mail,
     label: "Email",
-    href: "mailto:contact@benjaminbodin.com",
-    display: "contact@benjaminbodin.com",
+    href: "mailto:benjaminbodin.model@gmail.com",
+    display: "benjaminbodin.model@gmail.com",
   },
 ];
 
