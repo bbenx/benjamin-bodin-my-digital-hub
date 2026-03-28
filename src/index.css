@@ -79,7 +79,8 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    /* Pas de scroll-behavior: smooth ici : il anime aussi scrollTo() au changement de route.
+       Les ancres utilisent scrollIntoView({ behavior: "smooth" }) dans le code. */
     width: 100%;
     max-width: 100%;
     overscroll-behavior-x: none;
