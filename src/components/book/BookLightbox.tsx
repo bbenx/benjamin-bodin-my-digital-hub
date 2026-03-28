@@ -103,6 +103,9 @@ const BookLightbox = ({
             <div className="absolute bottom-0 left-0 right-0 z-10 p-4 bg-gradient-to-t from-black/60 to-transparent flex items-center justify-between text-white">
               <div className="flex items-center gap-3">
                 <span className="text-sm font-medium">{item.title}</span>
+                {item.photographer && (
+                  <span className="text-xs text-white/50">by {item.photographer}</span>
+                )}
                 <Badge
                   variant="outline"
                   className="text-[10px] border-white/30 text-white/80"

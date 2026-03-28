@@ -1,69 +1,43 @@
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { Separator } from "@/components/ui/separator";
 import { CircularGallery, type GalleryItem } from "@/components/ui/circular-gallery";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-
-// Placeholder gallery items — will be replaced with actual portfolio photos
-const galleryData: GalleryItem[] = [
-  {
-    common: "Portrait",
-    binomial: "Studio",
-    photo: {
-      url: "/assets/book/placeholder-1.jpg",
-      text: "Portrait studio",
-      by: "",
-    },
-  },
-  {
-    common: "Éditorial",
-    binomial: "Mode",
-    photo: {
-      url: "/assets/book/placeholder-2.jpg",
-      text: "Éditorial mode",
-      by: "",
-    },
-  },
-  {
-    common: "Cinéma",
-    binomial: "Court-métrage",
-    photo: {
-      url: "/assets/book/placeholder-3.jpg",
-      text: "Cinéma",
-      by: "",
-    },
-  },
-  {
-    common: "Défilé",
-    binomial: "Runway",
-    photo: {
-      url: "/assets/book/placeholder-4.jpg",
-      text: "Défilé",
-      by: "",
-    },
-  },
-  {
-    common: "Commercial",
-    binomial: "Publicité",
-    photo: {
-      url: "/assets/book/placeholder-5.jpg",
-      text: "Commercial",
-      by: "",
-    },
-  },
-  {
-    common: "Portrait",
-    binomial: "Extérieur",
-    photo: {
-      url: "/assets/book/placeholder-6.jpg",
-      text: "Portrait extérieur",
-      by: "",
-    },
-  },
-];
+import { fetchBookManifest } from "@/lib/book-manifest";
 
 const GallerySection = () => {
   const navigate = useNavigate();
+
+  const { data: manifest } = useQuery({
+    queryKey: ["book-manifest"],
+    queryFn: fetchBookManifest,
+  });
+
+  // Pick a spread of images from the manifest for the 3D gallery
+  const galleryItems: GalleryItem[] = (() => {
+    if (!manifest || manifest.items.length === 0) return [];
+
+    // Take up to 10 images, evenly spaced through the list
+    const total = manifest.items.length;
+    const count = Math.min(10, total);
+    const step = total / count;
+
+    return Array.from({ length: count }, (_, i) => {
+      const item = manifest.items[Math.floor(i * step)];
+      return {
+        common: item.title,
+        binomial: item.category,
+        photo: {
+          url: item.src,
+          text: item.title,
+          by: item.photographer,
+        },
+      };
+    });
+  })();
+
+  if (galleryItems.length === 0) return null;
 
   return (
     <section id="galerie" className="relative">
@@ -87,7 +61,7 @@ const GallerySection = () => {
           {/* 3D Gallery */}
           <div className="w-full h-full">
             <CircularGallery
-              items={galleryData}
+              items={galleryItems}
               radius={500}
               autoRotateSpeed={0.03}
             />

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Play } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { cn } from "@/lib/utils";
+import { useInView } from "framer-motion";
 import type { BookMediaItem } from "@/lib/book-manifest";
 
 interface BookItemProps {
@@ -10,8 +12,11 @@ interface BookItemProps {
 }
 
 const BookItem = ({ item, onClick }: BookItemProps) => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true });
   const [loaded, setLoaded] = useState(false);
   const imageSrc = item.thumb || item.src;
+  const ratio = item.width / item.height;
 
   return (
     <button
@@ -20,26 +25,26 @@ const BookItem = ({ item, onClick }: BookItemProps) => {
       onClick={onClick}
       aria-label={`Voir ${item.title}`}
     >
-      {/* Skeleton placeholder */}
-      {!loaded && (
-        <div
-          className="w-full bg-secondary/50 animate-pulse"
-          style={{ aspectRatio: `${item.width} / ${item.height}` }}
+      <AspectRatio
+        ref={ref}
+        ratio={ratio}
+        className="bg-accent relative size-full rounded-lg"
+      >
+        <img
+          src={imageSrc}
+          alt={item.title}
+          loading="lazy"
+          width={item.width}
+          height={item.height}
+          className={cn(
+            "size-full rounded-lg object-cover opacity-0 transition-all duration-1000 ease-in-out group-hover:scale-105",
+            {
+              "opacity-100": isInView && loaded,
+            }
+          )}
+          onLoad={() => setLoaded(true)}
         />
-      )}
-
-      <img
-        src={imageSrc}
-        alt={item.title}
-        loading="lazy"
-        width={item.width}
-        height={item.height}
-        className={cn(
-          "w-full h-auto transition-transform duration-500 group-hover:scale-105",
-          !loaded && "absolute opacity-0"
-        )}
-        onLoad={() => setLoaded(true)}
-      />
+      </AspectRatio>
 
       {/* Video overlay */}
       {item.type === "video" && (
@@ -53,6 +58,9 @@ const BookItem = ({ item, onClick }: BookItemProps) => {
       {/* Hover overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
         <p className="text-white text-sm font-medium">{item.title}</p>
+        {item.photographer && (
+          <p className="text-white/60 text-xs mt-0.5">by {item.photographer}</p>
+        )}
         <Badge
           variant="outline"
           className="mt-1 w-fit text-[10px] border-white/30 text-white/80"

@@ -9,6 +9,7 @@ export interface BookMediaItem {
   thumb?: string;
   category: string;
   title: string;
+  photographer: string;
   date: string;
   type: "photo" | "video";
   width: number;

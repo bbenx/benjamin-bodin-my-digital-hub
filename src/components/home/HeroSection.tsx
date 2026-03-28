@@ -1,6 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { BlurText } from "@/components/ui/blur-text";
-import portrait from "@/assets/portrait.png";
+const portrait = "/assets/book/Ludo%202/LYNE9458.webp";
 
 const HeroSection = () => {
   return (

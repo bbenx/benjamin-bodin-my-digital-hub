@@ -1,10 +1,620 @@
 {
   "categories": [
-    { "id": "portrait", "label": "Portrait" },
-    { "id": "editorial", "label": "Éditorial" },
-    { "id": "runway", "label": "Défilé" },
-    { "id": "commercial", "label": "Commercial" },
-    { "id": "cinema", "label": "Cinéma" }
+    {
+      "id": "portrait",
+      "label": "Portrait"
+    },
+    {
+      "id": "editorial",
+      "label": "Éditorial"
+    },
+    {
+      "id": "runway",
+      "label": "Défilé"
+    },
+    {
+      "id": "commercial",
+      "label": "Commercial"
+    },
+    {
+      "id": "cinema",
+      "label": "Cinéma"
+    }
   ],
-  "items": []
+  "items": [
+    {
+      "id": "001",
+      "src": "/assets/book/Clotis%202/0_DSC00178.webp",
+      "category": "portrait",
+      "title": "0_DSC00178",
+      "photographer": "Clotis 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 4672,
+      "height": 5840
+    },
+    {
+      "id": "002",
+      "src": "/assets/book/Clotis%202/0_DSC00183.webp",
+      "category": "editorial",
+      "title": "0_DSC00183",
+      "photographer": "Clotis 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 4249,
+      "height": 5311
+    },
+    {
+      "id": "003",
+      "src": "/assets/book/Clotis%202/0_DSC00209.webp",
+      "category": "editorial",
+      "title": "0_DSC00209",
+      "photographer": "Clotis 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 4672,
+      "height": 5840
+    },
+    {
+      "id": "004",
+      "src": "/assets/book/Clotis%202/0_DSC00225%20%281%29.webp",
+      "category": "portrait",
+      "title": "0_DSC00225 (1)",
+      "photographer": "Clotis 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 3954,
+      "height": 4942
+    },
+    {
+      "id": "005",
+      "src": "/assets/book/Clotis%202/0_DSC00243.webp",
+      "category": "portrait",
+      "title": "0_DSC00243",
+      "photographer": "Clotis 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 4672,
+      "height": 5840
+    },
+    {
+      "id": "006",
+      "src": "/assets/book/Clotis%202/By.webp",
+      "category": "editorial",
+      "title": "By",
+      "photographer": "Clotis 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 4648,
+      "height": 5810
+    },
+    {
+      "id": "007",
+      "src": "/assets/book/Divers/2348CCDC-DED2-426F-B56E-706C15D86433.webp",
+      "category": "editorial",
+      "title": "2348CCDC-DED2-426F-B56E-706C15D86433",
+      "photographer": "Divers",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "id": "008",
+      "src": "/assets/book/Divers/F260362F-13F7-483D-BDF7-C886715883D0.webp",
+      "category": "editorial",
+      "title": "F260362F-13F7-483D-BDF7-C886715883D0",
+      "photographer": "Divers",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1179,
+      "height": 1769
+    },
+    {
+      "id": "009",
+      "src": "/assets/book/Divers/IMG_9193.webp",
+      "category": "commercial",
+      "title": "IMG_9193",
+      "photographer": "Divers",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1680,
+      "height": 2976
+    },
+    {
+      "id": "010",
+      "src": "/assets/book/Divers/IMG_9200.webp",
+      "category": "commercial",
+      "title": "IMG_9200",
+      "photographer": "Divers",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1680,
+      "height": 2976
+    },
+    {
+      "id": "011",
+      "src": "/assets/book/Divers/IMG_9203.webp",
+      "category": "commercial",
+      "title": "IMG_9203",
+      "photographer": "Divers",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1680,
+      "height": 2976
+    },
+    {
+      "id": "012",
+      "src": "/assets/book/Divers/IMG_9216.webp",
+      "category": "commercial",
+      "title": "IMG_9216",
+      "photographer": "Divers",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1680,
+      "height": 2976
+    },
+    {
+      "id": "013",
+      "src": "/assets/book/Ludo%202/0_DSC00225.webp",
+      "category": "portrait",
+      "title": "0_DSC00225",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 3954,
+      "height": 4942
+    },
+    {
+      "id": "014",
+      "src": "/assets/book/Ludo%202/LYNE9348.webp",
+      "category": "editorial",
+      "title": "LYNE9348",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 3648,
+      "height": 5472
+    },
+    {
+      "id": "015",
+      "src": "/assets/book/Ludo%202/LYNE9354.webp",
+      "category": "editorial",
+      "title": "LYNE9354",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 3648,
+      "height": 5472
+    },
+    {
+      "id": "016",
+      "src": "/assets/book/Ludo%202/LYNE9357.webp",
+      "category": "editorial",
+      "title": "LYNE9357",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 3648,
+      "height": 5472
+    },
+    {
+      "id": "017",
+      "src": "/assets/book/Ludo%202/LYNE9361.webp",
+      "category": "editorial",
+      "title": "LYNE9361",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 3648,
+      "height": 5472
+    },
+    {
+      "id": "018",
+      "src": "/assets/book/Ludo%202/LYNE9363.webp",
+      "category": "editorial",
+      "title": "LYNE9363",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 5472,
+      "height": 3648
+    },
+    {
+      "id": "019",
+      "src": "/assets/book/Ludo%202/LYNE9369%20%281%29.webp",
+      "category": "cinema",
+      "title": "LYNE9369 (1)",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 2272,
+      "height": 3408
+    },
+    {
+      "id": "020",
+      "src": "/assets/book/Ludo%202/LYNE9369.webp",
+      "category": "cinema",
+      "title": "LYNE9369",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 2272,
+      "height": 3408
+    },
+    {
+      "id": "021",
+      "src": "/assets/book/Ludo%202/LYNE9370.webp",
+      "category": "cinema",
+      "title": "LYNE9370",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 2272,
+      "height": 3408
+    },
+    {
+      "id": "022",
+      "src": "/assets/book/Ludo%202/LYNE9375.webp",
+      "category": "cinema",
+      "title": "LYNE9375",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 2272,
+      "height": 3408
+    },
+    {
+      "id": "023",
+      "src": "/assets/book/Ludo%202/LYNE9396%20%281%29.webp",
+      "category": "portrait",
+      "title": "LYNE9396 (1)",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 2215,
+      "height": 3322
+    },
+    {
+      "id": "024",
+      "src": "/assets/book/Ludo%202/LYNE9396.webp",
+      "category": "portrait",
+      "title": "LYNE9396",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 2215,
+      "height": 3322
+    },
+    {
+      "id": "025",
+      "src": "/assets/book/Ludo%202/LYNE9397%20%281%29.webp",
+      "category": "portrait",
+      "title": "LYNE9397 (1)",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 2243,
+      "height": 3364
+    },
+    {
+      "id": "026",
+      "src": "/assets/book/Ludo%202/LYNE9397.webp",
+      "category": "portrait",
+      "title": "LYNE9397",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 2243,
+      "height": 3364
+    },
+    {
+      "id": "027",
+      "src": "/assets/book/Ludo%202/LYNE9404.webp",
+      "category": "portrait",
+      "title": "LYNE9404",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 2272,
+      "height": 3408
+    },
+    {
+      "id": "028",
+      "src": "/assets/book/Ludo%202/LYNE9417.webp",
+      "category": "cinema",
+      "title": "LYNE9417",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 5472,
+      "height": 3648
+    },
+    {
+      "id": "029",
+      "src": "/assets/book/Ludo%202/LYNE9418.webp",
+      "category": "cinema",
+      "title": "LYNE9418",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 5472,
+      "height": 3648
+    },
+    {
+      "id": "030",
+      "src": "/assets/book/Ludo%202/LYNE9425.webp",
+      "category": "editorial",
+      "title": "LYNE9425",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 3408,
+      "height": 2272
+    },
+    {
+      "id": "031",
+      "src": "/assets/book/Ludo%202/LYNE9435.webp",
+      "category": "editorial",
+      "title": "LYNE9435",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 3408,
+      "height": 2272
+    },
+    {
+      "id": "032",
+      "src": "/assets/book/Ludo%202/LYNE9437.webp",
+      "category": "portrait",
+      "title": "LYNE9437",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 3648,
+      "height": 5472
+    },
+    {
+      "id": "033",
+      "src": "/assets/book/Ludo%202/LYNE9439.webp",
+      "category": "portrait",
+      "title": "LYNE9439",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 5472,
+      "height": 3648
+    },
+    {
+      "id": "034",
+      "src": "/assets/book/Ludo%202/LYNE9446.webp",
+      "category": "portrait",
+      "title": "LYNE9446",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 3648,
+      "height": 5472
+    },
+    {
+      "id": "035",
+      "src": "/assets/book/Ludo%202/LYNE9450.webp",
+      "category": "commercial",
+      "title": "LYNE9450",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 4462,
+      "height": 5578
+    },
+    {
+      "id": "036",
+      "src": "/assets/book/Ludo%202/LYNE9452.webp",
+      "category": "commercial",
+      "title": "LYNE9452",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 4556,
+      "height": 5696
+    },
+    {
+      "id": "037",
+      "src": "/assets/book/Ludo%202/LYNE9454.webp",
+      "category": "commercial",
+      "title": "LYNE9454",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 4378,
+      "height": 5472
+    },
+    {
+      "id": "038",
+      "src": "/assets/book/Ludo%202/LYNE9458.webp",
+      "category": "portrait",
+      "title": "LYNE9458",
+      "photographer": "Ludo 2",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 3648,
+      "height": 5472
+    },
+    {
+      "id": "039",
+      "src": "/assets/book/MAJ%20POLA/BODIN%201.webp",
+      "category": "portrait",
+      "title": "BODIN 1",
+      "photographer": "MAJ POLA",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1179,
+      "height": 1728
+    },
+    {
+      "id": "040",
+      "src": "/assets/book/MAJ%20POLA/BODIN%2010.webp",
+      "category": "portrait",
+      "title": "BODIN 10",
+      "photographer": "MAJ POLA",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1179,
+      "height": 743
+    },
+    {
+      "id": "041",
+      "src": "/assets/book/MAJ%20POLA/BODIN%2011.webp",
+      "category": "portrait",
+      "title": "BODIN 11",
+      "photographer": "MAJ POLA",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1179,
+      "height": 764
+    },
+    {
+      "id": "042",
+      "src": "/assets/book/MAJ%20POLA/BODIN%2012.webp",
+      "category": "portrait",
+      "title": "BODIN 12",
+      "photographer": "MAJ POLA",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1179,
+      "height": 750
+    },
+    {
+      "id": "043",
+      "src": "/assets/book/MAJ%20POLA/BODIN%2013.webp",
+      "category": "portrait",
+      "title": "BODIN 13",
+      "photographer": "MAJ POLA",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1179,
+      "height": 1732
+    },
+    {
+      "id": "044",
+      "src": "/assets/book/MAJ%20POLA/BODIN%2014.webp",
+      "category": "portrait",
+      "title": "BODIN 14",
+      "photographer": "MAJ POLA",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1179,
+      "height": 1732
+    },
+    {
+      "id": "045",
+      "src": "/assets/book/MAJ%20POLA/BODIN%2015.webp",
+      "category": "portrait",
+      "title": "BODIN 15",
+      "photographer": "MAJ POLA",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1179,
+      "height": 1774
+    },
+    {
+      "id": "046",
+      "src": "/assets/book/MAJ%20POLA/BODIN%2016.webp",
+      "category": "portrait",
+      "title": "BODIN 16",
+      "photographer": "MAJ POLA",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1179,
+      "height": 747
+    },
+    {
+      "id": "047",
+      "src": "/assets/book/MAJ%20POLA/BODIN%202.webp",
+      "category": "portrait",
+      "title": "BODIN 2",
+      "photographer": "MAJ POLA",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1179,
+      "height": 1768
+    },
+    {
+      "id": "048",
+      "src": "/assets/book/MAJ%20POLA/BODIN%203.webp",
+      "category": "portrait",
+      "title": "BODIN 3",
+      "photographer": "MAJ POLA",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1179,
+      "height": 1747
+    },
+    {
+      "id": "049",
+      "src": "/assets/book/MAJ%20POLA/BODIN%204.webp",
+      "category": "portrait",
+      "title": "BODIN 4",
+      "photographer": "MAJ POLA",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1171,
+      "height": 1710
+    },
+    {
+      "id": "050",
+      "src": "/assets/book/MAJ%20POLA/BODIN%205.webp",
+      "category": "portrait",
+      "title": "BODIN 5",
+      "photographer": "MAJ POLA",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1179,
+      "height": 1711
+    },
+    {
+      "id": "051",
+      "src": "/assets/book/MAJ%20POLA/BODIN%206.webp",
+      "category": "portrait",
+      "title": "BODIN 6",
+      "photographer": "MAJ POLA",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1179,
+      "height": 1757
+    },
+    {
+      "id": "052",
+      "src": "/assets/book/MAJ%20POLA/BODIN%207.webp",
+      "category": "portrait",
+      "title": "BODIN 7",
+      "photographer": "MAJ POLA",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1179,
+      "height": 1738
+    },
+    {
+      "id": "053",
+      "src": "/assets/book/MAJ%20POLA/BODIN%208.webp",
+      "category": "portrait",
+      "title": "BODIN 8",
+      "photographer": "MAJ POLA",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1179,
+      "height": 759
+    },
+    {
+      "id": "054",
+      "src": "/assets/book/MAJ%20POLA/BODIN%209.webp",
+      "category": "portrait",
+      "title": "BODIN 9",
+      "photographer": "MAJ POLA",
+      "date": "2025-01-01",
+      "type": "photo",
+      "width": 1179,
+      "height": 762
+    }
+  ]
 }
