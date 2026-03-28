@@ -46,3 +46,14 @@ export function trackInstagramLinkClick(
     link_url: linkUrl,
   });
 }
+
+/** CTA « Voir tout le book » depuis la galerie d’accueil. */
+export function trackViewFullBookClick(): void {
+  const id = getMeasurementId();
+  if (!id || typeof window === "undefined" || !window.gtag) return;
+
+  window.gtag("event", "view_full_book_click", {
+    source: "gallery_section",
+    destination_path: "/book",
+  });
+}

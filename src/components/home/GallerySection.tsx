@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { CircularGallery, type GalleryItem } from "@/components/ui/circular-gallery";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { trackViewFullBookClick } from "@/lib/analytics";
 import {
   bookMediaAltText,
   fetchBookManifest,
@@ -122,7 +123,10 @@ const GallerySection = () => {
             <Button
               variant="outline"
               className="gap-2 border-primary/30 text-sm uppercase tracking-wider text-primary hover:bg-primary/10"
-              onClick={() => navigate("/book")}
+              onClick={() => {
+                trackViewFullBookClick();
+                void navigate("/book");
+              }}
             >
               Voir tout le book
               <ArrowRight className="h-4 w-4" />
