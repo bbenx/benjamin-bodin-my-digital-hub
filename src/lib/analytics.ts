@@ -29,3 +29,20 @@ export function trackPageView(pagePath: string): void {
     send_page_view: true,
   });
 }
+
+/**
+ * Événement dédié (plus lisible que le « click » sortant automatique de GA4).
+ * À voir sous Temps réel → instagram_click, puis Rapports → Engagement → Événements.
+ */
+export function trackInstagramLinkClick(
+  section: "header" | "contact",
+  linkUrl: string,
+): void {
+  const id = getMeasurementId();
+  if (!id || typeof window === "undefined" || !window.gtag) return;
+
+  window.gtag("event", "instagram_click", {
+    section,
+    link_url: linkUrl,
+  });
+}

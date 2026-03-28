@@ -1,5 +1,6 @@
 import { Mail, Instagram, Building2, Phone } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { trackInstagramLinkClick } from "@/lib/analytics";
 import { profile } from "@/lib/profile-data";
 
 const ContactSection = () => {
@@ -34,6 +35,9 @@ const ContactSection = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 transition-colors duration-300"
+              onClick={() =>
+                trackInstagramLinkClick("contact", profile.instagram.url)
+              }
             >
               <Instagram className="w-5 h-5 shrink-0 text-primary/60 group-hover:text-primary transition-colors" />
               <span className="text-foreground group-hover:text-primary transition-colors">

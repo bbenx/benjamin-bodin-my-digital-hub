@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, Instagram, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { trackInstagramLinkClick } from "@/lib/analytics";
 import { profile } from "@/lib/profile-data";
 
 const menuItems = [
@@ -155,6 +156,9 @@ const Header = () => {
             rel="noopener noreferrer"
             className="p-2 text-muted-foreground hover:text-primary transition-colors duration-300"
             aria-label="Instagram"
+            onClick={() =>
+              trackInstagramLinkClick("header", profile.instagram.url)
+            }
           >
             <Instagram className="w-6 h-6" />
           </a>
