@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef, HTMLAttributes } from 'react';
-import { cn } from '@/lib/utils';
+import React, { useEffect, useRef, HTMLAttributes } from "react";
+import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export interface GalleryItem {
   common: string;
@@ -16,57 +17,75 @@ interface CircularGalleryProps extends HTMLAttributes<HTMLDivElement> {
   items: GalleryItem[];
   radius?: number;
   autoRotateSpeed?: number;
+  /** Sensibilité du glisser horizontal (degrés par pixel). */
+  dragSensitivity?: number;
 }
 
 const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
-  ({ items, className, radius = 600, autoRotateSpeed = 0.02, ...props }, ref) => {
-    const [rotation, setRotation] = useState(0);
-    const [isScrolling, setIsScrolling] = useState(false);
-    const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  (
+    {
+      items,
+      className,
+      radius = 600,
+      autoRotateSpeed = 0.02,
+      dragSensitivity = 0.45,
+      ...props
+    },
+    ref,
+  ) => {
+    const [rotation, setRotation] = React.useState(0);
+    const draggingRef = useRef(false);
+    const lastXRef = useRef(0);
     const animationFrameRef = useRef<number | null>(null);
+    const isMobile = useIsMobile();
+
+    /** Même comportement partout : tailles adaptées au viewport étroit. */
+    const compact = isMobile;
+    const effectiveRadius = compact ? Math.round(radius * 0.56) : radius;
+    const cardW = compact ? 220 : 300;
+    const cardH = compact ? 300 : 400;
+    const halfW = cardW / 2;
+    const halfH = cardH / 2;
+    const sensitivity = compact ? 0.52 : dragSensitivity;
+    const perspectivePx = compact ? 1400 : 2000;
 
     useEffect(() => {
-      const handleScroll = () => {
-        setIsScrolling(true);
-        if (scrollTimeoutRef.current) {
-          clearTimeout(scrollTimeoutRef.current);
+      const tick = () => {
+        if (!draggingRef.current) {
+          setRotation((prev) => prev + autoRotateSpeed);
         }
-
-        const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollProgress = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;
-        const scrollRotation = scrollProgress * 360;
-        setRotation(scrollRotation);
-
-        scrollTimeoutRef.current = setTimeout(() => {
-          setIsScrolling(false);
-        }, 150);
+        animationFrameRef.current = requestAnimationFrame(tick);
       };
-
-      window.addEventListener('scroll', handleScroll, { passive: true });
+      animationFrameRef.current = requestAnimationFrame(tick);
       return () => {
-        window.removeEventListener('scroll', handleScroll);
-        if (scrollTimeoutRef.current) {
-          clearTimeout(scrollTimeoutRef.current);
-        }
-      };
-    }, []);
-
-    useEffect(() => {
-      const autoRotate = () => {
-        if (!isScrolling) {
-          setRotation(prev => prev + autoRotateSpeed);
-        }
-        animationFrameRef.current = requestAnimationFrame(autoRotate);
-      };
-
-      animationFrameRef.current = requestAnimationFrame(autoRotate);
-
-      return () => {
-        if (animationFrameRef.current) {
+        if (animationFrameRef.current !== null) {
           cancelAnimationFrame(animationFrameRef.current);
         }
       };
-    }, [isScrolling, autoRotateSpeed]);
+    }, [autoRotateSpeed]);
+
+    const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+      e.currentTarget.setPointerCapture(e.pointerId);
+      draggingRef.current = true;
+      lastXRef.current = e.clientX;
+    };
+
+    const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+      if (!draggingRef.current) return;
+      const dx = e.clientX - lastXRef.current;
+      lastXRef.current = e.clientX;
+      setRotation((r) => r + dx * sensitivity);
+    };
+
+    const endDrag = (e: React.PointerEvent<HTMLDivElement>) => {
+      if (!draggingRef.current) return;
+      draggingRef.current = false;
+      try {
+        e.currentTarget.releasePointerCapture(e.pointerId);
+      } catch {
+        /* capture déjà relâchée */
+      }
+    };
 
     const anglePerItem = 360 / items.length;
 
@@ -74,16 +93,23 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
       <div
         ref={ref}
         role="region"
-        aria-label="Circular 3D Gallery"
-        className={cn("relative w-full h-full flex items-center justify-center", className)}
-        style={{ perspective: '2000px' }}
+        aria-label="Galerie"
+        className={cn(
+          "relative flex h-full w-full touch-pan-y items-center justify-center md:cursor-grab md:active:cursor-grabbing",
+          className,
+        )}
+        style={{ perspective: `${perspectivePx}px` }}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
         {...props}
       >
         <div
-          className="relative w-full h-full"
+          className="relative h-full w-full select-none"
           style={{
             transform: `rotateY(${rotation}deg)`,
-            transformStyle: 'preserve-3d',
+            transformStyle: "preserve-3d",
           }}
         >
           {items.map((item, i) => {
@@ -91,35 +117,38 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
             const totalRotation = rotation % 360;
             const relativeAngle = (itemAngle + totalRotation + 360) % 360;
             const normalizedAngle = Math.abs(relativeAngle > 180 ? 360 - relativeAngle : relativeAngle);
-            const opacity = Math.max(0.3, 1 - (normalizedAngle / 180));
+            const opacity = Math.max(0.3, 1 - normalizedAngle / 180);
 
             return (
               <div
                 key={item.photo.url}
                 role="group"
                 aria-label={item.common}
-                className="absolute w-[300px] h-[400px]"
+                className="absolute overflow-hidden rounded-lg"
                 style={{
-                  transform: `rotateY(${itemAngle}deg) translateZ(${radius}px)`,
-                  left: '50%',
-                  top: '50%',
-                  marginLeft: '-150px',
-                  marginTop: '-200px',
-                  opacity: opacity,
-                  transition: 'opacity 0.3s linear',
+                  width: cardW,
+                  height: cardH,
+                  transform: `rotateY(${itemAngle}deg) translateZ(${effectiveRadius}px)`,
+                  left: "50%",
+                  top: "50%",
+                  marginLeft: -halfW,
+                  marginTop: -halfH,
+                  opacity,
+                  transition: "opacity 0.3s linear",
                 }}
               >
-                <div className="relative w-full h-full rounded-lg shadow-2xl overflow-hidden group border border-border bg-card/70 dark:bg-card/30 backdrop-blur-lg">
+                <div className="group relative h-full w-full overflow-hidden rounded-lg border border-border bg-card/70 shadow-2xl backdrop-blur-lg dark:bg-card/30">
                   <img
                     src={item.photo.url}
                     alt={item.photo.text}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    style={{ objectPosition: item.photo.pos || 'center' }}
+                    className="absolute inset-0 h-full w-full object-cover"
+                    style={{ objectPosition: item.photo.pos || "center" }}
+                    draggable={false}
                   />
-                  <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent text-white">
+                  <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
                     <h2 className="text-xl font-bold">{item.common}</h2>
                     <em className="text-sm italic opacity-80">{item.binomial}</em>
-                    <p className="text-xs mt-2 opacity-70">Photo by: {item.photo.by}</p>
+                    <p className="mt-2 text-xs opacity-70">Photo by: {item.photo.by}</p>
                   </div>
                 </div>
               </div>
@@ -128,9 +157,9 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
-CircularGallery.displayName = 'CircularGallery';
+CircularGallery.displayName = "CircularGallery";
 
 export { CircularGallery };

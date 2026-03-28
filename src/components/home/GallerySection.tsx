@@ -40,44 +40,34 @@ const GallerySection = () => {
   if (galleryItems.length === 0) return null;
 
   return (
-    <section id="galerie" className="relative">
-      {/* Scrollable height for the circular gallery rotation */}
-      <div className="w-full" style={{ height: "300vh" }}>
-        <div className="w-full h-screen sticky top-0 flex flex-col items-center justify-center overflow-hidden">
-          {/* Heading */}
-          <div className="absolute top-20 z-10 text-center">
-            <h2
-              className="text-4xl md:text-5xl font-light tracking-wide mb-4"
-              style={{ fontFamily: "'Cormorant Garamond', serif" }}
-            >
-              Galerie
-            </h2>
-            <Separator className="w-12 mx-auto mb-4 bg-primary/40" />
-            <p className="text-sm text-muted-foreground tracking-wider">
-              Faites défiler pour explorer
-            </p>
-          </div>
+    <section id="galerie" className="relative min-h-[100svh] overflow-hidden">
+      <div className="relative flex min-h-[100svh] w-full flex-col items-center justify-center">
+        {/* Heading */}
+        <div className="absolute top-16 z-10 text-center md:top-20">
+          <h2
+            className="mb-4 text-4xl font-light tracking-wide md:text-5xl"
+            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+          >
+            Galerie
+          </h2>
+          <Separator className="mx-auto w-12 bg-primary/40" />
+        </div>
 
-          {/* 3D Gallery */}
-          <div className="w-full h-full">
-            <CircularGallery
-              items={galleryItems}
-              radius={500}
-              autoRotateSpeed={0.03}
-            />
-          </div>
+        {/* 3D Gallery */}
+        <div className="h-[min(58vh,520px)] w-full min-h-[280px] max-w-6xl px-2 md:h-[min(70vh,640px)] md:min-h-[320px] md:px-0">
+          <CircularGallery items={galleryItems} radius={500} autoRotateSpeed={0.03} />
+        </div>
 
-          {/* CTA to full book */}
-          <div className="absolute bottom-20 z-10">
-            <Button
-              variant="outline"
-              className="border-primary/30 text-primary hover:bg-primary/10 tracking-wider uppercase text-sm gap-2"
-              onClick={() => navigate("/book")}
-            >
-              Voir tout le book
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </div>
+        {/* CTA to full book */}
+        <div className="absolute bottom-14 z-10 md:bottom-20">
+          <Button
+            variant="outline"
+            className="gap-2 border-primary/30 text-sm uppercase tracking-wider text-primary hover:bg-primary/10"
+            onClick={() => navigate("/book")}
+          >
+            Voir tout le book
+            <ArrowRight className="h-4 w-4" />
+          </Button>
         </div>
       </div>
     </section>

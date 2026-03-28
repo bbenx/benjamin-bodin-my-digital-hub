@@ -6,7 +6,7 @@ const ContactSection = () => {
   const hasAgent = profile.agent.name || profile.agent.agency;
 
   return (
-    <section id="contact" className="py-24 px-6">
+    <section id="contact" className="pt-24 pb-5 md:pb-6 px-6">
       <div className="max-w-4xl mx-auto">
         {/* Heading */}
         <h2
@@ -90,9 +90,12 @@ const ContactSection = () => {
           )}
         </div>
 
-        {/* Tagline */}
-        <p className="text-center text-sm text-muted-foreground mt-16 max-w-md mx-auto leading-relaxed">
-          Pour toute demande de casting ou collaboration, n'hésitez pas à me contacter.
+        {/* Tagline — desktop: une ligne lisible ; mobile: césure équilibrée */}
+        <p
+          className="mx-auto mt-8 w-full max-w-4xl text-pretty text-center text-sm font-light leading-relaxed text-muted-foreground md:mt-11 md:text-base md:leading-normal md:tracking-wide"
+          style={{ fontFamily: "'Outfit', sans-serif" }}
+        >
+          Pour toute demande d’informations ou de booking, n’hésitez pas à me contacter.
         </p>
       </div>
     </section>

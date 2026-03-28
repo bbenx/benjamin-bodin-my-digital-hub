@@ -22,9 +22,9 @@ const lineReveal = {
 
 const keyStats = [
   { label: "Taille", value: "176", unit: "cm" },
-  { label: "Âge", value: "25–35", unit: "ans" },
-  { label: "Yeux", value: profile.eyes },
-  { label: "Cheveux", value: profile.hair },
+  { label: "Poids", value: profile.weight, unit: "kg" },
+  { label: "Âge", value: profile.age, unit: "ans" },
+  { label: "Âge apparent", value: profile.apparentAge, unit: "ans" },
 ];
 
 const measurements = [
@@ -47,7 +47,7 @@ const StatsSection = () => {
     <section
       id="mensurations"
       ref={sectionRef}
-      className="relative py-32 md:py-44 px-6 overflow-hidden"
+      className="relative pt-20 md:pt-28 pb-32 md:pb-44 px-6 overflow-hidden"
     >
       {/* Decorative vertical line — left gutter */}
       <motion.div
@@ -81,7 +81,7 @@ const StatsSection = () => {
         </div>
 
         {/* Key stats — large editorial numbers */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-14 md:gap-y-0 mb-24 md:mb-32">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-14 md:gap-y-0 mb-16 md:mb-20">
           {keyStats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -114,6 +114,30 @@ const StatsSection = () => {
           ))}
         </div>
 
+        {/* Yeux & cheveux — discrets, avant le détail des mensurations */}
+        <motion.div
+          className="flex flex-wrap items-baseline gap-x-8 gap-y-2 mb-8 md:mb-10 text-sm md:text-base text-muted-foreground/70"
+          style={{ fontFamily: "'Outfit', sans-serif" }}
+          variants={fadeUp}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          custom={5}
+        >
+          <span>
+            <span className="text-[10px] tracking-[0.32em] uppercase text-muted-foreground/50 mr-2.5">
+              Yeux
+            </span>
+            <span className="font-light text-foreground/80">{profile.eyes}</span>
+          </span>
+          <span className="hidden sm:inline text-border/60">·</span>
+          <span>
+            <span className="text-[10px] tracking-[0.32em] uppercase text-muted-foreground/50 mr-2.5">
+              Cheveux
+            </span>
+            <span className="font-light text-foreground/80">{profile.hair}</span>
+          </span>
+        </motion.div>
+
         {/* Measurements — refined two-column list */}
         <div className="grid md:grid-cols-[1fr_1px_1fr] gap-8 md:gap-0 mb-24 md:mb-32">
           {/* Left column */}
@@ -125,7 +149,7 @@ const StatsSection = () => {
                 variants={fadeUp}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
-                custom={i + 5}
+                custom={i + 6}
               >
                 <span
                   className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground/50"
@@ -164,7 +188,7 @@ const StatsSection = () => {
                 variants={fadeUp}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
-                custom={i + 10}
+                custom={i + 11}
               >
                 <span
                   className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground/50"
@@ -185,12 +209,11 @@ const StatsSection = () => {
 
         {/* Languages + Skills — bottom row */}
         <div className="flex flex-col md:flex-row md:items-start gap-16 md:gap-24">
-          {/* Languages */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            custom={14}
+            custom={16}
           >
             <p
               className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground/60 mb-4"
@@ -206,12 +229,11 @@ const StatsSection = () => {
             </p>
           </motion.div>
 
-          {/* Skills */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            custom={15}
+            custom={17}
           >
             <p
               className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground/60 mb-4"

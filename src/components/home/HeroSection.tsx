@@ -1,5 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { BlurText } from "@/components/ui/blur-text";
+import { profile } from "@/lib/profile-data";
 const portrait = "/assets/book/Ludo%202/LYNE9458.webp";
 
 const HeroSection = () => {
@@ -55,7 +56,7 @@ const HeroSection = () => {
       <div className="absolute bottom-20 sm:bottom-24 md:bottom-28 lg:bottom-36 left-1/2 -translate-x-1/2 w-full px-6">
         <div className="flex justify-center">
           <BlurText
-            text="Comédien · Mannequin"
+            text={profile.tagline}
             delay={120}
             animateBy="words"
             direction="top"

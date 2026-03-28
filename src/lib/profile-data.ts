@@ -6,7 +6,7 @@ export const profile = {
   tagline: "Comédien · Mannequin",
   /** Texte de la section Bio (à personnaliser). */
   bio:
-    "Comédien et mannequin, je travaille en France et à l’international. Formé au jeu et à l’image, j’aime les projets qui mêlent créativité et exigence. Contactez-moi pour vos castings et collaborations.",
+    "Je m’appelle Benjamin, j’ai 35 ans. Comédien et mannequin, je suis aussi très sportif. Bordelais d’origine, je suis monté à Paris l’été dernier — en moto, sur un coup de tête — pour réaliser mes rêves. J’y vis aujourd’hui, en première année au Cours Florent, et je suis représenté par l’agence Céline. Je travaille en France et à l’international.",
   email: "contact@benjaminbodin.fr",
   instagram: {
     handle: "@_benjaminbodin",
@@ -28,9 +28,14 @@ export const profile = {
   },
   hair: "Brun",
   eyes: "Marron / Vert",
-  ageRange: "25–35 ans",
+  /** Poids affiché à côté de la taille (chiffre seul, l’unité « kg » est dans l’UI). */
+  weight: "64",
+  /** Âge réel. */
+  age: "35",
+  /** Fourchette d’âge apparent (casting). */
+  apparentAge: "25–35",
   languages: ["Français", "Anglais"],
-  skills: ["Modeling", "Acting", "High-level Sports"],
+  skills: ["Mannequinat", "Jeu d’acteur", "Sport de haut niveau"],
   agent: {
     name: "",
     agency: "",
