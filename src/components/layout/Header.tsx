@@ -70,7 +70,8 @@ const Header = () => {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 px-6 py-5 transition-all duration-300",
-        scrolled && "bg-background/80 backdrop-blur-md border-b border-border/30"
+        scrolled &&
+          "bg-background border-b border-border/30 md:bg-background/80 md:backdrop-blur-md"
       )}
     >
       <nav className="flex items-center justify-between max-w-screen-2xl mx-auto">
@@ -93,7 +94,7 @@ const Header = () => {
           {isMenuOpen && (
             <div
               ref={menuRef}
-              className="absolute top-full left-0 w-[220px] md:w-[260px] shadow-2xl mt-2 ml-2 p-4 rounded-lg z-[100] bg-background/95 backdrop-blur-md border border-border/30"
+              className="absolute top-full left-0 w-[220px] md:w-[260px] shadow-2xl mt-2 ml-2 p-4 rounded-lg z-[100] bg-background border border-border/30 md:bg-background/95 md:backdrop-blur-md"
             >
               {menuItems.map((item) => (
                 <button
