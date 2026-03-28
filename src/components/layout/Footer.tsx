@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
+import { trackLegalFooterClick } from "@/lib/analytics";
 
 const Footer = () => {
   return (
@@ -14,6 +15,7 @@ const Footer = () => {
           <Link
             to="/mentions-legales"
             className="text-muted-foreground/55 hover:text-primary/85 transition-colors underline-offset-4 hover:underline"
+            onClick={() => trackLegalFooterClick()}
           >
             Mentions légales
           </Link>

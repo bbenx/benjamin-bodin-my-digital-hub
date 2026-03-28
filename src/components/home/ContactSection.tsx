@@ -1,6 +1,10 @@
 import { Mail, Instagram, Building2, Phone } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-import { trackInstagramLinkClick } from "@/lib/analytics";
+import {
+  trackEmailClick,
+  trackInstagramLinkClick,
+  trackPhoneClick,
+} from "@/lib/analytics";
 import { profile } from "@/lib/profile-data";
 
 const ContactSection = () => {
@@ -23,6 +27,7 @@ const ContactSection = () => {
             <a
               href={`mailto:${profile.email}`}
               className="group inline-flex items-center gap-3 transition-colors duration-300"
+              onClick={() => trackEmailClick("contact_primary")}
             >
               <Mail className="w-5 h-5 shrink-0 text-primary/60 group-hover:text-primary transition-colors" />
               <span className="text-foreground group-hover:text-primary transition-colors">
@@ -71,6 +76,7 @@ const ContactSection = () => {
                 <a
                   href={`mailto:${profile.agent.email}`}
                   className="group flex items-center gap-4 transition-colors duration-300"
+                  onClick={() => trackEmailClick("contact_agent")}
                 >
                   <Mail className="w-5 h-5 text-primary/60 group-hover:text-primary transition-colors" />
                   <span className="text-foreground group-hover:text-primary transition-colors">
@@ -83,6 +89,7 @@ const ContactSection = () => {
                 <a
                   href={`tel:${profile.agent.phone}`}
                   className="group flex items-center gap-4 transition-colors duration-300"
+                  onClick={() => trackPhoneClick("contact_agent")}
                 >
                   <Phone className="w-5 h-5 text-primary/60 group-hover:text-primary transition-colors" />
                   <span className="text-foreground group-hover:text-primary transition-colors">

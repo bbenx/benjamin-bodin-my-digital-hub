@@ -1,5 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { BlurText } from "@/components/ui/blur-text";
+import { trackHeroScrollDownClick } from "@/lib/analytics";
 import { profile } from "@/lib/profile-data";
 const portrait = "/assets/book/Ludo%202/LYNE9458.webp";
 
@@ -80,6 +81,7 @@ const HeroSection = () => {
             className="flex size-11 touch-manipulation items-center justify-center rounded-full text-muted-foreground/50 transition-colors hover:text-primary md:size-12"
             aria-label="Défiler vers le bas"
             onClick={() => {
+              trackHeroScrollDownClick();
               const next = document.getElementById("bio");
               next?.scrollIntoView({ behavior: "smooth" });
             }}

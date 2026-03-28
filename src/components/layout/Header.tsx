@@ -2,7 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, Instagram, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { trackInstagramLinkClick } from "@/lib/analytics";
+import {
+  trackEmailClick,
+  trackInstagramLinkClick,
+  trackLogoClick,
+  trackNavMenuClick,
+} from "@/lib/analytics";
 import { profile } from "@/lib/profile-data";
 
 const menuItems = [
@@ -48,6 +53,12 @@ const Header = () => {
   const handleNavClick = (item: (typeof menuItems)[number]) => {
     setIsMenuOpen(false);
 
+    trackNavMenuClick({
+      label: item.label,
+      target: item.href,
+      link_type: item.type,
+    });
+
     if (item.type === "anchor") {
       const hash = item.href.startsWith("#") ? item.href.slice(1) : item.href;
       if (location.pathname !== "/") {
@@ -71,14 +82,17 @@ const Header = () => {
   };
 
   const handleLogoClick = () => {
-    if (location.pathname === "/") {
-      if (location.hash) {
-        void navigate("/", { replace: true });
-      } else {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    } else {
+    if (location.pathname !== "/") {
+      trackLogoClick("navigate_home");
       void navigate("/");
+      return;
+    }
+    if (location.hash) {
+      trackLogoClick("clear_hash");
+      void navigate("/", { replace: true });
+    } else {
+      trackLogoClick("scroll_top");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -147,6 +161,7 @@ const Header = () => {
             href={`mailto:${profile.email}`}
             className="p-2 text-muted-foreground hover:text-primary transition-colors duration-300"
             aria-label="Envoyer un e-mail"
+            onClick={() => trackEmailClick("header")}
           >
             <Mail className="w-6 h-6" />
           </a>

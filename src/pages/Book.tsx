@@ -5,6 +5,10 @@ import { BookFilters } from "@/components/book/BookFilters";
 import { BookGallery } from "@/components/book/BookGallery";
 import { BookLightbox } from "@/components/book/BookLightbox";
 import {
+  trackBookFilterChange,
+  trackBookLightboxOpen,
+} from "@/lib/analytics";
+import {
   fetchBookManifest,
   itemCategoryIds,
   itemPalette,
@@ -71,12 +75,37 @@ const Book = () => {
   }, [manifest]);
 
   const handleCategoryChange = (id: string) => {
+    trackBookFilterChange({ filter_type: "category", value: id });
     setActiveCategory(id);
     setActivePalette("all");
   };
 
   const handlePaletteChange = (val: "all" | "bw" | "color") => {
+    trackBookFilterChange({ filter_type: "palette", value: val });
     setActivePalette(val);
+  };
+
+  const handleSortOrderChange = (order: BookSortOrder | null) => {
+    trackBookFilterChange({
+      filter_type: "sort",
+      value: order ?? "manifest",
+    });
+    setSortOrder(order);
+  };
+
+  const handleGalleryItemClick = (index: number) => {
+    const item = filteredItems[index];
+    if (item) {
+      const labels = itemCategoryIds(item)
+        .map((id) => categoryLabelById[id])
+        .filter(Boolean)
+        .join(" · ");
+      trackBookLightboxOpen({
+        item_id: item.id,
+        ...(labels ? { category_label: labels } : {}),
+      });
+    }
+    setLightboxIndex(index);
   };
 
   return (
@@ -109,7 +138,7 @@ const Book = () => {
         activePalette={activePalette}
         onPaletteChange={handlePaletteChange}
         sortOrder={sortOrder}
-        onSortOrderChange={setSortOrder}
+        onSortOrderChange={handleSortOrderChange}
       />
 
       {/* Gallery */}
@@ -117,7 +146,7 @@ const Book = () => {
         items={filteredItems}
         isLoading={isLoading}
         categoryLabelById={categoryLabelById}
-        onItemClick={(index) => setLightboxIndex(index)}
+        onItemClick={handleGalleryItemClick}
       />
 
       {/* Lightbox */}

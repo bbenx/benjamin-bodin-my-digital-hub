@@ -7,6 +7,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
+import { trackBookLightboxNav } from "@/lib/analytics";
 import {
   bookMediaAltText,
   itemCategoryIds,
@@ -33,11 +34,13 @@ const BookLightbox = ({
 
   const goNext = useCallback(() => {
     if (currentIndex === null) return;
+    trackBookLightboxNav("next");
     onNavigate((currentIndex + 1) % items.length);
   }, [currentIndex, items.length, onNavigate]);
 
   const goPrev = useCallback(() => {
     if (currentIndex === null) return;
+    trackBookLightboxNav("prev");
     onNavigate((currentIndex - 1 + items.length) % items.length);
   }, [currentIndex, items.length, onNavigate]);
 
