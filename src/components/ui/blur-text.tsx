@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from "react";
+import { cn } from "@/lib/utils";
 
 interface BlurTextProps {
   text: string;
@@ -44,7 +45,15 @@ const BlurText: React.FC<BlurTextProps> = ({
   }, [text, animateBy]);
 
   return (
-    <p ref={ref} className={`inline-flex flex-wrap ${className}`} style={style}>
+    <p
+      ref={ref}
+      className={cn(
+        "inline-flex",
+        animateBy === "letters" ? "flex-nowrap" : "flex-wrap",
+        className
+      )}
+      style={style}
+    >
       {segments.map((segment, i) => (
         <span
           key={i}

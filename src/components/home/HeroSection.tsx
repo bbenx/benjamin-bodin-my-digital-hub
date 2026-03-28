@@ -17,7 +17,7 @@ const HeroSection = () => {
               delay={80}
               animateBy="letters"
               direction="top"
-              className="font-bold text-[100px] sm:text-[150px] md:text-[200px] lg:text-[260px] leading-[0.8] tracking-tighter uppercase justify-center whitespace-nowrap"
+              className="font-bold leading-[0.8] tracking-tighter uppercase justify-center text-[clamp(2.5rem,16vw,6.25rem)] sm:text-[clamp(3.75rem,17vw,9.375rem)] md:text-[clamp(5rem,22vw,12.5rem)] lg:text-[16.25rem]"
               style={{
                 color: "hsl(175 35% 40%)",
                 fontFamily: "'Fira Code', monospace",
@@ -30,7 +30,7 @@ const HeroSection = () => {
               delay={80}
               animateBy="letters"
               direction="top"
-              className="font-bold text-[100px] sm:text-[150px] md:text-[200px] lg:text-[260px] leading-[0.8] tracking-tighter uppercase justify-center whitespace-nowrap"
+              className="font-bold leading-[0.8] tracking-tighter uppercase justify-center text-[clamp(2.5rem,16vw,6.25rem)] sm:text-[clamp(3.75rem,17vw,9.375rem)] md:text-[clamp(5rem,22vw,12.5rem)] lg:text-[16.25rem]"
               style={{
                 color: "hsl(175 35% 40%)",
                 fontFamily: "'Fira Code', monospace",
