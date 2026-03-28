@@ -56,7 +56,7 @@ const HeroSection = () => {
       </div>
 
       {/* Tagline */}
-      <div className="absolute bottom-40 sm:bottom-32 lg:bottom-36 left-1/2 -translate-x-1/2 w-full px-6">
+      <div className="absolute inset-x-0 bottom-48 px-6 sm:bottom-40 lg:bottom-40">
         <div className="flex justify-center">
           <BlurText
             text={profile.tagline}
@@ -69,18 +69,22 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <button
-        type="button"
-        className="absolute bottom-16 left-1/2 -translate-x-1/2 animate-bounce md:bottom-12"
-        aria-label="Défiler vers le bas"
-        onClick={() => {
-          const next = document.getElementById("bio");
-          next?.scrollIntoView({ behavior: "smooth" });
-        }}
-      >
-        <ChevronDown className="w-6 h-6 md:w-8 md:h-8 text-muted-foreground/50 hover:text-primary transition-colors duration-300" />
-      </button>
+      {/* Scroll indicator — bounce sur un wrapper pour ne pas écraser le centrage (transform) */}
+      <div className="absolute inset-x-0 bottom-28 z-10 flex justify-center sm:bottom-24 md:bottom-14">
+        <div className="animate-bounce">
+          <button
+            type="button"
+            className="flex size-11 touch-manipulation items-center justify-center rounded-full text-muted-foreground/50 transition-colors hover:text-primary md:size-12"
+            aria-label="Défiler vers le bas"
+            onClick={() => {
+              const next = document.getElementById("bio");
+              next?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            <ChevronDown className="size-6 md:size-8" />
+          </button>
+        </div>
+      </div>
     </section>
   );
 };
