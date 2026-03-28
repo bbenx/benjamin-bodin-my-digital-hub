@@ -67,7 +67,7 @@ const Index = () => {
 
         {/* Footer */}
         <p className="text-[11px] text-muted-foreground/50 tracking-widest uppercase mt-6">
-          benjaminbodin.com
+          benjaminbodin.fr
         </p>
       </div>
     </div>
