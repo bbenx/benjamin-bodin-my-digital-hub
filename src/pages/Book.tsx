@@ -10,6 +10,8 @@ import {
   itemPalette,
   type BookSortOrder,
 } from "@/lib/book-manifest";
+import { PageSeo } from "@/components/seo/PageSeo";
+import { SEO_COPY } from "@/lib/seo-config";
 
 const Book = () => {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -79,6 +81,11 @@ const Book = () => {
 
   return (
     <div className="pt-24">
+      <PageSeo
+        title={SEO_COPY.book.title}
+        description={SEO_COPY.book.description}
+        path="/book"
+      />
       {/* Page heading */}
       <div className="text-center px-6 pb-8">
         <h1
@@ -86,6 +93,10 @@ const Book = () => {
           style={{ fontFamily: "'Cormorant Garamond', serif" }}
         >
           Book
+          <span className="sr-only">
+            {" "}
+            photographique — Benjamin Bodin, comédien et mannequin
+          </span>
         </h1>
         <Separator className="w-12 mx-auto bg-primary/40" />
       </div>

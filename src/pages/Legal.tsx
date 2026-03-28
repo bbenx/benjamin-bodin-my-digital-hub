@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import { legal } from "@/lib/legal-data";
+import { PageSeo } from "@/components/seo/PageSeo";
+import { SEO_COPY } from "@/lib/seo-config";
 
 const Legal = () => {
   return (
     <div className="pt-24 pb-20 px-6">
+      <PageSeo
+        title={SEO_COPY.legal.title}
+        description={SEO_COPY.legal.description}
+        path="/mentions-legales"
+      />
       <div className="max-w-2xl mx-auto">
         <div className="mb-12">
           <h1

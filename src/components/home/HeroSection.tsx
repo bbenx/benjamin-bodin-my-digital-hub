@@ -6,6 +6,9 @@ const portrait = "/assets/book/Ludo%202/LYNE9458.webp";
 const HeroSection = () => {
   return (
     <section className="relative flex min-h-screen w-full max-w-full flex-col overflow-x-hidden">
+      <h1 className="sr-only">
+        Benjamin Bodin — Comédien et mannequin à Paris
+      </h1>
       {/* Subtle background glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[140px] pointer-events-none" />
 
@@ -44,7 +47,7 @@ const HeroSection = () => {
             <div className="w-[70px] h-[115px] sm:w-[95px] sm:h-[155px] md:w-[115px] md:h-[190px] lg:w-[135px] lg:h-[225px] rounded-full overflow-hidden shadow-2xl transition-transform duration-300 hover:scale-110 cursor-pointer border border-border/30">
               <img
                 src={portrait}
-                alt="Benjamin Bodin"
+                alt="Portrait de Benjamin Bodin, comédien et mannequin"
                 className="w-full h-full object-cover"
                 fetchPriority="high"
                 loading="eager"
