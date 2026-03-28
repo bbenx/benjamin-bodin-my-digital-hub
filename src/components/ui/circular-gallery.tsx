@@ -54,8 +54,8 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
     const minTranslateZ =
       n <= 1 ? halfW + 120 : halfW / Math.sin(angleStepRad / 2) + 16;
     const effectiveRadius = compact ? Math.max(Math.ceil(minTranslateZ), Math.round(radius * 0.72)) : radius;
-    /** Sur mobile, moins de réduction : un scale trop bas aplatit l’anneau à l’écran. */
-    const ringScale = compact ? 0.86 : 1;
+    /** Réduit l’anneau pour tenir dans le viewport ; le relief vient surtout de la perspective mobile. */
+    const ringScale = compact ? 0.74 : 1;
     const sensitivity = compact ? 0.52 : dragSensitivity;
     /**
      * Perspective forte vs largeur viewport : sur téléphone 1500px+ donne un effet quasi « plat »
