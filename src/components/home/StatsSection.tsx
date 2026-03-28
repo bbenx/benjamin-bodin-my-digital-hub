@@ -49,9 +49,9 @@ const StatsSection = () => {
       ref={sectionRef}
       className="relative scroll-mt-24 pt-20 md:pt-28 pb-32 md:pb-44 px-6 overflow-hidden"
     >
-      {/* Decorative vertical line — left gutter */}
+      {/* Decorative vertical line — md+ only so it does not cross labels on narrow viewports */}
       <motion.div
-        className="absolute left-[8%] md:left-[12%] top-0 bottom-0 w-px bg-primary/10 origin-top"
+        className="pointer-events-none absolute bottom-0 left-[12%] top-0 hidden w-px bg-primary/10 origin-top md:block"
         initial={{ scaleY: 0 }}
         animate={isInView ? { scaleY: 1 } : {}}
         transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
