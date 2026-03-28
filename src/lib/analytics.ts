@@ -40,12 +40,15 @@ export function initGoogleAnalytics(): void {
   document.head.appendChild(script);
 }
 
-/** À appeler à chaque changement de route (SPA). */
+/**
+ * À chaque changement de route (SPA). Google documente `gtag('config', id, { page_path })`
+ * plutôt qu’un événement `page_view` manuel pour GA4.
+ */
 export function trackPageView(pagePath: string): void {
   const id = getMeasurementId();
   if (!id || typeof window === "undefined" || !window.gtag) return;
 
-  window.gtag("event", "page_view", {
+  window.gtag("config", id, {
     page_path: pagePath,
     page_location: window.location.href,
     page_title: document.title,
