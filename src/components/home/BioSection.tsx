@@ -3,7 +3,10 @@ import { profile } from "@/lib/profile-data";
 
 const BioSection = () => {
   return (
-    <section id="bio" className="pt-14 md:pt-20 pb-12 md:pb-16 px-6">
+    <section
+      id="bio"
+      className="scroll-mt-24 pt-14 md:pt-20 pb-12 md:pb-16 px-6"
+    >
       <div className="max-w-3xl mx-auto">
         <h2
           className="text-4xl md:text-5xl font-light tracking-wide text-center mb-3"

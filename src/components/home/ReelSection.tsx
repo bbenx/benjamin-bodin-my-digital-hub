@@ -4,7 +4,7 @@ import { profile } from "@/lib/profile-data";
 
 const ReelSection = () => {
   return (
-    <section id="bande-demo" className="py-24 px-6">
+    <section id="bande-demo" className="scroll-mt-24 py-24 px-6">
       <div className="max-w-4xl mx-auto">
         {/* Heading */}
         <h2

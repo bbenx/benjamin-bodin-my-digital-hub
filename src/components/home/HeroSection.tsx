@@ -56,7 +56,7 @@ const HeroSection = () => {
       </div>
 
       {/* Tagline */}
-      <div className="absolute bottom-32 sm:bottom-28 lg:bottom-36 left-1/2 -translate-x-1/2 w-full px-6">
+      <div className="absolute bottom-40 sm:bottom-32 lg:bottom-36 left-1/2 -translate-x-1/2 w-full px-6">
         <div className="flex justify-center">
           <BlurText
             text={profile.tagline}
@@ -72,7 +72,7 @@ const HeroSection = () => {
       {/* Scroll indicator */}
       <button
         type="button"
-        className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 animate-bounce"
+        className="absolute bottom-16 left-1/2 -translate-x-1/2 animate-bounce md:bottom-12"
         aria-label="Défiler vers le bas"
         onClick={() => {
           const next = document.getElementById("bio");

@@ -47,7 +47,7 @@ const StatsSection = () => {
     <section
       id="mensurations"
       ref={sectionRef}
-      className="relative pt-20 md:pt-28 pb-32 md:pb-44 px-6 overflow-hidden"
+      className="relative scroll-mt-24 pt-20 md:pt-28 pb-32 md:pb-44 px-6 overflow-hidden"
     >
       {/* Decorative vertical line — left gutter */}
       <motion.div

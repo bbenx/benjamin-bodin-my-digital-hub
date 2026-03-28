@@ -40,7 +40,7 @@ const GallerySection = () => {
   if (galleryItems.length === 0) return null;
 
   return (
-    <section id="galerie" className="relative min-h-[100svh] overflow-hidden">
+    <section id="galerie" className="relative min-h-[100svh] scroll-mt-24 overflow-hidden">
       <div className="relative flex min-h-[100svh] w-full flex-col items-center justify-center">
         {/* Heading */}
         <div className="absolute top-16 z-10 text-center md:top-20">
