@@ -5,7 +5,7 @@ const portrait = "/assets/book/Ludo%202/LYNE9458.webp";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex flex-col">
+    <section className="relative flex min-h-screen w-full max-w-full flex-col overflow-x-hidden">
       {/* Subtle background glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[140px] pointer-events-none" />
 
