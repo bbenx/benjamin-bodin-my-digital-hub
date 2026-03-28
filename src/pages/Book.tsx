@@ -4,7 +4,10 @@ import { Separator } from "@/components/ui/separator";
 import { BookFilters } from "@/components/book/BookFilters";
 import { BookGallery } from "@/components/book/BookGallery";
 import { BookLightbox } from "@/components/book/BookLightbox";
-import { fetchBookManifest } from "@/lib/book-manifest";
+import {
+  fetchBookManifest,
+  itemCategoryIds,
+} from "@/lib/book-manifest";
 
 const Book = () => {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -23,7 +26,9 @@ const Book = () => {
 
     // Filter by category
     if (activeCategory !== "all") {
-      items = items.filter((item) => item.category === activeCategory);
+      items = items.filter((item) =>
+        itemCategoryIds(item).includes(activeCategory),
+      );
     }
 
     // Sort
@@ -34,7 +39,9 @@ const Book = () => {
         case "name":
           return a.title.localeCompare(b.title);
         case "category":
-          return a.category.localeCompare(b.category);
+          return itemCategoryIds(a)
+            .join(",")
+            .localeCompare(itemCategoryIds(b).join(","));
         default:
           return 0;
       }
@@ -42,6 +49,14 @@ const Book = () => {
 
     return items;
   }, [manifest, activeCategory, sortBy]);
+
+  const categoryLabelById = useMemo(() => {
+    const map: Record<string, string> = {};
+    manifest?.categories.forEach((c) => {
+      map[c.id] = c.label;
+    });
+    return map;
+  }, [manifest]);
 
   return (
     <div className="pt-24">
@@ -69,6 +84,7 @@ const Book = () => {
       <BookGallery
         items={filteredItems}
         isLoading={isLoading}
+        categoryLabelById={categoryLabelById}
         onItemClick={(index) => setLightboxIndex(index)}
       />
 
@@ -76,6 +92,7 @@ const Book = () => {
       <BookLightbox
         items={filteredItems}
         currentIndex={lightboxIndex}
+        categoryLabelById={categoryLabelById}
         onClose={() => setLightboxIndex(null)}
         onNavigate={setLightboxIndex}
       />

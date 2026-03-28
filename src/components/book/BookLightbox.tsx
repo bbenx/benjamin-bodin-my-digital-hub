@@ -7,11 +7,16 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import type { BookMediaItem } from "@/lib/book-manifest";
+import {
+  bookMediaAltText,
+  itemCategoryIds,
+  type BookMediaItem,
+} from "@/lib/book-manifest";
 
 interface BookLightboxProps {
   items: BookMediaItem[];
   currentIndex: number | null;
+  categoryLabelById: Record<string, string>;
   onClose: () => void;
   onNavigate: (index: number) => void;
 }
@@ -19,6 +24,7 @@ interface BookLightboxProps {
 const BookLightbox = ({
   items,
   currentIndex,
+  categoryLabelById,
   onClose,
   onNavigate,
 }: BookLightboxProps) => {
@@ -51,7 +57,7 @@ const BookLightbox = ({
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="max-w-none w-screen h-screen p-0 bg-black/95 border-none rounded-none [&>button]:text-white [&>button]:hover:text-primary [&>button]:z-20">
         <DialogTitle className="sr-only">
-          {item?.title ?? "Image"}
+          {item ? bookMediaAltText(item, categoryLabelById) : "Image"}
         </DialogTitle>
         <DialogDescription className="sr-only">
           Visualisation plein écran
@@ -71,7 +77,7 @@ const BookLightbox = ({
               ) : (
                 <img
                   src={item.src}
-                  alt={item.title}
+                  alt={bookMediaAltText(item, categoryLabelById)}
                   className="max-h-[85vh] max-w-[90vw] object-contain rounded"
                 />
               )}
@@ -100,18 +106,20 @@ const BookLightbox = ({
             )}
 
             {/* Bottom bar */}
-            <div className="absolute bottom-0 left-0 right-0 z-10 p-4 bg-gradient-to-t from-black/60 to-transparent flex items-center justify-between text-white">
-              <div className="flex items-center gap-3">
-                <span className="text-sm font-medium">{item.title}</span>
+            <div className="absolute bottom-0 left-0 right-0 z-10 p-4 bg-gradient-to-t from-black/60 to-transparent flex items-center justify-between gap-3 text-white">
+              <div className="flex min-w-0 flex-wrap items-center gap-2 sm:gap-3">
+                {itemCategoryIds(item).map((catId) => (
+                  <Badge
+                    key={catId}
+                    variant="outline"
+                    className="text-[10px] border-white/30 text-white/80"
+                  >
+                    {categoryLabelById[catId] ?? catId}
+                  </Badge>
+                ))}
                 {item.photographer && (
                   <span className="text-xs text-white/50">by {item.photographer}</span>
                 )}
-                <Badge
-                  variant="outline"
-                  className="text-[10px] border-white/30 text-white/80"
-                >
-                  {item.category}
-                </Badge>
               </div>
               <span className="text-xs text-white/50">
                 {currentIndex! + 1} / {items.length}

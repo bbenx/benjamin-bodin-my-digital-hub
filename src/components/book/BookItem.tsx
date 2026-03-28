@@ -4,26 +4,32 @@ import { Badge } from "@/components/ui/badge";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { cn } from "@/lib/utils";
 import { useInView } from "framer-motion";
-import type { BookMediaItem } from "@/lib/book-manifest";
+import {
+  bookMediaAltText,
+  itemCategoryIds,
+  type BookMediaItem,
+} from "@/lib/book-manifest";
 
 interface BookItemProps {
   item: BookMediaItem;
+  categoryLabelById: Record<string, string>;
   onClick: () => void;
 }
 
-const BookItem = ({ item, onClick }: BookItemProps) => {
+const BookItem = ({ item, categoryLabelById, onClick }: BookItemProps) => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true });
   const [loaded, setLoaded] = useState(false);
   const imageSrc = item.thumb || item.src;
   const ratio = item.width / item.height;
+  const alt = bookMediaAltText(item, categoryLabelById);
 
   return (
     <button
       type="button"
       className="group relative w-full rounded-lg overflow-hidden border border-border/20 bg-card/30 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background"
       onClick={onClick}
-      aria-label={`Voir ${item.title}`}
+      aria-label={`Voir — ${alt}`}
     >
       <AspectRatio
         ref={ref}
@@ -32,7 +38,7 @@ const BookItem = ({ item, onClick }: BookItemProps) => {
       >
         <img
           src={imageSrc}
-          alt={item.title}
+          alt={alt}
           loading="lazy"
           width={item.width}
           height={item.height}
@@ -56,17 +62,21 @@ const BookItem = ({ item, onClick }: BookItemProps) => {
       )}
 
       {/* Hover overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-        <p className="text-white text-sm font-medium">{item.title}</p>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end gap-1.5 p-4">
+        <div className="flex flex-wrap gap-1">
+          {itemCategoryIds(item).map((catId) => (
+            <Badge
+              key={catId}
+              variant="outline"
+              className="w-fit text-[10px] border-white/30 text-white/80"
+            >
+              {categoryLabelById[catId] ?? catId}
+            </Badge>
+          ))}
+        </div>
         {item.photographer && (
-          <p className="text-white/60 text-xs mt-0.5">by {item.photographer}</p>
+          <p className="text-white/60 text-xs">by {item.photographer}</p>
         )}
-        <Badge
-          variant="outline"
-          className="mt-1 w-fit text-[10px] border-white/30 text-white/80"
-        >
-          {item.category}
-        </Badge>
       </div>
     </button>
   );

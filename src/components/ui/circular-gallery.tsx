@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export interface GalleryItem {
-  common: string;
   binomial: string;
   photo: {
     url: string;
@@ -166,7 +165,11 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
               <div
                 key={item.photo.url}
                 role="group"
-                aria-label={item.common}
+                aria-label={
+                  item.photo.by
+                    ? `${item.binomial}, photo ${item.photo.by}`
+                    : item.binomial
+                }
                 className="absolute overflow-hidden rounded-lg"
                 style={{
                   width: cardW,
@@ -192,9 +195,10 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
                     decoding="async"
                   />
                   <div className="pointer-events-none absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
-                    <h2 className="text-xl font-bold">{item.common}</h2>
-                    <em className="text-sm italic opacity-80">{item.binomial}</em>
-                    <p className="mt-2 text-xs opacity-70">Photo by: {item.photo.by}</p>
+                    <p className="text-xl font-bold leading-tight">{item.binomial}</p>
+                    {item.photo.by ? (
+                      <p className="mt-2 text-xs opacity-70">Photo by: {item.photo.by}</p>
+                    ) : null}
                   </div>
                 </div>
               </div>

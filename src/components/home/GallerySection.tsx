@@ -1,10 +1,15 @@
+import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Separator } from "@/components/ui/separator";
 import { CircularGallery, type GalleryItem } from "@/components/ui/circular-gallery";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { fetchBookManifest } from "@/lib/book-manifest";
+import {
+  bookMediaAltText,
+  fetchBookManifest,
+  itemCategoryIds,
+} from "@/lib/book-manifest";
 
 const GallerySection = () => {
   const navigate = useNavigate();
@@ -14,28 +19,34 @@ const GallerySection = () => {
     queryFn: fetchBookManifest,
   });
 
+  const categoryLabelById = useMemo(() => {
+    if (!manifest) return {} as Record<string, string>;
+    return Object.fromEntries(manifest.categories.map((c) => [c.id, c.label]));
+  }, [manifest]);
+
   // Pick a spread of images from the manifest for the 3D gallery
-  const galleryItems: GalleryItem[] = (() => {
+  const galleryItems: GalleryItem[] = useMemo(() => {
     if (!manifest || manifest.items.length === 0) return [];
 
-    // Take up to 10 images, evenly spaced through the list
     const total = manifest.items.length;
     const count = Math.min(10, total);
     const step = total / count;
 
     return Array.from({ length: count }, (_, i) => {
       const item = manifest.items[Math.floor(i * step)];
+      const labels = itemCategoryIds(item).map(
+        (id) => categoryLabelById[id] ?? id,
+      );
       return {
-        common: item.title,
-        binomial: item.category,
+        binomial: labels.join(" · "),
         photo: {
           url: item.src,
-          text: item.title,
+          text: bookMediaAltText(item, categoryLabelById),
           by: item.photographer,
         },
       };
     });
-  })();
+  }, [manifest, categoryLabelById]);
 
   if (galleryItems.length === 0) return null;
 

@@ -5,10 +5,16 @@ import type { BookMediaItem } from "@/lib/book-manifest";
 interface BookGalleryProps {
   items: BookMediaItem[];
   isLoading: boolean;
+  categoryLabelById: Record<string, string>;
   onItemClick: (index: number) => void;
 }
 
-const BookGallery = ({ items, isLoading, onItemClick }: BookGalleryProps) => {
+const BookGallery = ({
+  items,
+  isLoading,
+  categoryLabelById,
+  onItemClick,
+}: BookGalleryProps) => {
   // Distribute items across 3 columns for true masonry layout
   const columns = useMemo(() => {
     const cols: { item: BookMediaItem; index: number }[][] = [[], [], []];
@@ -54,6 +60,7 @@ const BookGallery = ({ items, isLoading, onItemClick }: BookGalleryProps) => {
             <BookItem
               key={item.id}
               item={item}
+              categoryLabelById={categoryLabelById}
               onClick={() => onItemClick(index)}
             />
           ))}
