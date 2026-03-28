@@ -39,7 +39,7 @@ const Index = () => {
           <h1 className="text-4xl md:text-5xl font-light tracking-wide text-foreground">
             Benjamin Bodin
           </h1>
-          <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground font-light">
+          <p className="text-sm tracking-[0.3em] uppercase text-primary font-light">
             Comédien · Mannequin
           </p>
         </div>
