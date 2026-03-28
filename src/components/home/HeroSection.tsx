@@ -46,6 +46,9 @@ const HeroSection = () => {
                 src={portrait}
                 alt="Benjamin Bodin"
                 className="w-full h-full object-cover"
+                fetchPriority="high"
+                loading="eager"
+                decoding="async"
               />
             </div>
           </div>
