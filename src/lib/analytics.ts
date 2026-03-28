@@ -1,7 +1,6 @@
 /**
- * Google Analytics 4 (gtag). Activé seulement si VITE_GA_MEASUREMENT_ID est défini.
- * Côté France / RGPD : prévoir une bannière de consentement avant d’activer le suivi
- * si tu utilises des cookies non essentiels (voir documentation Google « Consent Mode »).
+ * Suivi des navigations SPA (premier chargement = balise dans index.html).
+ * VITE_GA_MEASUREMENT_ID doit être défini au build (local .env + Vercel).
  */
 
 declare global {
@@ -14,37 +13,11 @@ declare global {
 const getMeasurementId = () =>
   import.meta.env.VITE_GA_MEASUREMENT_ID?.trim() || "";
 
-let gtagInitialized = false;
-
 export function isGoogleAnalyticsEnabled(): boolean {
   return Boolean(getMeasurementId());
 }
 
-/** Charge gtag.js une seule fois (file d’attente dataLayer avant chargement du script). */
-export function initGoogleAnalytics(): void {
-  const id = getMeasurementId();
-  if (gtagInitialized || !id || typeof window === "undefined") return;
-  gtagInitialized = true;
-
-  window.dataLayer = window.dataLayer ?? [];
-  window.gtag = function gtag(...args: unknown[]) {
-    window.dataLayer!.push(args);
-  };
-
-  window.gtag("js", new Date());
-  /* Comme le snippet officiel : un premier page_view est envoyé au traitement du config. */
-  window.gtag("config", id);
-
-  const script = document.createElement("script");
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
-  document.head.appendChild(script);
-}
-
-/**
- * À chaque changement de route (SPA). Google documente `gtag('config', id, { page_path })`
- * plutôt qu’un événement `page_view` manuel pour GA4.
- */
+/** Appelé après le premier affichage quand la route React change. */
 export function trackPageView(pagePath: string): void {
   const id = getMeasurementId();
   if (!id || typeof window === "undefined" || !window.gtag) return;
