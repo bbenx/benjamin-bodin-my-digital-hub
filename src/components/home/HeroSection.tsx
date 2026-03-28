@@ -56,7 +56,7 @@ const HeroSection = () => {
       </div>
 
       {/* Tagline */}
-      <div className="absolute bottom-20 sm:bottom-24 md:bottom-28 lg:bottom-36 left-1/2 -translate-x-1/2 w-full px-6">
+      <div className="absolute bottom-32 sm:bottom-28 lg:bottom-36 left-1/2 -translate-x-1/2 w-full px-6">
         <div className="flex justify-center">
           <BlurText
             text={profile.tagline}
