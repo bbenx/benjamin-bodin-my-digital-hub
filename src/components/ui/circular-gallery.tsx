@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, HTMLAttributes } from "react";
+import React, { useEffect, useRef, useState, HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -33,13 +33,17 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
     },
     ref,
   ) => {
-    const [rotation, setRotation] = React.useState(0);
+    const [rotation, setRotation] = useState(0);
+    const [isDraggingUi, setIsDraggingUi] = useState(false);
     const draggingRef = useRef(false);
     const lastXRef = useRef(0);
     const animationFrameRef = useRef<number | null>(null);
+    const dragPendingRef = useRef(0);
+    const dragRafRef = useRef<number | null>(null);
+    const sensitivityRef = useRef(dragSensitivity);
     const isMobile = useIsMobile();
 
-    /** Mobile : cartes un peu plus étroites + rayon minimal pour éviter le chevauchement (10 panneaux ≈ 36°). */
+    /** Même comportement partout : tailles adaptées au viewport étroit. */
     const compact = isMobile;
     const cardW = compact ? 190 : 300;
     const cardH = compact ? 265 : 400;
@@ -56,6 +60,24 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
     const sensitivity = compact ? 0.52 : dragSensitivity;
     const perspectivePx = compact ? 1500 : 2000;
 
+    sensitivityRef.current = sensitivity;
+
+    const flushDragPending = () => {
+      const d = dragPendingRef.current;
+      dragPendingRef.current = 0;
+      if (d !== 0) {
+        setRotation((r) => r + d);
+      }
+    };
+
+    const scheduleDragFrame = () => {
+      if (dragRafRef.current !== null) return;
+      dragRafRef.current = requestAnimationFrame(() => {
+        dragRafRef.current = null;
+        flushDragPending();
+      });
+    };
+
     useEffect(() => {
       const tick = () => {
         if (!draggingRef.current) {
@@ -68,25 +90,37 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
         if (animationFrameRef.current !== null) {
           cancelAnimationFrame(animationFrameRef.current);
         }
+        if (dragRafRef.current !== null) {
+          cancelAnimationFrame(dragRafRef.current);
+        }
       };
     }, [autoRotateSpeed]);
 
     const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
       e.currentTarget.setPointerCapture(e.pointerId);
       draggingRef.current = true;
+      setIsDraggingUi(true);
       lastXRef.current = e.clientX;
+      dragPendingRef.current = 0;
     };
 
     const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
       if (!draggingRef.current) return;
       const dx = e.clientX - lastXRef.current;
       lastXRef.current = e.clientX;
-      setRotation((r) => r + dx * sensitivity);
+      dragPendingRef.current += dx * sensitivityRef.current;
+      scheduleDragFrame();
     };
 
     const endDrag = (e: React.PointerEvent<HTMLDivElement>) => {
       if (!draggingRef.current) return;
       draggingRef.current = false;
+      setIsDraggingUi(false);
+      if (dragRafRef.current !== null) {
+        cancelAnimationFrame(dragRafRef.current);
+        dragRafRef.current = null;
+      }
+      flushDragPending();
       try {
         e.currentTarget.releasePointerCapture(e.pointerId);
       } catch {
@@ -95,6 +129,7 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
     };
 
     const anglePerItem = 360 / items.length;
+    const opacityTransition = isDraggingUi ? "none" : "opacity 0.3s linear";
 
     return (
       <div
@@ -102,10 +137,10 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
         role="region"
         aria-label="Galerie"
         className={cn(
-          "relative flex h-full w-full touch-pan-y items-center justify-center md:cursor-grab md:active:cursor-grabbing",
+          "relative flex h-full w-full touch-pan-y items-center justify-center overscroll-x-none md:cursor-grab md:active:cursor-grabbing",
           className,
         )}
-        style={{ perspective: `${perspectivePx}px` }}
+        style={{ perspective: `${perspectivePx}px`, touchAction: "pan-y" }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
@@ -117,6 +152,7 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
           style={{
             transform: `rotateY(${rotation}deg) scale3d(${ringScale}, ${ringScale}, ${ringScale})`,
             transformStyle: "preserve-3d",
+            willChange: "transform",
           }}
         >
           {items.map((item, i) => {
@@ -141,7 +177,7 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
                   marginLeft: -halfW,
                   marginTop: -halfH,
                   opacity,
-                  transition: "opacity 0.3s linear",
+                  transition: opacityTransition,
                   backfaceVisibility: "hidden",
                 }}
               >
@@ -149,11 +185,11 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
                   <img
                     src={item.photo.url}
                     alt={item.photo.text}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="pointer-events-none absolute inset-0 h-full w-full object-cover"
                     style={{ objectPosition: item.photo.pos || "center" }}
                     draggable={false}
                   />
-                  <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
+                  <div className="pointer-events-none absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
                     <h2 className="text-xl font-bold">{item.common}</h2>
                     <em className="text-sm italic opacity-80">{item.binomial}</em>
                     <p className="mt-2 text-xs opacity-70">Photo by: {item.photo.by}</p>

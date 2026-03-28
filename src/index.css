@@ -80,6 +80,15 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
+    overscroll-behavior-x: none;
+  }
+
+  @supports (overflow: clip) {
+    html {
+      overflow-x: clip;
+    }
   }
 
   * {
@@ -89,6 +98,23 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+    max-width: 100%;
+    overscroll-behavior-x: none;
+  }
+
+  @supports (overflow: clip) {
+    body {
+      overflow-x: clip;
+    }
+  }
+
+  /* Mobile : pas de « glissé » horizontal sur tout le document (effet app). */
+  @media (max-width: 767px) {
+    html,
+    body {
+      touch-action: pan-y pinch-zoom;
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {
