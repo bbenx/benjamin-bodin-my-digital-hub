@@ -80,7 +80,6 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
     width: 100%;
     max-width: 100%;
     overscroll-behavior-x: none;
@@ -101,16 +100,7 @@
 
   #root {
     width: 100%;
-    min-height: 100dvh;
     overflow-x: hidden;
-  }
-
-  /* Mobile : pas de « glissé » horizontal sur tout le document (effet app). */
-  @media (max-width: 767px) {
-    html,
-    body {
-      touch-action: pan-y pinch-zoom;
-    }
   }
 
   h1, h2, h3, h4, h5, h6 {

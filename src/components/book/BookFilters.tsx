@@ -27,14 +27,14 @@ const BookFilters = ({
     <div className="sticky top-[72px] z-30 bg-background/90 backdrop-blur-md border-b border-border/30 py-4 px-6">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         {/* Category filters */}
-        <div className="overflow-x-auto w-full sm:w-auto">
+        <div className="w-full overflow-x-auto sm:w-auto [-webkit-overflow-scrolling:touch]">
           <ToggleGroup
             type="single"
             value={activeCategory}
             onValueChange={(val) => {
               if (val) onCategoryChange(val);
             }}
-            className="flex-nowrap"
+            className="w-max flex-nowrap justify-start gap-1.5"
           >
             <ToggleGroupItem
               value="all"
