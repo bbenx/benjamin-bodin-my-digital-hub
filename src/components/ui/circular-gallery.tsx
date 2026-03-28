@@ -54,10 +54,16 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
     const minTranslateZ =
       n <= 1 ? halfW + 120 : halfW / Math.sin(angleStepRad / 2) + 16;
     const effectiveRadius = compact ? Math.max(Math.ceil(minTranslateZ), Math.round(radius * 0.72)) : radius;
-    /** Réduit visuellement l’anneau (grand translateZ nécessaire) pour rester dans le viewport. */
-    const ringScale = compact ? 0.74 : 1;
+    /** Sur mobile, moins de réduction : un scale trop bas aplatit l’anneau à l’écran. */
+    const ringScale = compact ? 0.86 : 1;
     const sensitivity = compact ? 0.52 : dragSensitivity;
-    const perspectivePx = compact ? 1500 : 2000;
+    /**
+     * Perspective forte vs largeur viewport : sur téléphone 1500px+ donne un effet quasi « plat »
+     * (comme un carrousel linéaire). On lie la distance de fuite à ~1.5–1.7× la largeur visible.
+     */
+    const perspectiveStyle = compact
+      ? "clamp(480px, calc(100vw * 1.62), 780px)"
+      : "2000px";
 
     sensitivityRef.current = sensitivity;
 
@@ -139,7 +145,7 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
           "relative flex h-full w-full touch-pan-y items-center justify-center overscroll-x-none md:cursor-grab md:active:cursor-grabbing",
           className,
         )}
-        style={{ perspective: `${perspectivePx}px`, touchAction: "pan-y" }}
+        style={{ perspective: perspectiveStyle, touchAction: "pan-y" }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}

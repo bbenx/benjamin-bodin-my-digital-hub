@@ -6,7 +6,7 @@ import { profile } from "@/lib/profile-data";
 
 const menuItems = [
   { label: "ACCUEIL", href: "/", type: "route" as const },
-  { label: "BOOK", href: "/book", type: "route" as const },
+  { label: "BOOK", href: "#galerie", type: "anchor" as const },
   { label: "MENSURATIONS", href: "#mensurations", type: "anchor" as const },
   { label: "BANDE DÉMO", href: "#bande-demo", type: "anchor" as const },
   { label: "CONTACT", href: "#contact", type: "anchor" as const },
@@ -48,29 +48,36 @@ const Header = () => {
     setIsMenuOpen(false);
 
     if (item.type === "anchor") {
+      const hash = item.href.startsWith("#") ? item.href.slice(1) : item.href;
       if (location.pathname !== "/") {
-        navigate("/" + item.href);
+        void navigate({ pathname: "/", hash });
       } else {
-        const el = document.querySelector(item.href);
-        el?.scrollIntoView({ behavior: "smooth" });
+        void navigate({ pathname: "/", hash }, { replace: true });
       }
-    } else {
-      navigate(item.href);
+      return;
     }
+    void navigate(item.href);
   };
 
   const isActive = (item: (typeof menuItems)[number]) => {
     if (item.type === "route") {
-      return location.pathname === item.href;
+      return location.pathname === item.href && !location.hash;
+    }
+    if (item.type === "anchor") {
+      return location.pathname === "/" && location.hash === item.href;
     }
     return false;
   };
 
   const handleLogoClick = () => {
     if (location.pathname === "/") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (location.hash) {
+        void navigate("/", { replace: true });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     } else {
-      navigate("/");
+      void navigate("/");
     }
   };
 
