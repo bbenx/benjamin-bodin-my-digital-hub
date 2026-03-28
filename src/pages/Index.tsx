@@ -1,76 +1,18 @@
-import { Instagram, Mail, Camera } from "lucide-react";
-import portrait from "@/assets/portrait.png";
-
-const links = [
-  {
-    icon: Instagram,
-    label: "Instagram",
-    href: "https://instagram.com/_benjaminbodin",
-    display: "@_benjaminbodin",
-  },
-  {
-    icon: Camera,
-    label: "Book",
-    href: "https://benjaminbodin.book.fr/",
-    display: "benjaminbodin.book.fr",
-  },
-  {
-    icon: Mail,
-    label: "Email",
-    href: "mailto:contact@benjaminbodin.fr",
-    display: "contact@benjaminbodin.fr",
-  },
-];
+import { HeroSection } from "@/components/home/HeroSection";
+import { StatsSection } from "@/components/home/StatsSection";
+import { GallerySection } from "@/components/home/GallerySection";
+import { ReelSection } from "@/components/home/ReelSection";
+import { ContactSection } from "@/components/home/ContactSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-16 relative overflow-hidden">
-      {/* Subtle glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
-
-      <div className="relative z-10 flex flex-col items-center gap-10 max-w-md w-full">
-        {/* Avatar placeholder */}
-        <div className="w-36 h-36 rounded-full border-2 border-border bg-secondary overflow-hidden">
-          <img src={portrait} alt="Benjamin Bodin" className="w-full h-full object-cover" />
-        </div>
-
-        {/* Name & title */}
-        <div className="text-center space-y-2">
-          <h1 className="text-4xl md:text-5xl font-light tracking-wide text-foreground">
-            Benjamin Bodin
-          </h1>
-          <p className="text-sm tracking-[0.3em] uppercase text-primary font-light">
-            Comédien · Mannequin
-          </p>
-        </div>
-
-        {/* Separator */}
-        <div className="w-12 h-px bg-primary/40" />
-
-        {/* Links */}
-        <div className="w-full flex flex-col gap-3">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target={link.label !== "Email" ? "_blank" : undefined}
-              rel="noopener noreferrer"
-              className="group flex items-center justify-center gap-3 px-6 py-4 rounded-lg border border-border bg-card hover:border-primary/40 transition-all duration-300"
-            >
-              <link.icon className="w-5 h-5 transition-colors text-primary/70 group-hover:text-primary" />
-              <span className="text-sm tracking-[0.15em] uppercase text-foreground group-hover:text-primary transition-colors">
-                {link.label}
-              </span>
-            </a>
-          ))}
-        </div>
-
-        {/* Footer */}
-        <p className="text-[11px] text-muted-foreground/50 tracking-widest uppercase mt-6">
-          www.benjaminbodin.fr
-        </p>
-      </div>
-    </div>
+    <>
+      <HeroSection />
+      <StatsSection />
+      <GallerySection />
+      <ReelSection />
+      <ContactSection />
+    </>
   );
 };
 

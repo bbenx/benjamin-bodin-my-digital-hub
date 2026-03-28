@@ -1,0 +1,10 @@
+{
+  "categories": [
+    { "id": "portrait", "label": "Portrait" },
+    { "id": "editorial", "label": "Éditorial" },
+    { "id": "runway", "label": "Défilé" },
+    { "id": "commercial", "label": "Commercial" },
+    { "id": "cinema", "label": "Cinéma" }
+  ],
+  "items": []
+}
