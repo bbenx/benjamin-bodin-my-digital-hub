@@ -55,17 +55,12 @@ const Index = () => {
               href={link.href}
               target={link.label !== "Email" ? "_blank" : undefined}
               rel="noopener noreferrer"
-              className="group flex items-center gap-4 px-6 py-4 rounded-lg border border-border bg-card hover:border-primary/40 transition-all duration-300"
+              className="group flex items-center justify-center gap-3 px-6 py-4 rounded-lg border border-border bg-card hover:border-primary/40 transition-all duration-300"
             >
               <link.icon className="w-5 h-5 transition-colors text-primary/70 group-hover:text-primary" />
-              <div className="flex flex-col">
-                <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                  {link.label}
-                </span>
-                <span className="text-sm text-foreground group-hover:text-primary transition-colors">
-                  {link.display}
-                </span>
-              </div>
+              <span className="text-sm tracking-[0.15em] uppercase text-foreground group-hover:text-primary transition-colors">
+                {link.label}
+              </span>
             </a>
           ))}
         </div>
