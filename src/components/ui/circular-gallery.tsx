@@ -39,15 +39,22 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
     const animationFrameRef = useRef<number | null>(null);
     const isMobile = useIsMobile();
 
-    /** Même comportement partout : tailles adaptées au viewport étroit. */
+    /** Mobile : cartes un peu plus étroites + rayon minimal pour éviter le chevauchement (10 panneaux ≈ 36°). */
     const compact = isMobile;
-    const effectiveRadius = compact ? Math.round(radius * 0.56) : radius;
-    const cardW = compact ? 220 : 300;
-    const cardH = compact ? 300 : 400;
+    const cardW = compact ? 190 : 300;
+    const cardH = compact ? 265 : 400;
     const halfW = cardW / 2;
     const halfH = cardH / 2;
+    const n = items.length;
+    const angleStepRad = n <= 1 ? Math.PI / 2 : (2 * Math.PI) / n;
+    /** Distance Z minimale pour que les largeurs de panneaux ne se croisent pas sur le cercle. */
+    const minTranslateZ =
+      n <= 1 ? halfW + 120 : halfW / Math.sin(angleStepRad / 2) + 16;
+    const effectiveRadius = compact ? Math.max(Math.ceil(minTranslateZ), Math.round(radius * 0.72)) : radius;
+    /** Réduit visuellement l’anneau (grand translateZ nécessaire) pour rester dans le viewport. */
+    const ringScale = compact ? 0.74 : 1;
     const sensitivity = compact ? 0.52 : dragSensitivity;
-    const perspectivePx = compact ? 1400 : 2000;
+    const perspectivePx = compact ? 1500 : 2000;
 
     useEffect(() => {
       const tick = () => {
@@ -108,7 +115,7 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
         <div
           className="relative h-full w-full select-none"
           style={{
-            transform: `rotateY(${rotation}deg)`,
+            transform: `rotateY(${rotation}deg) scale3d(${ringScale}, ${ringScale}, ${ringScale})`,
             transformStyle: "preserve-3d",
           }}
         >
@@ -135,6 +142,7 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
                   marginTop: -halfH,
                   opacity,
                   transition: "opacity 0.3s linear",
+                  backfaceVisibility: "hidden",
                 }}
               >
                 <div className="group relative h-full w-full overflow-hidden rounded-lg border border-border bg-card/70 shadow-2xl backdrop-blur-lg dark:bg-card/30">
