@@ -1,4 +1,5 @@
 import { Instagram, Mail, Camera } from "lucide-react";
+import portrait from "@/assets/portrait.png";
 
 const links = [
   {
