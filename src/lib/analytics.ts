@@ -32,7 +32,8 @@ export function initGoogleAnalytics(): void {
   };
 
   window.gtag("js", new Date());
-  window.gtag("config", id, { send_page_view: false });
+  /* Comme le snippet officiel : un premier page_view est envoyé au traitement du config. */
+  window.gtag("config", id);
 
   const script = document.createElement("script");
   script.async = true;
@@ -52,5 +53,6 @@ export function trackPageView(pagePath: string): void {
     page_path: pagePath,
     page_location: window.location.href,
     page_title: document.title,
+    send_page_view: true,
   });
 }
