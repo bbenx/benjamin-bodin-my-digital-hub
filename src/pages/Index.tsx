@@ -17,8 +17,8 @@ const links = [
   {
     icon: Mail,
     label: "Email",
-    href: "mailto:benjaminbodin.model@gmail.com",
-    display: "benjaminbodin.model@gmail.com",
+    href: "mailto:contact@benjaminbodin.fr",
+    display: "contact@benjaminbodin.fr",
   },
 ];
 
