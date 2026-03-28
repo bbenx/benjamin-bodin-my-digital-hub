@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&amp;display=swap");
+    </style>
+  </defs>
+  <rect width="100" height="100" fill="hsl(0, 0%, 4%)" />
+  <text
+    x="50"
+    y="50"
+    dominant-baseline="central"
+    text-anchor="middle"
+    font-family="Cormorant Garamond, Georgia, serif"
+    font-weight="300"
+    font-size="58"
+    fill="hsl(40, 10%, 90%)"
+  >
+    B
+  </text>
+</svg>

@@ -50,6 +50,11 @@ const Book = () => {
         if (byDate !== 0) return byDate;
         return a.id.localeCompare(b.id, undefined, { numeric: true });
       });
+    } else if (activeCategory === "all") {
+      for (let i = items.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [items[i], items[j]] = [items[j], items[i]];
+      }
     }
 
     return items;
@@ -65,6 +70,7 @@ const Book = () => {
 
   const handleCategoryChange = (id: string) => {
     setActiveCategory(id);
+    setActivePalette("all");
   };
 
   const handlePaletteChange = (val: "all" | "bw" | "color") => {

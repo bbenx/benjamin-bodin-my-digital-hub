@@ -613,6 +613,105 @@
       "width": 1179,
       "height": 762,
       "palette": "color"
+    },
+    {
+      "id": "055",
+      "src": "/assets/book/Garnier/IMG_3085.webp",
+      "category": "commercial",
+      "photographer": "snartsphotography",
+      "date": "2026-03-02",
+      "type": "photo",
+      "width": 1179,
+      "height": 1403,
+      "palette": "color"
+    },
+    {
+      "id": "056",
+      "src": "/assets/book/Garnier/IMG_3086.webp",
+      "category": "commercial",
+      "photographer": "snartsphotography",
+      "date": "2026-03-02",
+      "type": "photo",
+      "width": 1179,
+      "height": 1425,
+      "palette": "color"
+    },
+    {
+      "id": "057",
+      "src": "/assets/book/Garnier/IMG_3087.webp",
+      "category": "commercial",
+      "photographer": "snartsphotography",
+      "date": "2026-03-02",
+      "type": "photo",
+      "width": 1179,
+      "height": 1409,
+      "palette": "color"
+    },
+    {
+      "id": "058",
+      "src": "/assets/book/Garnier/IMG_3088.webp",
+      "category": "commercial",
+      "photographer": "snartsphotography",
+      "date": "2026-03-02",
+      "type": "photo",
+      "width": 1179,
+      "height": 1440,
+      "palette": "color"
+    },
+    {
+      "id": "059",
+      "src": "/assets/book/Garnier/IMG_3089.webp",
+      "category": "commercial",
+      "photographer": "snartsphotography",
+      "date": "2026-03-02",
+      "type": "photo",
+      "width": 1179,
+      "height": 1433,
+      "palette": "color"
+    },
+    {
+      "id": "060",
+      "src": "/assets/book/Garnier/IMG_3090.webp",
+      "category": "commercial",
+      "photographer": "snartsphotography",
+      "date": "2026-03-02",
+      "type": "photo",
+      "width": 1179,
+      "height": 1422,
+      "palette": "color"
+    },
+    {
+      "id": "061",
+      "src": "/assets/book/Garnier/IMG_3091.webp",
+      "category": "commercial",
+      "photographer": "snartsphotography",
+      "date": "2026-03-02",
+      "type": "photo",
+      "width": 1179,
+      "height": 1425,
+      "palette": "color"
+    },
+    {
+      "id": "062",
+      "src": "/assets/book/Garnier/IMG_3092.webp",
+      "category": "commercial",
+      "photographer": "snartsphotography",
+      "date": "2026-03-02",
+      "type": "photo",
+      "width": 1179,
+      "height": 1412,
+      "palette": "color"
+    },
+    {
+      "id": "063",
+      "src": "/assets/book/Garnier/IMG_3093.webp",
+      "category": "commercial",
+      "photographer": "snartsphotography",
+      "date": "2026-03-02",
+      "type": "photo",
+      "width": 1179,
+      "height": 1421,
+      "palette": "color"
     }
   ]
 }
