@@ -45,7 +45,7 @@ const StatsSection = () => {
 
   return (
     <section
-      id="profil"
+      id="mensurations"
       ref={sectionRef}
       className="relative py-32 md:py-44 px-6 overflow-hidden"
     >
@@ -58,28 +58,17 @@ const StatsSection = () => {
       />
 
       <div className="max-w-5xl mx-auto">
-        {/* Section label + heading */}
+        {/* Heading */}
         <div className="mb-20 md:mb-28">
-          <motion.p
-            className="text-[10px] tracking-[0.5em] uppercase text-primary/60 mb-6"
-            style={{ fontFamily: "'Outfit', sans-serif" }}
-            variants={fadeUp}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            custom={0}
-          >
-            Fiche technique
-          </motion.p>
-
           <motion.h2
             className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-foreground/90"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
             variants={fadeUp}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            custom={1}
+            custom={0}
           >
-            Profil
+            Mensurations
           </motion.h2>
 
           <motion.div
@@ -100,7 +89,7 @@ const StatsSection = () => {
               variants={fadeUp}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
-              custom={i + 2}
+              custom={i + 1}
             >
               <p
                 className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground/60 mb-3"
@@ -136,7 +125,7 @@ const StatsSection = () => {
                 variants={fadeUp}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
-                custom={i + 6}
+                custom={i + 5}
               >
                 <span
                   className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground/50"
@@ -175,7 +164,7 @@ const StatsSection = () => {
                 variants={fadeUp}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
-                custom={i + 11}
+                custom={i + 10}
               >
                 <span
                   className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground/50"
@@ -201,7 +190,7 @@ const StatsSection = () => {
             variants={fadeUp}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            custom={15}
+            custom={14}
           >
             <p
               className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground/60 mb-4"
@@ -222,7 +211,7 @@ const StatsSection = () => {
             variants={fadeUp}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            custom={16}
+            custom={15}
           >
             <p
               className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground/60 mb-4"

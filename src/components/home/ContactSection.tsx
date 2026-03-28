@@ -18,17 +18,12 @@ const ContactSection = () => {
         <Separator className="w-12 mx-auto mb-16 bg-primary/40" />
 
         <div className={`grid ${hasAgent ? "md:grid-cols-2" : "md:grid-cols-1"} gap-12 max-w-2xl mx-auto`}>
-          {/* Direct contact */}
-          <div className="space-y-6">
-            <h3 className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-6">
-              Contact direct
-            </h3>
-
+          <div className="flex flex-row flex-wrap items-center justify-center gap-x-10 gap-y-4">
             <a
               href={`mailto:${profile.email}`}
-              className="group flex items-center gap-4 transition-colors duration-300"
+              className="group inline-flex items-center gap-3 transition-colors duration-300"
             >
-              <Mail className="w-5 h-5 text-primary/60 group-hover:text-primary transition-colors" />
+              <Mail className="w-5 h-5 shrink-0 text-primary/60 group-hover:text-primary transition-colors" />
               <span className="text-foreground group-hover:text-primary transition-colors">
                 {profile.email}
               </span>
@@ -38,9 +33,9 @@ const ContactSection = () => {
               href={profile.instagram.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-4 transition-colors duration-300"
+              className="group inline-flex items-center gap-3 transition-colors duration-300"
             >
-              <Instagram className="w-5 h-5 text-primary/60 group-hover:text-primary transition-colors" />
+              <Instagram className="w-5 h-5 shrink-0 text-primary/60 group-hover:text-primary transition-colors" />
               <span className="text-foreground group-hover:text-primary transition-colors">
                 {profile.instagram.handle}
               </span>

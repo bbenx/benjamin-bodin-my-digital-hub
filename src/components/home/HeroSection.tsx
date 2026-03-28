@@ -9,7 +9,7 @@ const HeroSection = () => {
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[140px] pointer-events-none" />
 
       {/* Centered Name + Portrait */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4">
+      <div className="absolute left-1/2 top-[calc(50%-1rem)] w-full -translate-x-1/2 -translate-y-1/2 px-4 sm:top-[calc(50%-1.25rem)] md:top-[calc(50%-1.5rem)] lg:top-[calc(50%-1.75rem)]">
         <div className="relative text-center">
           <div>
             <BlurText
@@ -59,7 +59,7 @@ const HeroSection = () => {
             delay={120}
             animateBy="words"
             direction="top"
-            className="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] text-center transition-colors duration-300 text-muted-foreground"
+            className="text-[16px] sm:text-[18px] md:text-[21px] lg:text-[24px] text-center transition-colors duration-300 text-muted-foreground"
             style={{ fontFamily: "'Outfit', sans-serif", letterSpacing: "0.3em" }}
           />
         </div>
@@ -71,7 +71,7 @@ const HeroSection = () => {
         className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 animate-bounce"
         aria-label="Défiler vers le bas"
         onClick={() => {
-          const next = document.getElementById("profil");
+          const next = document.getElementById("bio");
           next?.scrollIntoView({ behavior: "smooth" });
         }}
       >

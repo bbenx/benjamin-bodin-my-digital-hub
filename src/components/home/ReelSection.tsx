@@ -4,14 +4,14 @@ import { profile } from "@/lib/profile-data";
 
 const ReelSection = () => {
   return (
-    <section id="reel" className="py-24 px-6">
+    <section id="bande-demo" className="py-24 px-6">
       <div className="max-w-4xl mx-auto">
         {/* Heading */}
         <h2
           className="text-4xl md:text-5xl font-light tracking-wide text-center mb-4"
           style={{ fontFamily: "'Cormorant Garamond', serif" }}
         >
-          Showreel
+          Bande démo
         </h2>
         <Separator className="w-12 mx-auto mb-16 bg-primary/40" />
 
@@ -20,7 +20,7 @@ const ReelSection = () => {
           {profile.showreelUrl ? (
             <iframe
               src={profile.showreelUrl}
-              title="Showreel Benjamin Bodin"
+              title="Bande démo — Benjamin Bodin"
               className="absolute inset-0 w-full h-full rounded-lg border border-border/30"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen

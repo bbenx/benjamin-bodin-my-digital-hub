@@ -4,6 +4,9 @@ export const profile = {
   lastName: "BODIN",
   subtitle: "Comédien · Mannequin",
   tagline: "Comédien · Mannequin",
+  /** Texte de la section Bio (à personnaliser). */
+  bio:
+    "Comédien et mannequin, je travaille en France et à l’international. Formé au jeu et à l’image, j’aime les projets qui mêlent créativité et exigence. Contactez-moi pour vos castings et collaborations.",
   email: "contact@benjaminbodin.fr",
   instagram: {
     handle: "@_benjaminbodin",

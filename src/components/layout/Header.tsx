@@ -1,14 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Instagram } from "lucide-react";
+import { Menu, X, Instagram, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { profile } from "@/lib/profile-data";
 
 const menuItems = [
   { label: "ACCUEIL", href: "/", type: "route" as const },
   { label: "BOOK", href: "/book", type: "route" as const },
-  { label: "PROFIL", href: "#profil", type: "anchor" as const },
-  { label: "SHOWREEL", href: "#reel", type: "anchor" as const },
+  { label: "BIO", href: "#bio", type: "anchor" as const },
+  { label: "MENSURATIONS", href: "#mensurations", type: "anchor" as const },
+  { label: "BANDE DÉMO", href: "#bande-demo", type: "anchor" as const },
   { label: "CONTACT", href: "#contact", type: "anchor" as const },
 ];
 
@@ -125,16 +126,24 @@ const Header = () => {
           B
         </button>
 
-        {/* Instagram link */}
-        <a
-          href={profile.instagram.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-2 text-muted-foreground hover:text-primary transition-colors duration-300"
-          aria-label="Instagram"
-        >
-          <Instagram className="w-6 h-6" />
-        </a>
+        <div className="flex flex-nowrap items-center gap-4">
+          <a
+            href={`mailto:${profile.email}`}
+            className="p-2 text-muted-foreground hover:text-primary transition-colors duration-300"
+            aria-label="Envoyer un e-mail"
+          >
+            <Mail className="w-6 h-6" />
+          </a>
+          <a
+            href={profile.instagram.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 text-muted-foreground hover:text-primary transition-colors duration-300"
+            aria-label="Instagram"
+          >
+            <Instagram className="w-6 h-6" />
+          </a>
+        </div>
       </nav>
     </header>
   );
