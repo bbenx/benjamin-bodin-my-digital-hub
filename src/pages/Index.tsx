@@ -30,10 +30,8 @@ const Index = () => {
 
       <div className="relative z-10 flex flex-col items-center gap-10 max-w-md w-full">
         {/* Avatar placeholder */}
-        <div className="w-36 h-36 rounded-full border-2 border-border bg-secondary flex items-center justify-center overflow-hidden">
-          <span className="text-muted-foreground text-xs font-light tracking-widest uppercase">
-            Photo
-          </span>
+        <div className="w-36 h-36 rounded-full border-2 border-border bg-secondary overflow-hidden">
+          <img src={portrait} alt="Benjamin Bodin" className="w-full h-full object-cover" />
         </div>
 
         {/* Name & title */}
