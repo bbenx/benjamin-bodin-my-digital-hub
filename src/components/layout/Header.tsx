@@ -66,6 +66,14 @@ const Header = () => {
     return false;
   };
 
+  const handleLogoClick = () => {
+    if (location.pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      navigate("/");
+    }
+  };
+
   return (
     <header
       className={cn(
@@ -118,9 +126,10 @@ const Header = () => {
         {/* Signature */}
         <button
           type="button"
-          onClick={() => navigate("/")}
+          onClick={handleLogoClick}
           className="text-4xl text-foreground hover:text-primary transition-colors duration-300"
           style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300 }}
+          aria-label="Retour en haut de la page"
         >
           B
         </button>

@@ -9,7 +9,55 @@ import {
   bookMediaAltText,
   fetchBookManifest,
   itemCategoryIds,
+  itemPalette,
+  type BookMediaItem,
 } from "@/lib/book-manifest";
+
+/** Répartit `n` choix sur `pool` en gardant un écart régulier (ordre du manifest). */
+function spreadPick(pool: BookMediaItem[], n: number): BookMediaItem[] {
+  if (n <= 0 || pool.length === 0) return [];
+  if (pool.length === 1) return Array.from({ length: n }, () => pool[0]);
+  return Array.from({ length: n }, (_, j) => {
+    const t = n === 1 ? 0.5 : j / (n - 1);
+    return pool[Math.round(t * (pool.length - 1))];
+  });
+}
+
+/** Jusqu’à `count` images en alternant N&B / couleur pour le carrousel d’accueil. */
+function pickAlternatingForCarousel(
+  items: BookMediaItem[],
+  count: number,
+): BookMediaItem[] {
+  const bw = items.filter((it) => itemPalette(it) === "bw");
+  const color = items.filter((it) => itemPalette(it) === "color");
+
+  const nBwSlots = Math.ceil(count / 2);
+  const nColorSlots = Math.floor(count / 2);
+  const bwPicks = spreadPick(bw, nBwSlots);
+  const colorPicks = spreadPick(color, nColorSlots);
+
+  const out: BookMediaItem[] = [];
+  for (let i = 0; i < count; i++) {
+    if (i % 2 === 0) {
+      const b = bwPicks[Math.floor(i / 2)];
+      if (b) out.push(b);
+      else {
+        const fallback =
+          colorPicks[Math.min(Math.floor(i / 2), colorPicks.length - 1)];
+        if (fallback) out.push(fallback);
+      }
+    } else {
+      const c = colorPicks[Math.floor(i / 2)];
+      if (c) out.push(c);
+      else {
+        const fallback =
+          bwPicks[Math.min(Math.floor((i + 1) / 2), bwPicks.length - 1)];
+        if (fallback) out.push(fallback);
+      }
+    }
+  }
+  return out;
+}
 
 const GallerySection = () => {
   const navigate = useNavigate();
@@ -28,12 +76,10 @@ const GallerySection = () => {
   const galleryItems: GalleryItem[] = useMemo(() => {
     if (!manifest || manifest.items.length === 0) return [];
 
-    const total = manifest.items.length;
-    const count = Math.min(10, total);
-    const step = total / count;
+    const count = Math.min(10, manifest.items.length);
+    const picked = pickAlternatingForCarousel(manifest.items, count);
 
-    return Array.from({ length: count }, (_, i) => {
-      const item = manifest.items[Math.floor(i * step)];
+    return picked.map((item) => {
       const labels = itemCategoryIds(item).map(
         (id) => categoryLabelById[id] ?? id,
       );

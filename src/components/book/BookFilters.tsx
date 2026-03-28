@@ -6,28 +6,31 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { BookCategory } from "@/lib/book-manifest";
+import type { BookCategory, BookSortOrder } from "@/lib/book-manifest";
 
 interface BookFiltersProps {
   categories: BookCategory[];
   activeCategory: string;
   onCategoryChange: (id: string) => void;
-  sortBy: string;
-  onSortChange: (sort: string) => void;
+  activePalette: "all" | "bw" | "color";
+  onPaletteChange: (val: "all" | "bw" | "color") => void;
+  sortOrder: BookSortOrder | null;
+  onSortOrderChange: (order: BookSortOrder | null) => void;
 }
 
 const BookFilters = ({
   categories,
   activeCategory,
   onCategoryChange,
-  sortBy,
-  onSortChange,
+  activePalette,
+  onPaletteChange,
+  sortOrder,
+  onSortOrderChange,
 }: BookFiltersProps) => {
   return (
-    <div className="sticky top-[72px] z-30 bg-background/90 backdrop-blur-md border-b border-border/30 py-4 px-6">
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        {/* Category filters */}
-        <div className="w-full overflow-x-auto sm:w-auto [-webkit-overflow-scrolling:touch]">
+    <div className="sticky top-[72px] z-30 border-b border-border/30 bg-background/90 px-6 py-4 backdrop-blur-md">
+      <div className="mx-auto flex max-w-6xl flex-col gap-4">
+        <div className="w-full overflow-x-auto [-webkit-overflow-scrolling:touch] sm:w-auto">
           <ToggleGroup
             type="single"
             value={activeCategory}
@@ -38,7 +41,7 @@ const BookFilters = ({
           >
             <ToggleGroupItem
               value="all"
-              className="text-xs tracking-wider uppercase px-4 data-[state=on]:bg-primary/10 data-[state=on]:text-primary whitespace-nowrap"
+              className="whitespace-nowrap px-4 text-xs uppercase tracking-wider data-[state=on]:bg-primary/10 data-[state=on]:text-primary"
             >
               Tous
             </ToggleGroupItem>
@@ -46,7 +49,7 @@ const BookFilters = ({
               <ToggleGroupItem
                 key={cat.id}
                 value={cat.id}
-                className="text-xs tracking-wider uppercase px-4 data-[state=on]:bg-primary/10 data-[state=on]:text-primary whitespace-nowrap"
+                className="whitespace-nowrap px-4 text-xs uppercase tracking-wider data-[state=on]:bg-primary/10 data-[state=on]:text-primary"
               >
                 {cat.label}
               </ToggleGroupItem>
@@ -54,17 +57,64 @@ const BookFilters = ({
           </ToggleGroup>
         </div>
 
-        {/* Sort */}
-        <Select value={sortBy} onValueChange={onSortChange}>
-          <SelectTrigger className="w-[140px] text-xs tracking-wider uppercase border-border/30">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="date">Date</SelectItem>
-            <SelectItem value="name">Nom</SelectItem>
-            <SelectItem value="category">Catégorie</SelectItem>
-          </SelectContent>
-        </Select>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+              Trier
+            </span>
+            <Select
+              value={sortOrder ?? ""}
+              onValueChange={(v) => {
+                if (v === "manifest") onSortOrderChange(null);
+                else onSortOrderChange(v as BookSortOrder);
+              }}
+            >
+              <SelectTrigger className="h-9 w-[min(100%,200px)] border-border/30 text-xs sm:w-[200px]">
+                <SelectValue placeholder="Trier par date…" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="manifest" className="text-xs">
+                  Ordre du book
+                </SelectItem>
+                <SelectItem value="newest" className="text-xs">
+                  Plus récent
+                </SelectItem>
+                <SelectItem value="oldest" className="text-xs">
+                  Plus ancien
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="w-full overflow-x-auto [-webkit-overflow-scrolling:touch] sm:w-auto">
+            <ToggleGroup
+              type="single"
+              value={activePalette}
+              onValueChange={(val) => {
+                if (val) onPaletteChange(val as "all" | "bw" | "color");
+              }}
+              className="w-max flex-nowrap justify-start gap-1.5"
+            >
+              <ToggleGroupItem
+                value="all"
+                className="whitespace-nowrap px-4 text-xs uppercase tracking-wider data-[state=on]:bg-primary/10 data-[state=on]:text-primary"
+              >
+                Toutes tonalités
+              </ToggleGroupItem>
+              <ToggleGroupItem
+                value="bw"
+                className="whitespace-nowrap px-4 text-xs uppercase tracking-wider data-[state=on]:bg-primary/10 data-[state=on]:text-primary"
+              >
+                Noir et blanc
+              </ToggleGroupItem>
+              <ToggleGroupItem
+                value="color"
+                className="whitespace-nowrap px-4 text-xs uppercase tracking-wider data-[state=on]:bg-primary/10 data-[state=on]:text-primary"
+              >
+                Couleur
+              </ToggleGroupItem>
+            </ToggleGroup>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -19,6 +19,14 @@
     {
       "id": "polas",
       "label": "Polas"
+    },
+    {
+      "id": "mode",
+      "label": "Mode"
+    },
+    {
+      "id": "lingerie",
+      "label": "Lingerie"
     }
   ],
   "items": [
@@ -27,586 +35,584 @@
       "src": "/assets/book/Clotis%202/0_DSC00178.webp",
       "category": [
         "portrait",
-        "editorial"
+        "Editorial"
       ],
-      "title": "0_DSC00178",
-      "photographer": "Clotis 2",
-      "date": "2025-01-01",
+      "photographer": "Studio Clotis",
+      "date": "2026-02-04",
       "type": "photo",
       "width": 4672,
-      "height": 5840
+      "height": 5840,
+      "palette": "color"
     },
     {
       "id": "002",
       "src": "/assets/book/Clotis%202/0_DSC00183.webp",
-      "category": "editorial",
-      "title": "0_DSC00183",
-      "photographer": "Clotis 2",
-      "date": "2025-01-01",
+      "category": "Editorial",
+      "photographer": "Studio Clotis",
+      "date": "2026-02-04",
       "type": "photo",
       "width": 4249,
-      "height": 5311
+      "height": 5311,
+      "palette": "color"
     },
     {
       "id": "003",
       "src": "/assets/book/Clotis%202/0_DSC00209.webp",
-      "category": "editorial",
-      "title": "0_DSC00209",
-      "photographer": "Clotis 2",
-      "date": "2025-01-01",
+      "category": [
+        "portrait",
+        "Editorial"
+      ],
+      "photographer": "Studio Clotis",
+      "date": "2026-02-04",
       "type": "photo",
       "width": 4672,
-      "height": 5840
+      "height": 5840,
+      "palette": "color"
     },
     {
       "id": "004",
       "src": "/assets/book/Clotis%202/0_DSC00225%20%281%29.webp",
-      "category": "cinema",
-      "title": "0_DSC00225 (1)",
-      "photographer": "Clotis 2",
-      "date": "2025-01-01",
+      "category": [
+        "portrait",
+        "cinema"
+      ],
+      "photographer": "Studio Clotis",
+      "date": "2026-02-04",
       "type": "photo",
       "width": 3954,
-      "height": 4942
+      "height": 4942,
+      "palette": "bw"
     },
     {
       "id": "005",
       "src": "/assets/book/Clotis%202/0_DSC00243.webp",
       "category": "portrait",
-      "title": "0_DSC00243",
-      "photographer": "Clotis 2",
-      "date": "2025-01-01",
+      "photographer": "Studio Clotis",
+      "date": "2026-02-04",
       "type": "photo",
       "width": 4672,
-      "height": 5840
+      "height": 5840,
+      "palette": "color"
     },
     {
       "id": "006",
       "src": "/assets/book/Clotis%202/By.webp",
-      "category": "editorial",
-      "title": "By",
-      "photographer": "Clotis 2",
-      "date": "2025-01-01",
+      "category": "Editorial",
+      "photographer": "Studio Clotis",
+      "date": "2026-02-04",
       "type": "photo",
       "width": 4648,
-      "height": 5810
+      "height": 5810,
+      "palette": "color"
     },
     {
       "id": "007",
       "src": "/assets/book/Divers/2348CCDC-DED2-426F-B56E-706C15D86433.webp",
-      "category": "editorial",
-      "title": "2348CCDC-DED2-426F-B56E-706C15D86433",
-      "photographer": "Divers",
-      "date": "2025-01-01",
+      "category": "mode",
+      "photographer": "icecreamtruucck",
+      "date": "2026-03-05",
       "type": "photo",
       "width": 1080,
-      "height": 1920
+      "height": 1920,
+      "palette": "color"
     },
     {
       "id": "008",
       "src": "/assets/book/Divers/F260362F-13F7-483D-BDF7-C886715883D0.webp",
-      "category": "editorial",
-      "title": "F260362F-13F7-483D-BDF7-C886715883D0",
-      "photographer": "Divers",
-      "date": "2025-01-01",
+      "category": "mode",
+      "photographer": "icecreamtruucck",
+      "date": "2026-03-05",
       "type": "photo",
       "width": 1179,
-      "height": 1769
+      "height": 1769,
+      "palette": "color"
     },
     {
       "id": "009",
       "src": "/assets/book/Divers/IMG_9193.webp",
-      "category": "commercial",
-      "title": "IMG_9193",
-      "photographer": "Divers",
-      "date": "2025-01-01",
+      "category": "mode",
+      "photographer": "AytronK",
+      "date": "2026-03-05",
       "type": "photo",
       "width": 1680,
-      "height": 2976
+      "height": 2976,
+      "palette": "color"
     },
     {
       "id": "010",
       "src": "/assets/book/Divers/IMG_9200.webp",
-      "category": "commercial",
-      "title": "IMG_9200",
-      "photographer": "Divers",
-      "date": "2025-01-01",
+      "category": "mode",
+      "photographer": "AytronK",
+      "date": "2026-03-05",
       "type": "photo",
       "width": 1680,
-      "height": 2976
+      "height": 2976,
+      "palette": "color"
     },
     {
       "id": "011",
       "src": "/assets/book/Divers/IMG_9203.webp",
-      "category": "commercial",
-      "title": "IMG_9203",
-      "photographer": "Divers",
-      "date": "2025-01-01",
+      "category": "mode",
+      "photographer": "AytronK",
+      "date": "2026-03-05",
       "type": "photo",
       "width": 1680,
-      "height": 2976
+      "height": 2976,
+      "palette": "color"
     },
     {
       "id": "012",
       "src": "/assets/book/Divers/IMG_9216.webp",
-      "category": "commercial",
-      "title": "IMG_9216",
-      "photographer": "Divers",
-      "date": "2025-01-01",
+      "category": "mode",
+      "photographer": "AytronK",
+      "date": "2026-03-05",
       "type": "photo",
       "width": 1680,
-      "height": 2976
-    },
-    {
-      "id": "013",
-      "src": "/assets/book/Ludo%202/0_DSC00225.webp",
-      "category": "portrait",
-      "title": "0_DSC00225",
-      "photographer": "Ludo 2",
-      "date": "2025-01-01",
-      "type": "photo",
-      "width": 3954,
-      "height": 4942
+      "height": 2976,
+      "palette": "color"
     },
     {
       "id": "014",
       "src": "/assets/book/Ludo%202/LYNE9348.webp",
       "category": "cinema",
-      "title": "LYNE9348",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 3648,
-      "height": 5472
+      "height": 5472,
+      "palette": "bw"
     },
     {
       "id": "015",
       "src": "/assets/book/Ludo%202/LYNE9354.webp",
       "category": "cinema",
-      "title": "LYNE9354",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 3648,
-      "height": 5472
+      "height": 5472,
+      "palette": "color"
     },
     {
       "id": "016",
       "src": "/assets/book/Ludo%202/LYNE9357.webp",
       "category": "cinema",
-      "title": "LYNE9357",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 3648,
-      "height": 5472
+      "height": 5472,
+      "palette": "bw"
     },
     {
       "id": "017",
       "src": "/assets/book/Ludo%202/LYNE9361.webp",
       "category": "cinema",
-      "title": "LYNE9361",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 3648,
-      "height": 5472
+      "height": 5472,
+      "palette": "color"
     },
     {
       "id": "018",
       "src": "/assets/book/Ludo%202/LYNE9363.webp",
       "category": "cinema",
-      "title": "LYNE9363",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 5472,
-      "height": 3648
+      "height": 3648,
+      "palette": "color"
     },
     {
       "id": "020",
       "src": "/assets/book/Ludo%202/LYNE9369.webp",
-      "category": "cinema",
-      "title": "LYNE9369",
+      "category": "mode",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 2272,
-      "height": 3408
+      "height": 3408,
+      "palette": "color"
     },
     {
       "id": "021",
       "src": "/assets/book/Ludo%202/LYNE9370.webp",
-      "category": "cinema",
-      "title": "LYNE9370",
+      "category": "mode",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 2272,
-      "height": 3408
+      "height": 3408,
+      "palette": "color"
     },
     {
       "id": "022",
       "src": "/assets/book/Ludo%202/LYNE9375.webp",
-      "category": "cinema",
-      "title": "LYNE9375",
+      "category": "mode",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 2272,
-      "height": 3408
+      "height": 3408,
+      "palette": "color"
     },
     {
       "id": "023",
       "src": "/assets/book/Ludo%202/LYNE9396%20%281%29.webp",
-      "category": "cinema",
-      "title": "LYNE9396 (1)",
+      "category": "mode",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 2215,
-      "height": 3322
+      "height": 3322,
+      "palette": "color"
     },
     {
       "id": "024",
       "src": "/assets/book/Ludo%202/LYNE9396.webp",
-      "category": "cinema",
-      "title": "LYNE9396",
+      "category": "mode",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 2215,
-      "height": 3322
+      "height": 3322,
+      "palette": "color"
     },
     {
       "id": "025",
       "src": "/assets/book/Ludo%202/LYNE9397%20%281%29.webp",
-      "category": "cinema",
-      "title": "LYNE9397 (1)",
+      "category": "mode",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 2243,
-      "height": 3364
+      "height": 3364,
+      "palette": "color"
     },
     {
       "id": "026",
       "src": "/assets/book/Ludo%202/LYNE9397.webp",
-      "category": "cinema",
-      "title": "LYNE9397",
+      "category": "mode",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 2243,
-      "height": 3364
+      "height": 3364,
+      "palette": "color"
     },
     {
       "id": "027",
       "src": "/assets/book/Ludo%202/LYNE9404.webp",
-      "category": "cinema",
-      "title": "LYNE9404",
+      "category": "mode",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 2272,
-      "height": 3408
+      "height": 3408,
+      "palette": "color"
     },
     {
       "id": "028",
       "src": "/assets/book/Ludo%202/LYNE9417.webp",
-      "category": "cinema",
-      "title": "LYNE9417",
+      "category": [
+        "portrait",
+        "cinema"
+      ],
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 5472,
-      "height": 3648
+      "height": 3648,
+      "palette": "bw"
     },
     {
       "id": "029",
       "src": "/assets/book/Ludo%202/LYNE9418.webp",
       "category": "cinema",
-      "title": "LYNE9418",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 5472,
-      "height": 3648
+      "height": 3648,
+      "palette": "bw"
     },
     {
       "id": "030",
       "src": "/assets/book/Ludo%202/LYNE9425.webp",
-      "category": "cinema",
-      "title": "LYNE9425",
+      "category": "Editorial",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 3408,
-      "height": 2272
+      "height": 2272,
+      "palette": "color"
     },
     {
       "id": "031",
       "src": "/assets/book/Ludo%202/LYNE9435.webp",
-      "category": "cinema",
-      "title": "LYNE9435",
+      "category": "Editorial",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 3408,
-      "height": 2272
+      "height": 2272,
+      "palette": "color"
     },
     {
       "id": "032",
       "src": "/assets/book/Ludo%202/LYNE9437.webp",
-      "category": "cinema",
-      "title": "LYNE9437",
+      "category": "portrait",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 3648,
-      "height": 5472
+      "height": 5472,
+      "palette": "bw"
     },
     {
       "id": "033",
       "src": "/assets/book/Ludo%202/LYNE9439.webp",
-      "category": "cinema",
-      "title": "LYNE9439",
+      "category": "portrait",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 5472,
-      "height": 3648
+      "height": 3648,
+      "palette": "bw"
     },
     {
       "id": "034",
       "src": "/assets/book/Ludo%202/LYNE9446.webp",
-      "category": "cinema",
-      "title": "LYNE9446",
+      "category": "portrait",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 3648,
-      "height": 5472
+      "height": 5472,
+      "palette": "bw"
     },
     {
       "id": "035",
       "src": "/assets/book/Ludo%202/LYNE9450.webp",
-      "category": "cinema",
-      "title": "LYNE9450",
+      "category": "lingerie",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 4462,
-      "height": 5578
+      "height": 5578,
+      "palette": "bw"
     },
     {
       "id": "036",
       "src": "/assets/book/Ludo%202/LYNE9452.webp",
-      "category": "cinema",
-      "title": "LYNE9452",
+      "category": "lingerie",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 4556,
-      "height": 5696
+      "height": 5696,
+      "palette": "bw"
     },
     {
       "id": "037",
       "src": "/assets/book/Ludo%202/LYNE9454.webp",
-      "category": "cinema",
-      "title": "LYNE9454",
+      "category": "lingerie",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 4378,
-      "height": 5472
+      "height": 5472,
+      "palette": "bw"
     },
     {
       "id": "038",
       "src": "/assets/book/Ludo%202/LYNE9458.webp",
-      "category": "cinema",
-      "title": "LYNE9458",
+      "category": "portrait",
       "photographer": "Ludovic Lyne",
-      "date": "2025-01-01",
+      "date": "2025-11-28",
       "type": "photo",
       "width": 3648,
-      "height": 5472
+      "height": 5472,
+      "palette": "bw"
     },
     {
       "id": "039",
       "src": "/assets/book/MAJ%20POLA/BODIN%201.webp",
       "category": "polas",
-      "title": "BODIN 1",
       "photographer": "",
-      "date": "2025-01-01",
+      "date": "2026-03-14",
       "type": "photo",
       "width": 1179,
-      "height": 1728
+      "height": 1728,
+      "palette": "color"
     },
     {
       "id": "040",
       "src": "/assets/book/MAJ%20POLA/BODIN%2010.webp",
       "category": "polas",
-      "title": "BODIN 10",
       "photographer": "",
-      "date": "2025-01-01",
+      "date": "2026-03-14",
       "type": "photo",
       "width": 1179,
-      "height": 743
+      "height": 743,
+      "palette": "color"
     },
     {
       "id": "041",
       "src": "/assets/book/MAJ%20POLA/BODIN%2011.webp",
       "category": "polas",
-      "title": "BODIN 11",
       "photographer": "",
-      "date": "2025-01-01",
+      "date": "2026-03-14",
       "type": "photo",
       "width": 1179,
-      "height": 764
+      "height": 764,
+      "palette": "color"
     },
     {
       "id": "042",
       "src": "/assets/book/MAJ%20POLA/BODIN%2012.webp",
       "category": "polas",
-      "title": "BODIN 12",
       "photographer": "",
-      "date": "2025-01-01",
+      "date": "2026-03-14",
       "type": "photo",
       "width": 1179,
-      "height": 750
+      "height": 750,
+      "palette": "color"
     },
     {
       "id": "043",
       "src": "/assets/book/MAJ%20POLA/BODIN%2013.webp",
       "category": "polas",
-      "title": "BODIN 13",
       "photographer": "",
-      "date": "2025-01-01",
+      "date": "2026-03-14",
       "type": "photo",
       "width": 1179,
-      "height": 1732
+      "height": 1732,
+      "palette": "color"
     },
     {
       "id": "044",
       "src": "/assets/book/MAJ%20POLA/BODIN%2014.webp",
       "category": "polas",
-      "title": "BODIN 14",
       "photographer": "",
-      "date": "2025-01-01",
+      "date": "2026-03-14",
       "type": "photo",
       "width": 1179,
-      "height": 1732
+      "height": 1732,
+      "palette": "color"
     },
     {
       "id": "045",
       "src": "/assets/book/MAJ%20POLA/BODIN%2015.webp",
       "category": "polas",
-      "title": "BODIN 15",
       "photographer": "",
-      "date": "2025-01-01",
+      "date": "2026-03-14",
       "type": "photo",
       "width": 1179,
-      "height": 1774
+      "height": 1774,
+      "palette": "color"
     },
     {
       "id": "046",
       "src": "/assets/book/MAJ%20POLA/BODIN%2016.webp",
       "category": "polas",
-      "title": "BODIN 16",
       "photographer": "",
-      "date": "2025-01-01",
+      "date": "2026-03-14",
       "type": "photo",
       "width": 1179,
-      "height": 747
+      "height": 747,
+      "palette": "color"
     },
     {
       "id": "047",
       "src": "/assets/book/MAJ%20POLA/BODIN%202.webp",
       "category": "polas",
-      "title": "BODIN 2",
       "photographer": "",
-      "date": "2025-01-01",
+      "date": "2026-03-14",
       "type": "photo",
       "width": 1179,
-      "height": 1768
+      "height": 1768,
+      "palette": "color"
     },
     {
       "id": "048",
       "src": "/assets/book/MAJ%20POLA/BODIN%203.webp",
       "category": "polas",
-      "title": "BODIN 3",
       "photographer": "",
-      "date": "2025-01-01",
+      "date": "2026-03-14",
       "type": "photo",
       "width": 1179,
-      "height": 1747
+      "height": 1747,
+      "palette": "color"
     },
     {
       "id": "049",
       "src": "/assets/book/MAJ%20POLA/BODIN%204.webp",
       "category": "polas",
-      "title": "BODIN 4",
       "photographer": "",
-      "date": "2025-01-01",
+      "date": "2026-03-14",
       "type": "photo",
       "width": 1171,
-      "height": 1710
+      "height": 1710,
+      "palette": "color"
     },
     {
       "id": "050",
       "src": "/assets/book/MAJ%20POLA/BODIN%205.webp",
       "category": "polas",
-      "title": "BODIN 5",
       "photographer": "",
-      "date": "2025-01-01",
+      "date": "2026-03-14",
       "type": "photo",
       "width": 1179,
-      "height": 1711
+      "height": 1711,
+      "palette": "color"
     },
     {
       "id": "051",
       "src": "/assets/book/MAJ%20POLA/BODIN%206.webp",
       "category": "polas",
-      "title": "BODIN 6",
       "photographer": "",
-      "date": "2025-01-01",
+      "date": "2026-03-14",
       "type": "photo",
       "width": 1179,
-      "height": 1757
+      "height": 1757,
+      "palette": "color"
     },
     {
       "id": "052",
       "src": "/assets/book/MAJ%20POLA/BODIN%207.webp",
       "category": "polas",
-      "title": "BODIN 7",
       "photographer": "",
-      "date": "2025-01-01",
+      "date": "2026-03-14",
       "type": "photo",
       "width": 1179,
-      "height": 1738
+      "height": 1738,
+      "palette": "color"
     },
     {
       "id": "053",
       "src": "/assets/book/MAJ%20POLA/BODIN%208.webp",
       "category": "polas",
-      "title": "BODIN 8",
       "photographer": "",
-      "date": "2025-01-01",
+      "date": "2026-03-14",
       "type": "photo",
       "width": 1179,
-      "height": 759
+      "height": 759,
+      "palette": "color"
     },
     {
       "id": "054",
       "src": "/assets/book/MAJ%20POLA/BODIN%209.webp",
       "category": "polas",
-      "title": "BODIN 9",
       "photographer": "",
-      "date": "2025-01-01",
+      "date": "2026-03-14",
       "type": "photo",
       "width": 1179,
-      "height": 762
+      "height": 762,
+      "palette": "color"
     }
   ]
 }

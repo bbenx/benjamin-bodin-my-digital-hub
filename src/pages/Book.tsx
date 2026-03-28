@@ -7,11 +7,16 @@ import { BookLightbox } from "@/components/book/BookLightbox";
 import {
   fetchBookManifest,
   itemCategoryIds,
+  itemPalette,
+  type BookSortOrder,
 } from "@/lib/book-manifest";
 
 const Book = () => {
   const [activeCategory, setActiveCategory] = useState("all");
-  const [sortBy, setSortBy] = useState("date");
+  const [activePalette, setActivePalette] = useState<"all" | "bw" | "color">(
+    "all",
+  );
+  const [sortOrder, setSortOrder] = useState<BookSortOrder | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const { data: manifest, isLoading } = useQuery({
@@ -24,31 +29,31 @@ const Book = () => {
 
     let items = [...manifest.items];
 
-    // Filter by category
     if (activeCategory !== "all") {
       items = items.filter((item) =>
         itemCategoryIds(item).includes(activeCategory),
       );
     }
 
-    // Sort
-    items.sort((a, b) => {
-      switch (sortBy) {
-        case "date":
-          return b.date.localeCompare(a.date);
-        case "name":
-          return a.title.localeCompare(b.title);
-        case "category":
-          return itemCategoryIds(a)
-            .join(",")
-            .localeCompare(itemCategoryIds(b).join(","));
-        default:
-          return 0;
-      }
-    });
+    if (activePalette !== "all") {
+      items = items.filter(
+        (item) => itemPalette(item) === activePalette,
+      );
+    }
+
+    if (sortOrder === "newest" || sortOrder === "oldest") {
+      items.sort((a, b) => {
+        const byDate =
+          sortOrder === "newest"
+            ? b.date.localeCompare(a.date)
+            : a.date.localeCompare(b.date);
+        if (byDate !== 0) return byDate;
+        return a.id.localeCompare(b.id, undefined, { numeric: true });
+      });
+    }
 
     return items;
-  }, [manifest, activeCategory, sortBy]);
+  }, [manifest, activeCategory, activePalette, sortOrder]);
 
   const categoryLabelById = useMemo(() => {
     const map: Record<string, string> = {};
@@ -57,6 +62,14 @@ const Book = () => {
     });
     return map;
   }, [manifest]);
+
+  const handleCategoryChange = (id: string) => {
+    setActiveCategory(id);
+  };
+
+  const handlePaletteChange = (val: "all" | "bw" | "color") => {
+    setActivePalette(val);
+  };
 
   return (
     <div className="pt-24">
@@ -75,9 +88,11 @@ const Book = () => {
       <BookFilters
         categories={manifest?.categories ?? []}
         activeCategory={activeCategory}
-        onCategoryChange={setActiveCategory}
-        sortBy={sortBy}
-        onSortChange={setSortBy}
+        onCategoryChange={handleCategoryChange}
+        activePalette={activePalette}
+        onPaletteChange={handlePaletteChange}
+        sortOrder={sortOrder}
+        onSortOrderChange={setSortOrder}
       />
 
       {/* Gallery */}
