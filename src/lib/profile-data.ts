@@ -13,7 +13,16 @@ export const profile = {
     url: "https://instagram.com/_benjaminbodin",
   },
   website: "www.benjaminbodin.fr",
+  /**
+   * Vidéo locale dans public/videos/ — nom de fichier simple (ASCII) pour éviter les soucis d’URL (ex. bande-demo.mp4).
+   * Prioritaire sur showreelUrl. Laisser "" pour le placeholder « à venir ».
+   */
+  demoVideoSrc: "/videos/bande-demo.mp4",
+  /** URL d’intégration YouTube / Vimeo (iframe). Utilisée si demoVideoSrc est vide. */
   showreelUrl: "",
+  /** Texte d’intro au-dessus du lecteur (section Bande démo). */
+  demoSectionNote:
+    "N’ayant pas encore reçu les images de mes tournages, voici une brève vidéo de présentation.",
   measurements: {
     "Taille": "176 cm",
     "Poitrine": "86 cm",
