@@ -1,5 +1,7 @@
+import { useCallback, useRef, useState } from "react";
 import { Play } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 import { profile } from "@/lib/profile-data";
 
 /** Chemins avec espaces / caractères spéciaux → URL valide pour <video src>. */
@@ -8,6 +10,98 @@ function resolveDemoVideoSrc(raw: string): string {
   if (!t) return "";
   if (t.startsWith("http://") || t.startsWith("https://")) return t;
   return encodeURI(t);
+}
+
+/**
+ * Présentation courte : gros play au centre, puis lecture avec son (geste utilisateur).
+ * Pause via le comportement natif du navigateur (clic sur la vidéo / contrôles) — pas de
+ * onClick custom, sinon double toggle (pause puis reprise). À la pause : overlay gris + play.
+ */
+function DemoLocalVideo({ videoSrc }: { videoSrc: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const hasStartedRef = useRef(false);
+  const [showPlayOverlay, setShowPlayOverlay] = useState(true);
+  const [hasStarted, setHasStarted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handleOverlayClick = useCallback(() => {
+    void videoRef.current?.play();
+  }, []);
+
+  const handleVideoPlay = useCallback(() => {
+    hasStartedRef.current = true;
+    setShowPlayOverlay(false);
+    setHasStarted(true);
+    setIsPlaying(true);
+  }, []);
+
+  const handleVideoPause = useCallback(() => {
+    setIsPlaying(false);
+    if (hasStartedRef.current) {
+      setShowPlayOverlay(true);
+    }
+  }, []);
+
+  const handleVideoEnded = useCallback(() => {
+    hasStartedRef.current = false;
+    setShowPlayOverlay(true);
+    setHasStarted(false);
+    setIsPlaying(false);
+  }, []);
+
+  const videoFilterClass = cn(
+    "transition-[filter] duration-500 ease-out",
+    showPlayOverlay &&
+      "brightness-[0.68] saturate-[0.72] contrast-[1.03]",
+    !showPlayOverlay &&
+      isPlaying &&
+      "brightness-100 saturate-100 contrast-100",
+    !showPlayOverlay &&
+      !isPlaying &&
+      hasStarted &&
+      "brightness-[0.9] saturate-[0.82] contrast-[0.98]",
+  );
+
+  return (
+    <>
+      <video
+        ref={videoRef}
+        className={cn(
+          "absolute inset-0 h-full w-full cursor-pointer rounded-lg border border-border/30 object-contain bg-black",
+          videoFilterClass,
+        )}
+        controls={hasStarted}
+        playsInline
+        preload="auto"
+        src={videoSrc}
+        title="Bande démo — Benjamin Bodin"
+        onPlay={handleVideoPlay}
+        onPause={handleVideoPause}
+        onEnded={handleVideoEnded}
+      >
+        Votre navigateur ne permet pas la lecture de cette vidéo.
+      </video>
+
+      {showPlayOverlay ? (
+        <button
+          type="button"
+          className="absolute inset-0 z-10 flex cursor-pointer items-center justify-center rounded-lg bg-black/45 transition-colors hover:bg-black/55"
+          aria-label="Lire la présentation vidéo"
+          onClick={handleOverlayClick}
+        >
+          <span
+            className="pointer-events-none flex h-24 w-24 shrink-0 items-center justify-center rounded-full border-2 border-white/70 bg-white/20 shadow-xl ring-2 ring-white/25 backdrop-blur-sm md:h-28 md:w-28"
+            aria-hidden
+          >
+            <Play
+              className="ml-1 h-10 w-10 text-white drop-shadow-md md:h-11 md:w-11"
+              strokeWidth={2.25}
+            />
+          </span>
+        </button>
+      ) : null}
+    </>
+  );
 }
 
 const ReelSection = () => {
@@ -39,16 +133,7 @@ const ReelSection = () => {
 
         <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
           {hasLocalVideo ? (
-            <video
-              className="absolute inset-0 h-full w-full rounded-lg border border-border/30 object-contain bg-black"
-              controls
-              playsInline
-              preload="auto"
-              src={videoSrc}
-              title="Bande démo — Benjamin Bodin"
-            >
-              Votre navigateur ne permet pas la lecture de cette vidéo.
-            </video>
+            <DemoLocalVideo videoSrc={videoSrc} />
           ) : hasEmbed ? (
             <iframe
               src={profile.showreelUrl}
