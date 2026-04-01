@@ -14,15 +14,20 @@ export const profile = {
   },
   website: "www.benjaminbodin.fr",
   /**
-   * Vidéo locale dans public/videos/ — nom de fichier simple (ASCII) pour éviter les soucis d’URL (ex. bande-demo.mp4).
+   * Vidéo locale dans public/videos/ — nom de fichier simple (ASCII) pour éviter les soucis d’URL (ex. extrait-web.mp4).
    * Prioritaire sur showreelUrl. Laisser "" pour le placeholder « à venir ».
    */
-  demoVideoSrc: "/videos/bande-demo.mp4",
+  demoVideoSrc: "/videos/demo-reel.mp4",
+  /**
+   * Vignette avant lecture (attribut poster du lecteur). Chemin sous public/ ou URL https.
+   * Chaîne vide = aperçu laissé au navigateur (souvent la première image de la vidéo).
+   */
+  demoVideoPoster: "/assets/book/preshot.png",
   /** URL d’intégration YouTube / Vimeo (iframe). Utilisée si demoVideoSrc est vide. */
   showreelUrl: "",
   /** Texte d’intro au-dessus du lecteur (section Bande démo). */
   demoSectionNote:
-    "N’ayant pas encore reçu les images de mes tournages, voici une brève vidéo de présentation.",
+    "En attendant les vidéos de mes précédents tournages, voici un court extrait sur le vif.",
   measurements: {
     "Taille": "176 cm",
     "Poitrine": "86 cm",

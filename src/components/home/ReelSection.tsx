@@ -4,8 +4,8 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { profile } from "@/lib/profile-data";
 
-/** Chemins avec espaces / caractères spéciaux → URL valide pour <video src>. */
-function resolveDemoVideoSrc(raw: string): string {
+/** Chemins avec espaces / caractères spéciaux → URL valide pour src / poster. */
+function resolvePublicMediaUrl(raw: string): string {
   const t = raw.trim();
   if (!t) return "";
   if (t.startsWith("http://") || t.startsWith("https://")) return t;
@@ -17,7 +17,13 @@ function resolveDemoVideoSrc(raw: string): string {
  * Pause via le comportement natif du navigateur (clic sur la vidéo / contrôles) — pas de
  * onClick custom, sinon double toggle (pause puis reprise). À la pause : overlay gris + play.
  */
-function DemoLocalVideo({ videoSrc }: { videoSrc: string }) {
+function DemoLocalVideo({
+  videoSrc,
+  posterSrc,
+}: {
+  videoSrc: string;
+  posterSrc: string;
+}) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const hasStartedRef = useRef(false);
   const [showPlayOverlay, setShowPlayOverlay] = useState(true);
@@ -72,7 +78,8 @@ function DemoLocalVideo({ videoSrc }: { videoSrc: string }) {
         )}
         controls={hasStarted}
         playsInline
-        preload="auto"
+        preload={posterSrc ? "metadata" : "auto"}
+        poster={posterSrc || undefined}
         src={videoSrc}
         title="Bande démo — Benjamin Bodin"
         onPlay={handleVideoPlay}
@@ -106,7 +113,8 @@ function DemoLocalVideo({ videoSrc }: { videoSrc: string }) {
 
 const ReelSection = () => {
   const hasLocalVideo = Boolean(profile.demoVideoSrc?.trim());
-  const videoSrc = resolveDemoVideoSrc(profile.demoVideoSrc ?? "");
+  const videoSrc = resolvePublicMediaUrl(profile.demoVideoSrc ?? "");
+  const posterSrc = resolvePublicMediaUrl(profile.demoVideoPoster ?? "");
   const hasEmbed = Boolean(profile.showreelUrl?.trim());
   const showNote =
     Boolean(profile.demoSectionNote) && (hasLocalVideo || hasEmbed);
@@ -133,7 +141,7 @@ const ReelSection = () => {
 
         <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
           {hasLocalVideo ? (
-            <DemoLocalVideo videoSrc={videoSrc} />
+            <DemoLocalVideo videoSrc={videoSrc} posterSrc={posterSrc} />
           ) : hasEmbed ? (
             <iframe
               src={profile.showreelUrl}

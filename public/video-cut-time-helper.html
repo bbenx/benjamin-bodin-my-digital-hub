@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Repère de coupe — vidéo démo</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 56rem;
+        margin: 0 auto;
+        padding: 1rem 1.25rem 2rem;
+        background: #0c0c0c;
+        color: #e8e8e8;
+        line-height: 1.5;
+      }
+      video {
+        width: 100%;
+        border-radius: 0.5rem;
+        background: #000;
+      }
+      .time {
+        font-size: clamp(1.5rem, 4vw, 2.25rem);
+        font-variant-numeric: tabular-nums;
+        margin: 1rem 0;
+        letter-spacing: 0.02em;
+      }
+      button {
+        font-size: 1rem;
+        padding: 0.55rem 1.1rem;
+        margin: 0.25rem 0.5rem 0.25rem 0;
+        cursor: pointer;
+        border-radius: 0.375rem;
+        border: 1px solid #444;
+        background: #1a1a1a;
+        color: #eee;
+      }
+      button:hover {
+        background: #2a2a2a;
+      }
+      pre {
+        margin-top: 1.25rem;
+        padding: 1rem;
+        background: #141414;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+        font-size: 0.8rem;
+        white-space: pre-wrap;
+        word-break: break-all;
+        border: 1px solid #2a2a2a;
+      }
+      .hint {
+        font-size: 0.9rem;
+        opacity: 0.88;
+        margin: 0.75rem 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="font-weight: 600; font-size: 1.25rem">Repère de coupe</h1>
+    <p class="hint" style="opacity: 1">
+      Ouvre cette page via le dev server :
+      <a href="/video-cut-time-helper.html" style="color: #8ab4ff"
+        ><code>http://localhost:8080/video-cut-time-helper.html</code></a
+      >
+      (port défini dans <code>vite.config.ts</code>).
+    </p>
+    <p class="hint">
+      Lance la lecture, puis <strong>pause</strong> pile à la fin voulue. Utilise
+      <strong>←</strong> / <strong>→</strong> pour reculer ou avancer d’une image (fichier servi :
+      <code>demo-reel.mp4</code>, 30&nbsp;img/s). Le temps s’affiche à la milliseconde.
+    </p>
+    <video
+      id="v"
+      src="/videos/demo-reel.mp4"
+      controls
+      playsinline
+      preload="metadata"
+    ></video>
+    <div class="time">
+      Temps : <span id="t">0.000</span> s
+      <span style="opacity: 0.5"> / </span>
+      <span id="d">—</span> s
+    </div>
+    <button type="button" id="copy">Copier le temps + commande ffmpeg</button>
+    <pre id="out" class="hint" aria-live="polite"></pre>
+
+    <script>
+      const v = document.getElementById("v");
+      const tEl = document.getElementById("t");
+      const dEl = document.getElementById("d");
+      const logPre = document.getElementById("out");
+      const FPS = 30;
+      const STEP = 1 / FPS;
+
+      function upd() {
+        tEl.textContent = v.currentTime.toFixed(3);
+        if (Number.isFinite(v.duration)) dEl.textContent = v.duration.toFixed(3);
+      }
+
+      v.addEventListener("timeupdate", upd);
+      v.addEventListener("seeked", upd);
+      v.addEventListener("loadedmetadata", upd);
+      v.addEventListener("pause", upd);
+
+      document.addEventListener("keydown", (e) => {
+        if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)
+          return;
+        if (e.code === "ArrowLeft") {
+          e.preventDefault();
+          v.pause();
+          v.currentTime = Math.max(0, v.currentTime - STEP);
+        }
+        if (e.code === "ArrowRight") {
+          e.preventDefault();
+          v.pause();
+          v.currentTime = Math.min(v.duration || 0, v.currentTime + STEP);
+        }
+      });
+
+      document.getElementById("copy").onclick = async () => {
+        const s = v.currentTime.toFixed(3);
+        const input = "public/videos/demo-reel.mp4";
+        const tmp = "public/videos/demo-reel-trimmed.mp4";
+        const fast = `ffmpeg -y -i ${input} -t ${s} -c copy ${tmp}`;
+        const exact = `ffmpeg -y -i ${input} -t ${s} -c:v libx264 -profile:v main -level 4.1 -pix_fmt yuv420p -crf 23 -preset medium -movflags +faststart -c:a aac -b:a 128k -ar 44100 ${tmp}`;
+        const text = `Temps de fin : ${s} s\n\nRapide (coupe au keyframe le plus proche) :\n${fast}\n\nPrécis au frame (ré-encodage) :\n${exact}\n\nPuis remplace demo-reel.mp4 par demo-reel-trimmed.mp4 si le résultat te convient.`;
+        logPre.textContent = text;
+        try {
+          await navigator.clipboard.writeText(s);
+        } catch {
+          /* ignore */
+        }
+      };
+    </script>
+  </body>
+</html>
