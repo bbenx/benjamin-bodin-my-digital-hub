@@ -42,36 +42,8 @@ const Layout = () => {
       const el = document.getElementById(id);
       if (!el) return;
 
-      /* #galerie : desktop = haut de section sous le header. Mobile = section en 100svh : sous header fixe
-         on ne voit pas le bas (CTA) ; on vise le bas de section pour garder « Voir tout le book » dans le cadre. */
-      if (id === "galerie") {
-        const header = document.querySelector("header");
-        const headerH = header?.getBoundingClientRect().height ?? 0;
-        const rect = el.getBoundingClientRect();
-        const top = rect.top + window.scrollY;
-        const sectionH = rect.height;
-        const vh = window.innerHeight;
-        const isNarrow = window.matchMedia("(max-width: 767px)").matches;
-        let y: number;
-        if (isNarrow) {
-          const bottomAligned = top + sectionH - vh + 20;
-          const topAligned = top - headerH;
-          y = Math.max(topAligned, bottomAligned);
-        } else {
-          y = top - headerH;
-        }
-        const maxY = Math.max(
-          0,
-          document.documentElement.scrollHeight - vh,
-        );
-        window.scrollTo({
-          top: Math.max(0, Math.min(y, maxY)),
-          behavior: "smooth",
-        });
-        return;
-      }
-
-      el.scrollIntoView({ behavior: "smooth" });
+      /* scroll-mt-* sur les sections compense le header fixe ; block:start aligne le haut de la section. */
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
     };
 
     scrollToTarget();

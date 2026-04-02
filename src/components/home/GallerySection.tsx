@@ -98,12 +98,11 @@ const GallerySection = () => {
   return (
     <section
       id="galerie"
-      className="relative min-h-[100svh] overflow-hidden"
+      className="relative scroll-mt-[4.5rem] overflow-x-hidden px-4 pb-16 pt-10 md:px-6 md:pb-24 md:pt-12"
     >
       {galleryItems.length > 0 ? (
-        <div className="relative flex min-h-[100svh] w-full flex-col items-center justify-center">
-          {/* Heading */}
-          <div className="absolute top-16 z-10 text-center md:top-20">
+        <div className="mx-auto flex w-full max-w-6xl flex-col items-center">
+          <header className="mb-8 text-center md:mb-10">
             <h2
               className="mb-4 text-4xl font-light tracking-wide md:text-5xl"
               style={{ fontFamily: "'Cormorant Garamond', serif" }}
@@ -111,15 +110,14 @@ const GallerySection = () => {
               Galerie
             </h2>
             <Separator className="mx-auto w-12 bg-primary/40" />
-          </div>
+          </header>
 
-          {/* 3D Gallery */}
-          <div className="h-[min(58vh,520px)] w-full min-h-[280px] max-w-6xl px-2 md:h-[min(70vh,640px)] md:min-h-[320px] md:px-0">
+          {/* 3D Gallery — hauteur bornée ; le CTA suit dans le flux (plus de chevauchement) */}
+          <div className="h-[min(50vh,480px)] w-full min-h-[260px] max-w-6xl shrink-0 md:h-[min(58vh,560px)] md:min-h-[300px]">
             <CircularGallery items={galleryItems} radius={500} autoRotateSpeed={0.03} />
           </div>
 
-          {/* CTA to full book */}
-          <div className="absolute bottom-14 z-10 md:bottom-20">
+          <div className="mt-10 flex w-full shrink-0 justify-center md:mt-14">
             <Button
               variant="outline"
               className="gap-2 border-primary/30 text-sm uppercase tracking-wider text-primary hover:bg-primary/10"
