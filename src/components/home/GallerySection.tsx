@@ -112,12 +112,12 @@ const GallerySection = () => {
             <Separator className="mx-auto w-12 bg-primary/40" />
           </header>
 
-          {/* 3D Gallery — hauteur bornée ; le CTA suit dans le flux (plus de chevauchement) */}
-          <div className="h-[min(50vh,480px)] w-full min-h-[260px] max-w-6xl shrink-0 md:h-[min(58vh,560px)] md:min-h-[300px]">
+          {/* 3D Gallery — overflow-hidden clippe le 3D ; hauteurs plus basses sur très petites largeurs (ex. Galaxy J6+) */}
+          <div className="relative isolate h-[min(50vh,480px)] w-full min-h-[260px] max-w-6xl shrink-0 overflow-hidden md:h-[min(58vh,560px)] md:min-h-[300px] max-[419px]:h-[min(42vh,320px)] max-[419px]:min-h-[200px]">
             <CircularGallery items={galleryItems} radius={500} autoRotateSpeed={0.03} />
           </div>
 
-          <div className="mt-10 flex w-full shrink-0 justify-center md:mt-14">
+          <div className="relative z-10 mt-8 flex w-full shrink-0 justify-center max-[419px]:mt-6 md:mt-14">
             <Button
               variant="outline"
               className="gap-2 border-primary/30 text-sm uppercase tracking-wider text-primary hover:bg-primary/10"

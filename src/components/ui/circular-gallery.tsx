@@ -41,11 +41,24 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
     const dragRafRef = useRef<number | null>(null);
     const sensitivityRef = useRef(dragSensitivity);
     const isMobile = useIsMobile();
+    const [viewportW, setViewportW] = useState(() =>
+      typeof window !== "undefined" ? window.innerWidth : 768,
+    );
 
-    /** Même comportement partout : tailles adaptées au viewport étroit. */
-    const compact = isMobile;
-    const cardW = compact ? 190 : 300;
-    const cardH = compact ? 265 : 400;
+    useEffect(() => {
+      const onResize = () => setViewportW(window.innerWidth);
+      onResize();
+      window.addEventListener("resize", onResize, { passive: true });
+      return () => window.removeEventListener("resize", onResize);
+    }, []);
+
+    /** < ~420px : téléphones étroits (ex. Galaxy J6+ ~360px) — anneau et cartes plus petits. */
+    const isNarrowPhone = viewportW > 0 && viewportW < 420;
+    /** Tablette / petit desktop vs mobile : largeur réelle prioritaire pour éviter le flash SSR. */
+    const compact = isMobile || viewportW < 768;
+
+    const cardW = compact ? (isNarrowPhone ? 132 : 190) : 300;
+    const cardH = compact ? (isNarrowPhone ? 184 : 265) : 400;
     const halfW = cardW / 2;
     const halfH = cardH / 2;
     const n = items.length;
@@ -53,17 +66,21 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
     /** Distance Z minimale pour que les largeurs de panneaux ne se croisent pas sur le cercle. */
     const minTranslateZ =
       n <= 1 ? halfW + 120 : halfW / Math.sin(angleStepRad / 2) + 16;
-    const effectiveRadius = compact ? Math.max(Math.ceil(minTranslateZ), Math.round(radius * 0.72)) : radius;
-    /** Réduit l’anneau pour tenir dans le viewport ; le relief vient surtout de la perspective mobile. */
-    const ringScale = compact ? 0.74 : 1;
+    const effectiveRadius = compact
+      ? Math.max(Math.ceil(minTranslateZ), Math.round(radius * 0.72))
+      : radius;
+    /** Échelle globale de l’anneau : très basse sur ~360px pour que les cartes tiennent dans le cadre. */
+    const ringScale = isNarrowPhone ? 0.5 : compact ? 0.74 : 1;
     const sensitivity = compact ? 0.52 : dragSensitivity;
     /**
-     * Perspective forte vs largeur viewport : sur téléphone 1500px+ donne un effet quasi « plat »
-     * (comme un carrousel linéaire). On lie la distance de fuite à ~1.5–1.7× la largeur visible.
+     * Perspective liée à la largeur : sur téléphones étroits, éviter une fuite trop grande
+     * (cartes géantes) tout en gardant un peu de relief.
      */
-    const perspectiveStyle = compact
-      ? "clamp(480px, calc(100vw * 1.62), 780px)"
-      : "2000px";
+    const perspectiveStyle = isNarrowPhone
+      ? "clamp(260px, calc(100vw * 1.05), 400px)"
+      : compact
+        ? "clamp(480px, calc(100vw * 1.62), 780px)"
+        : "2000px";
 
     sensitivityRef.current = sensitivity;
 
@@ -200,10 +217,24 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
                     loading="lazy"
                     decoding="async"
                   />
-                  <div className="pointer-events-none absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
-                    <p className="text-xl font-bold leading-tight">{item.binomial}</p>
+                  <div className="pointer-events-none absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-2 text-white sm:p-4">
+                    <p
+                      className={cn(
+                        "font-bold leading-tight",
+                        isNarrowPhone ? "text-sm" : "text-lg sm:text-xl",
+                      )}
+                    >
+                      {item.binomial}
+                    </p>
                     {item.photo.by ? (
-                      <p className="mt-2 text-xs opacity-70">Photo by: {item.photo.by}</p>
+                      <p
+                        className={cn(
+                          "opacity-70",
+                          isNarrowPhone ? "mt-1 text-[10px]" : "mt-2 text-xs",
+                        )}
+                      >
+                        Photo by: {item.photo.by}
+                      </p>
                     ) : null}
                   </div>
                 </div>
