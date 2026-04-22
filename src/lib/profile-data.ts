@@ -14,10 +14,10 @@ export const profile = {
   },
   website: "www.benjaminbodin.fr",
   /**
-   * Vidéo locale dans public/videos/ — nom de fichier simple (ASCII) pour éviter les soucis d’URL (ex. extrait-web.mp4).
+   * Vidéo locale dans public/videos/ — nom de fichier simple (ASCII) pour éviter les soucis d’URL (ex. .mp4, .mov).
    * Prioritaire sur showreelUrl. Laisser "" pour le placeholder « à venir ».
    */
-  demoVideoSrc: "/videos/demo-reel.mp4",
+  demoVideoSrc: "/videos/IMG_3575.mov",
   /**
    * Vignette avant lecture (attribut poster du lecteur). Chemin sous public/ ou URL https.
    * Chaîne vide = aperçu laissé au navigateur (souvent la première image de la vidéo).

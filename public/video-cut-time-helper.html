@@ -68,11 +68,11 @@
     <p class="hint">
       Lance la lecture, puis <strong>pause</strong> pile à la fin voulue. Utilise
       <strong>←</strong> / <strong>→</strong> pour reculer ou avancer d’une image (fichier servi :
-      <code>demo-reel.mp4</code>, 30&nbsp;img/s). Le temps s’affiche à la milliseconde.
+      <code>IMG_3575.mov</code>, 30&nbsp;img/s). Le temps s’affiche à la milliseconde.
     </p>
     <video
       id="v"
-      src="/videos/demo-reel.mp4"
+      src="/videos/IMG_3575.mov"
       controls
       playsinline
       preload="metadata"
@@ -120,11 +120,11 @@
 
       document.getElementById("copy").onclick = async () => {
         const s = v.currentTime.toFixed(3);
-        const input = "public/videos/demo-reel.mp4";
-        const tmp = "public/videos/demo-reel-trimmed.mp4";
+        const input = "public/videos/IMG_3575.mov";
+        const tmp = "public/videos/IMG_3575-trimmed.mov";
         const fast = `ffmpeg -y -i ${input} -t ${s} -c copy ${tmp}`;
         const exact = `ffmpeg -y -i ${input} -t ${s} -c:v libx264 -profile:v main -level 4.1 -pix_fmt yuv420p -crf 23 -preset medium -movflags +faststart -c:a aac -b:a 128k -ar 44100 ${tmp}`;
-        const text = `Temps de fin : ${s} s\n\nRapide (coupe au keyframe le plus proche) :\n${fast}\n\nPrécis au frame (ré-encodage) :\n${exact}\n\nPuis remplace demo-reel.mp4 par demo-reel-trimmed.mp4 si le résultat te convient.`;
+        const text = `Temps de fin : ${s} s\n\nRapide (coupe au keyframe le plus proche) :\n${fast}\n\nPrécis au frame (ré-encodage) :\n${exact}\n\nPuis remplace IMG_3575.mov par IMG_3575-trimmed.mov si le résultat te convient.`;
         logPre.textContent = text;
         try {
           await navigator.clipboard.writeText(s);
