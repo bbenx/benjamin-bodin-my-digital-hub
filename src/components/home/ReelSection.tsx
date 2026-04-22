@@ -78,7 +78,7 @@ function DemoLocalVideo({
         )}
         controls={hasStarted}
         playsInline
-        preload={posterSrc ? "metadata" : "auto"}
+        preload={posterSrc ? "metadata" : "none"}
         poster={posterSrc || undefined}
         src={videoSrc}
         title="Bande démo — Benjamin Bodin"

@@ -21,14 +21,14 @@ export const profile = {
   demoVideoSrc: "/videos/bande-demo.mp4",
   /**
    * Vignette avant lecture (attribut poster du lecteur). Chemin sous public/ ou URL https.
-   * Chaîne vide = aperçu laissé au navigateur (souvent la première image de la vidéo).
+   * Chaîne vide = fond noir jusqu’au play (pas de vignette fichier ; sinon la 1re image vidéo réapparaît).
    */
-  demoVideoPoster: "/assets/book/preshot.png",
+  demoVideoPoster: "",
   /** URL d’intégration YouTube / Vimeo (iframe). Utilisée si demoVideoSrc est vide. */
   showreelUrl: "",
   /** Texte d’intro au-dessus du lecteur (section Bande démo). */
   demoSectionNote:
-    "En attendant les vidéos de mes précédents tournages, voici un court extrait sur le vif.",
+    "En attendant les vidéos de mes précédents tournages, voici une vidéo de présentation.",
   measurements: {
     "Taille": "176 cm",
     "Poitrine": "86 cm",
