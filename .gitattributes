@@ -1,2 +1,2 @@
 *.mov filter=lfs diff=lfs merge=lfs -text
-*.mp4 filter=lfs diff=lfs merge=lfs -text
+# .mp4 : laisser en Git classique (pas LFS) — Vercel sert le pointeur LFS au lieu du binaire, la vidéo ne se lit pas.
