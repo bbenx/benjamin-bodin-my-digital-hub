@@ -16,4 +16,6 @@ npm run dev
 
 ## Déploiement (Vercel)
 
-Le dépôt utilise Git LFS pour la vidéo de démo (`.mov`). Dans le tableau Vercel du projet : **Settings → Git**, activer **Git Large File Storage (LFS)**, puis lancer un **Redeploy** pour que la vidéo soit bien incluse dans le build.
+Le dépôt utilise Git LFS pour les fichiers vidéo (`.mov` source iPhone, `.mp4` H.264 servi sur le site). Dans le tableau Vercel du projet : **Settings → Git**, activer **Git Large File Storage (LFS)**, puis lancer un **Redeploy** pour que la vidéo soit bien incluse dans le build.
+
+Pour une nouvelle prise iPhone : exporter ou transcoder en **H.264 / AAC** dans un `.mp4` (pas seulement du HEVC dans un `.mov`), sinon la lecture échoue hors Safari.

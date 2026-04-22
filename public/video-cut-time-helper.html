@@ -67,12 +67,13 @@
     </p>
     <p class="hint">
       Lance la lecture, puis <strong>pause</strong> pile à la fin voulue. Utilise
-      <strong>←</strong> / <strong>→</strong> pour reculer ou avancer d’une image (fichier servi :
-      <code>IMG_3575.mov</code>, 30&nbsp;img/s). Le temps s’affiche à la milliseconde.
+      <strong>←</strong> / <strong>→</strong> pour reculer ou avancer d’une image (aperçu :
+      <code>bande-demo.mp4</code>, ~60&nbsp;img/s). Les commandes ffmpeg copiées ciblent toujours le
+      fichier source <code>IMG_3575.mov</code>. Le temps s’affiche à la milliseconde.
     </p>
     <video
       id="v"
-      src="/videos/IMG_3575.mov"
+      src="/videos/bande-demo.mp4"
       controls
       playsinline
       preload="metadata"
@@ -90,7 +91,7 @@
       const tEl = document.getElementById("t");
       const dEl = document.getElementById("d");
       const logPre = document.getElementById("out");
-      const FPS = 30;
+      const FPS = 60;
       const STEP = 1 / FPS;
 
       function upd() {
