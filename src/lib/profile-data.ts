@@ -28,7 +28,7 @@ export const profile = {
   showreelUrl: "",
   /** Court texte sous le titre « Bande démo », au-dessus de la vidéo (vide = masqué). */
   demoSectionIntro:
-    "En attendant les rushes des différents tournages, voici une vidéo de ma toute première expérience ! Bon visionnage !",
+    "📷 En attendant les rushes des différents tournages, voici une vidéo de ma toute première expérience ! Bon visionnage !",
   /** Vidéo de présentation affichée sous la bio via un bouton dépliant. */
   presentationVideoSrc: "/videos/video-presentation-web.mp4",
   measurements: {
