@@ -47,7 +47,7 @@ const BioSection = () => {
         </h2>
         <Separator className="w-12 mx-auto mb-7 md:mb-9 bg-primary/40" />
         <p
-          className="text-base md:text-lg font-light leading-relaxed text-muted-foreground text-center"
+          className="whitespace-pre-line text-base md:text-lg font-light leading-relaxed text-muted-foreground text-center"
           style={{ fontFamily: "'Outfit', sans-serif" }}
         >
           {profile.bio}

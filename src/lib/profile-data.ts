@@ -6,7 +6,7 @@ export const profile = {
   tagline: "Comédien · Mannequin",
   /** Texte de la section Bio (à personnaliser). */
   bio:
-    "Je m’appelle Benjamin, j’ai 35 ans. Comédien et mannequin, je suis aussi très sportif. Bordelais d’origine, je suis monté à Paris l’été dernier — en moto, sur un coup de tête — pour réaliser mes rêves. J’y vis aujourd’hui, en première année au Cours Florent, et je suis représenté par l’agence Céline. Je travaille en France et à l’international.",
+    "Je m'appelle Benjamin, sportif dans l'âme, j'ai 35 ans et je suis Français et résident permanent au Canada.\n\nBordelais d'origine, je suis monté à Paris l'été dernier, en moto, sur un coup de tête, pour réaliser mes rêves : devenir comédien et mannequin !\n\nJ'ai terminé ma première année au Cours Florent et ce sont aujourd'hui mes métiers. Je suis notamment représenté par l'agence Céline et l'agence Cute Models.\n\nJe vis aujourd'hui de mes passions entre Paris et Montréal.",
   email: "contact@benjaminbodin.fr",
   instagram: {
     handle: "@_benjaminbodin",
