@@ -27,8 +27,7 @@ export const profile = {
   /** URL d’intégration YouTube / Vimeo (iframe). Utilisée si demoVideoSrc est vide. */
   showreelUrl: "",
   /** Texte d’intro au-dessus du lecteur (section Bande démo). */
-  demoSectionNote:
-    "En attendant les vidéos de mes précédents tournages, voici une vidéo de présentation.",
+  demoSectionNote: "",
   /** Vidéo de présentation affichée sous la bio via un bouton dépliant. */
   presentationVideoSrc: "/videos/video-presentation-web.mp4",
   measurements: {
