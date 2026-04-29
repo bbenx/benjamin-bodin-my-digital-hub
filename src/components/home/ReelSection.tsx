@@ -116,14 +116,7 @@ function DemoLocalVideo({
 
       {hasVideoError ? (
         <div className="absolute inset-x-4 bottom-4 z-20 rounded-md border border-red-400/40 bg-black/70 px-3 py-2 text-center text-xs text-red-200">
-          Impossible de lire la vidéo. Vous pouvez la télécharger directement{" "}
-          <a
-            href={videoSrc}
-            className="underline decoration-red-200/80 underline-offset-2"
-          >
-            ici
-          </a>
-          .
+          Impossible de lire la vidéo sur ce navigateur.
         </div>
       ) : null}
     </>

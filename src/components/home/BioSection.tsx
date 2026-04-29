@@ -9,6 +9,13 @@ function resolvePublicMediaUrl(raw: string): string {
   return encodeURI(t);
 }
 
+function getVideoMimeType(src: string): string {
+  const normalized = src.toLowerCase();
+  if (normalized.endsWith(".mov")) return "video/quicktime";
+  if (normalized.endsWith(".webm")) return "video/webm";
+  return "video/mp4";
+}
+
 const BioSection = () => {
   const [isPresentationExpanded, setIsPresentationExpanded] = useState(false);
   const [hasPresentationVideoError, setHasPresentationVideoError] =
@@ -16,6 +23,7 @@ const BioSection = () => {
   const presentationVideoSrc = resolvePublicMediaUrl(
     profile.presentationVideoSrc ?? "",
   );
+  const presentationVideoType = getVideoMimeType(presentationVideoSrc);
   return (
     <section
       id="bio"
@@ -67,20 +75,13 @@ const BioSection = () => {
                   title="Vidéo de présentation — Benjamin Bodin"
                   onError={() => setHasPresentationVideoError(true)}
                 >
-                  <source src={presentationVideoSrc} type="video/mp4" />
+                  <source src={presentationVideoSrc} type={presentationVideoType} />
                   Votre navigateur ne permet pas la lecture de cette vidéo.
                 </video>
               </div>
               {hasPresentationVideoError ? (
                 <p className="mt-2 text-center text-xs text-red-300">
-                  Impossible de lire la vidéo. Ouvrez le fichier directement{" "}
-                  <a
-                    href={presentationVideoSrc}
-                    className="underline decoration-red-200/80 underline-offset-2"
-                  >
-                    ici
-                  </a>
-                  .
+                  Impossible de lire la vidéo sur ce navigateur.
                 </p>
               ) : null}
             </div>
