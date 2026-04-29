@@ -11,6 +11,8 @@ function resolvePublicMediaUrl(raw: string): string {
 
 const BioSection = () => {
   const [isPresentationExpanded, setIsPresentationExpanded] = useState(false);
+  const [hasPresentationVideoError, setHasPresentationVideoError] =
+    useState(false);
   const presentationVideoSrc = resolvePublicMediaUrl(
     profile.presentationVideoSrc ?? "",
   );
@@ -62,12 +64,25 @@ const BioSection = () => {
                   controls
                   playsInline
                   preload="metadata"
-                  src={presentationVideoSrc}
                   title="Vidéo de présentation — Benjamin Bodin"
+                  onError={() => setHasPresentationVideoError(true)}
                 >
+                  <source src={presentationVideoSrc} type="video/mp4" />
                   Votre navigateur ne permet pas la lecture de cette vidéo.
                 </video>
               </div>
+              {hasPresentationVideoError ? (
+                <p className="mt-2 text-center text-xs text-red-300">
+                  Impossible de lire la vidéo. Ouvrez le fichier directement{" "}
+                  <a
+                    href={presentationVideoSrc}
+                    className="underline decoration-red-200/80 underline-offset-2"
+                  >
+                    ici
+                  </a>
+                  .
+                </p>
+              ) : null}
             </div>
           ) : null}
         </div>

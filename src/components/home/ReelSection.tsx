@@ -29,6 +29,7 @@ function DemoLocalVideo({
   const [showPlayOverlay, setShowPlayOverlay] = useState(true);
   const [hasStarted, setHasStarted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [hasVideoError, setHasVideoError] = useState(false);
 
   const handleOverlayClick = useCallback(() => {
     void videoRef.current?.play();
@@ -53,6 +54,10 @@ function DemoLocalVideo({
     setShowPlayOverlay(true);
     setHasStarted(false);
     setIsPlaying(false);
+  }, []);
+
+  const handleVideoError = useCallback(() => {
+    setHasVideoError(true);
   }, []);
 
   const videoFilterClass = cn(
@@ -80,12 +85,13 @@ function DemoLocalVideo({
         playsInline
         preload={posterSrc ? "metadata" : "none"}
         poster={posterSrc || undefined}
-        src={videoSrc}
         title="Bande démo — Benjamin Bodin"
         onPlay={handleVideoPlay}
         onPause={handleVideoPause}
         onEnded={handleVideoEnded}
+        onError={handleVideoError}
       >
+        <source src={videoSrc} type="video/mp4" />
         Votre navigateur ne permet pas la lecture de cette vidéo.
       </video>
 
@@ -106,6 +112,19 @@ function DemoLocalVideo({
             />
           </span>
         </button>
+      ) : null}
+
+      {hasVideoError ? (
+        <div className="absolute inset-x-4 bottom-4 z-20 rounded-md border border-red-400/40 bg-black/70 px-3 py-2 text-center text-xs text-red-200">
+          Impossible de lire la vidéo. Vous pouvez la télécharger directement{" "}
+          <a
+            href={videoSrc}
+            className="underline decoration-red-200/80 underline-offset-2"
+          >
+            ici
+          </a>
+          .
+        </div>
       ) : null}
     </>
   );
