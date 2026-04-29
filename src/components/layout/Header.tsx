@@ -10,6 +10,18 @@ import {
 } from "@/lib/analytics";
 import { profile } from "@/lib/profile-data";
 
+/** Même logique que Layout : retards pour le layout (header fixe, images). */
+function scrollToHashTarget(id: string) {
+  const scrollOnce = () => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  scrollOnce();
+  window.setTimeout(scrollOnce, 120);
+  window.setTimeout(scrollOnce, 400);
+}
+
 const menuItems = [
   { label: "ACCUEIL", href: "/", type: "route" as const },
   { label: "PRÉSENTATION", href: "#bio", type: "anchor" as const },
@@ -61,12 +73,24 @@ const Header = () => {
     });
 
     if (item.type === "anchor") {
-      const hash = item.href.startsWith("#") ? item.href.slice(1) : item.href;
+      const raw = item.href.startsWith("#") ? item.href.slice(1) : item.href;
+      const id = decodeURIComponent(raw);
+
       if (location.pathname !== "/") {
-        void navigate({ pathname: "/", hash });
-      } else {
-        void navigate({ pathname: "/", hash }, { replace: true });
+        void navigate({ pathname: "/", hash: id });
+        return;
       }
+
+      /* Même # que l’URL actuelle : navigate ne fait rien → scroll manuel. */
+      const currentId = location.hash
+        ? decodeURIComponent(location.hash.slice(1))
+        : "";
+      if (currentId === id) {
+        scrollToHashTarget(id);
+        return;
+      }
+
+      void navigate({ pathname: "/", hash: id }, { replace: true });
       return;
     }
     void navigate(item.href);
