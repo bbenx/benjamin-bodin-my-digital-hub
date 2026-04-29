@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
@@ -59,13 +59,7 @@ const Layout = () => {
     <div className="flex min-h-screen w-full min-w-0 flex-col overflow-x-hidden">
       <Header />
       <main className="min-w-0 w-full flex-1 overflow-x-hidden">
-        <Suspense
-          fallback={
-            <div className="min-h-[50vh] w-full bg-background" aria-hidden />
-          }
-        >
-          <Outlet />
-        </Suspense>
+        <Outlet />
       </main>
       <Footer />
     </div>

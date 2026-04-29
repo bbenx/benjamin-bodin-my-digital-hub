@@ -8,9 +8,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { Layout } from "@/components/layout/Layout";
 import Index from "./pages/Index.tsx";
+import Book from "./pages/Book.tsx";
+import Legal from "./pages/Legal.tsx";
 
-const Book = lazy(() => import("./pages/Book.tsx"));
-const Legal = lazy(() => import("./pages/Legal.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 const notFoundFallback = (
