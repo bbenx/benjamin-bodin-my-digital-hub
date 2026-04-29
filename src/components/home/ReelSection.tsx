@@ -128,8 +128,6 @@ const ReelSection = () => {
   const videoSrc = resolvePublicMediaUrl(profile.demoVideoSrc ?? "");
   const posterSrc = resolvePublicMediaUrl(profile.demoVideoPoster ?? "");
   const hasEmbed = Boolean(profile.showreelUrl?.trim());
-  const showNote =
-    Boolean(profile.demoSectionNote) && (hasLocalVideo || hasEmbed);
 
   return (
     <section id="bande-demo" className="scroll-mt-24 py-24 px-6">
@@ -141,15 +139,6 @@ const ReelSection = () => {
           Bande démo
         </h2>
         <Separator className="w-12 mx-auto mb-16 bg-primary/40" />
-
-        {showNote ? (
-          <p
-            className="mx-auto mb-8 max-w-2xl text-pretty text-center text-sm font-light leading-relaxed text-muted-foreground md:mb-10 md:text-base md:leading-relaxed"
-            style={{ fontFamily: "'Outfit', sans-serif" }}
-          >
-            {profile.demoSectionNote}
-          </p>
-        ) : null}
 
         <div
           id="bande-demo-content"
