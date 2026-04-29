@@ -58,7 +58,7 @@ const BioSection = () => {
         <div className="mt-6 md:mt-8 flex flex-col items-center">
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-full border border-white/80 bg-white px-7 py-3 text-sm font-medium tracking-[0.08em] text-black uppercase transition-none hover:border-primary hover:bg-primary hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="inline-flex items-center justify-center rounded-full border-2 border-primary bg-transparent px-7 py-3 text-sm font-medium tracking-[0.08em] text-primary uppercase transition-colors duration-200 hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-40"
             onClick={() => setIsPresentationExpanded((prev) => !prev)}
             aria-expanded={isPresentationExpanded}
             aria-controls="presentation-video-content"
