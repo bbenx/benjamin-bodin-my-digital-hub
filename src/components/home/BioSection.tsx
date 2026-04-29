@@ -19,7 +19,8 @@ const BioSection = () => {
       id="bio"
       className="scroll-mt-24 pt-14 md:pt-20 pb-12 md:pb-16 px-6"
     >
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-4xl mx-auto">
+        <div className="max-w-3xl mx-auto">
         <h2
           className="text-4xl md:text-5xl font-light tracking-wide text-center mb-3"
           style={{ fontFamily: "'Cormorant Garamond', serif" }}
@@ -33,6 +34,8 @@ const BioSection = () => {
         >
           {profile.bio}
         </p>
+
+        </div>
 
         <div className="mt-6 md:mt-8 flex flex-col items-center">
           <button
@@ -49,13 +52,13 @@ const BioSection = () => {
           </button>
 
           {isPresentationExpanded && presentationVideoSrc ? (
-            <div id="presentation-video-content" className="mt-6 w-full max-w-4xl">
+            <div id="presentation-video-content" className="mt-6 w-full">
               <div
                 className="relative w-full overflow-hidden rounded-lg border border-border/30 bg-black"
                 style={{ aspectRatio: "16 / 9" }}
               >
                 <video
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full object-contain"
                   controls
                   playsInline
                   preload="metadata"
