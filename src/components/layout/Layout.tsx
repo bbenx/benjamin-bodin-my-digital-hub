@@ -55,8 +55,18 @@ const Layout = () => {
     };
   }, [location.pathname, location.hash]);
 
+  const layoutShellStyle = {
+    display: "flex",
+    flexDirection: "column" as const,
+    minHeight: "100vh",
+    width: "100%",
+  };
+
   return (
-    <div className="flex min-h-screen w-full min-w-0 flex-col overflow-x-hidden">
+    <div
+      className="flex min-h-screen w-full min-w-0 flex-col overflow-x-hidden"
+      style={layoutShellStyle}
+    >
       <Header />
       <main className="min-w-0 w-full flex-1 overflow-x-hidden">
         <Outlet />

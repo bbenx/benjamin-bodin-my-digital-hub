@@ -4,10 +4,32 @@ import { trackHeroScrollDownClick } from "@/lib/analytics";
 import { profile } from "@/lib/profile-data";
 const portrait = "/assets/book/Ludo%202/LYNE9458.webp";
 
+/** Recoupe la logique `sr-only` si le CSS Tailwind n’est pas encore chargé. */
+const visuallyHiddenStyle = {
+  position: "absolute" as const,
+  width: "1px",
+  height: "1px",
+  padding: 0,
+  margin: "-1px",
+  overflow: "hidden",
+  clip: "rect(0, 0, 0, 0)",
+  whiteSpace: "nowrap" as const,
+  border: 0,
+};
+
+const heroShellStyle = {
+  minHeight: "100vh",
+  position: "relative" as const,
+  overflowX: "hidden" as const,
+};
+
 const HeroSection = () => {
   return (
-    <section className="relative flex min-h-screen w-full max-w-full flex-col overflow-x-hidden">
-      <h1 className="sr-only">
+    <section
+      className="relative flex min-h-screen w-full max-w-full flex-col overflow-x-hidden"
+      style={heroShellStyle}
+    >
+      <h1 className="sr-only" style={visuallyHiddenStyle}>
         Benjamin Bodin — Comédien et mannequin à Paris
       </h1>
       {/* Subtle background glow */}
