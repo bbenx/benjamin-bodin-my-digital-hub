@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { profile } from "@/lib/profile-data";
 
@@ -20,10 +20,18 @@ const BioSection = () => {
   const [isPresentationExpanded, setIsPresentationExpanded] = useState(false);
   const [hasPresentationVideoError, setHasPresentationVideoError] =
     useState(false);
+  const presentationVideoRef = useRef<HTMLVideoElement>(null);
   const presentationVideoSrc = resolvePublicMediaUrl(
     profile.presentationVideoSrc ?? "",
   );
   const presentationVideoType = getVideoMimeType(presentationVideoSrc);
+
+  useLayoutEffect(() => {
+    if (!isPresentationExpanded || !presentationVideoSrc) return;
+    const el = presentationVideoRef.current;
+    if (!el) return;
+    void el.play().catch(() => {});
+  }, [isPresentationExpanded, presentationVideoSrc]);
   return (
     <section
       id="bio"
@@ -68,10 +76,11 @@ const BioSection = () => {
                 style={{ aspectRatio: "16 / 9" }}
               >
                 <video
+                  ref={presentationVideoRef}
                   className="absolute inset-0 h-full w-full object-contain"
                   controls
                   playsInline
-                  preload="metadata"
+                  preload="auto"
                   title="Vidéo de présentation — Benjamin Bodin"
                   onError={() => setHasPresentationVideoError(true)}
                 >
