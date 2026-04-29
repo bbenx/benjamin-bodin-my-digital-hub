@@ -12,6 +12,7 @@ import { profile } from "@/lib/profile-data";
 
 const menuItems = [
   { label: "ACCUEIL", href: "/", type: "route" as const },
+  { label: "PRÉSENTATION", href: "#bio", type: "anchor" as const },
   { label: "MENSURATIONS", href: "#mensurations", type: "anchor" as const },
   { label: "BOOK", href: "#galerie", type: "anchor" as const },
   { label: "BANDE DÉMO", href: "#bande-demo", type: "anchor" as const },

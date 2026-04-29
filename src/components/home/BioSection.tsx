@@ -65,8 +65,8 @@ const BioSection = () => {
             disabled={!presentationVideoSrc}
           >
             {isPresentationExpanded
-              ? "Masquer la vidéo de présentation"
-              : "Voir la vidéo de présentation"}
+              ? "Masquer la vidéo"
+              : "Voir la vidéo"}
           </button>
 
           {isPresentationExpanded && presentationVideoSrc ? (

@@ -1,0 +1,17 @@
+---
+description: Commit et push systématiques après modifications du projet
+alwaysApply: true
+---
+
+# Git : commit et push
+
+Après avoir terminé une modification du code ou du contenu du site (hors discussions sans changement de fichiers) :
+
+1. **`git status`** pour voir les fichiers concernés.
+2. **`git add`** les fichiers pertinents (ne pas inclure par erreur des artefacts locaux type `node_modules`, fichiers perso non versionnés).
+3. **`git commit`** avec un message en français ou anglais, court et descriptif (type de changement + résumé).
+4. **`git push`** vers la branche courante (souvent `main`), sauf si le dépôt est déconnecté ou si l’utilisateur a demandé explicitement de ne pas pousser.
+
+Si le push échoue (réseau, conflit), réessayer ou résoudre le conflit puis pousser ; ne pas abandonner après une seule tentative sans diagnostic.
+
+Ne pas committer uniquement des fichiers de travail temporaires ou des secrets.
