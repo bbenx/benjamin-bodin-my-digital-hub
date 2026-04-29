@@ -112,7 +112,6 @@ function DemoLocalVideo({
 }
 
 const ReelSection = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
   const hasLocalVideo = Boolean(profile.demoVideoSrc?.trim());
   const videoSrc = resolvePublicMediaUrl(profile.demoVideoSrc ?? "");
   const posterSrc = resolvePublicMediaUrl(profile.demoVideoPoster ?? "");
@@ -140,46 +139,32 @@ const ReelSection = () => {
           </p>
         ) : null}
 
-        <div className="mx-auto mb-6 flex max-w-4xl justify-center md:mb-8">
-          <button
-            type="button"
-            className="rounded-full border border-border/50 bg-card px-6 py-3 text-sm tracking-[0.12em] uppercase transition-colors hover:bg-accent"
-            onClick={() => setIsExpanded((prev) => !prev)}
-            aria-expanded={isExpanded}
-            aria-controls="bande-demo-content"
-          >
-            {isExpanded ? "Masquer la bande démo" : "Voir la bande démo"}
-          </button>
-        </div>
-
-        {isExpanded ? (
-          <div
-            id="bande-demo-content"
-            className="relative w-full"
-            style={{ aspectRatio: "16 / 9" }}
-          >
-            {hasLocalVideo ? (
-              <DemoLocalVideo videoSrc={videoSrc} posterSrc={posterSrc} />
-            ) : hasEmbed ? (
-              <iframe
-                src={profile.showreelUrl}
-                title="Bande démo — Benjamin Bodin"
-                className="absolute inset-0 w-full h-full rounded-lg border border-border/30"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            ) : (
-              <div className="absolute inset-0 flex flex-col items-center justify-center rounded-lg border border-border/30 bg-card/50">
-                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full border-2 border-primary/30">
-                  <Play className="ml-1 h-8 w-8 text-primary/50" />
-                </div>
-                <p className="text-sm tracking-[0.2em] text-muted-foreground uppercase">
-                  Bande démo à venir
-                </p>
+        <div
+          id="bande-demo-content"
+          className="relative w-full"
+          style={{ aspectRatio: "16 / 9" }}
+        >
+          {hasLocalVideo ? (
+            <DemoLocalVideo videoSrc={videoSrc} posterSrc={posterSrc} />
+          ) : hasEmbed ? (
+            <iframe
+              src={profile.showreelUrl}
+              title="Bande démo — Benjamin Bodin"
+              className="absolute inset-0 w-full h-full rounded-lg border border-border/30"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          ) : (
+            <div className="absolute inset-0 flex flex-col items-center justify-center rounded-lg border border-border/30 bg-card/50">
+              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full border-2 border-primary/30">
+                <Play className="ml-1 h-8 w-8 text-primary/50" />
               </div>
-            )}
-          </div>
-        ) : null}
+              <p className="text-sm tracking-[0.2em] text-muted-foreground uppercase">
+                Bande démo à venir
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

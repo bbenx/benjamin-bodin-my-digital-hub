@@ -29,6 +29,8 @@ export const profile = {
   /** Texte d’intro au-dessus du lecteur (section Bande démo). */
   demoSectionNote:
     "En attendant les vidéos de mes précédents tournages, voici une vidéo de présentation.",
+  /** Vidéo de présentation affichée sous la bio via un bouton dépliant. */
+  presentationVideoSrc: "/videos/Video de presentation.mov",
   measurements: {
     "Taille": "176 cm",
     "Poitrine": "86 cm",
