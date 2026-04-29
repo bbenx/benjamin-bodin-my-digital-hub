@@ -138,7 +138,16 @@ const ReelSection = () => {
         >
           Bande démo
         </h2>
-        <Separator className="w-12 mx-auto mb-16 bg-primary/40" />
+        <Separator className="w-12 mx-auto mb-7 md:mb-9 bg-primary/40" />
+
+        {(hasLocalVideo || hasEmbed) && profile.demoSectionIntro?.trim() ? (
+          <p
+            className="mx-auto mb-10 md:mb-14 max-w-3xl text-center text-base md:text-lg font-light leading-relaxed text-muted-foreground"
+            style={{ fontFamily: "'Outfit', sans-serif" }}
+          >
+            {profile.demoSectionIntro.trim()}
+          </p>
+        ) : null}
 
         <div
           id="bande-demo-content"
