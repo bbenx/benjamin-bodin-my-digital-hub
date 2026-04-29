@@ -49,17 +49,22 @@ const BioSection = () => {
           </button>
 
           {isPresentationExpanded && presentationVideoSrc ? (
-            <div id="presentation-video-content" className="mt-6 w-full max-w-3xl">
-              <video
-                className="w-full rounded-lg border border-border/30 bg-black"
-                controls
-                playsInline
-                preload="metadata"
-                src={presentationVideoSrc}
-                title="Vidéo de présentation — Benjamin Bodin"
+            <div id="presentation-video-content" className="mt-6 w-full max-w-4xl">
+              <div
+                className="relative w-full overflow-hidden rounded-lg border border-border/30 bg-black"
+                style={{ aspectRatio: "16 / 9" }}
               >
-                Votre navigateur ne permet pas la lecture de cette vidéo.
-              </video>
+                <video
+                  className="absolute inset-0 h-full w-full object-cover"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  src={presentationVideoSrc}
+                  title="Vidéo de présentation — Benjamin Bodin"
+                >
+                  Votre navigateur ne permet pas la lecture de cette vidéo.
+                </video>
+              </div>
             </div>
           ) : null}
         </div>
