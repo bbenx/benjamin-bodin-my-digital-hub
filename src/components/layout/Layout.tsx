@@ -55,6 +55,21 @@ const Layout = () => {
     };
   }, [location.pathname, location.hash]);
 
+  /* Une seule lecture HTML5 à la fois (bio, bande démo, vidéos du book…). */
+  useEffect(() => {
+    const onVideoPlay = (event: Event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLVideoElement)) return;
+      document.querySelectorAll("video").forEach((video) => {
+        if (video !== target) {
+          video.pause();
+        }
+      });
+    };
+    document.addEventListener("play", onVideoPlay, true);
+    return () => document.removeEventListener("play", onVideoPlay, true);
+  }, []);
+
   const layoutShellStyle = {
     display: "flex",
     flexDirection: "column" as const,
