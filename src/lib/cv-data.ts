@@ -1,20 +1,37 @@
 /** Contenu de la fiche artiste / CV (source : CV Artistique Benjamin BODIN). */
 
+import { profile } from "@/lib/profile-data";
+
+const secondaryCitiesMid = Math.ceil(profile.secondaryCities.length / 2);
+
 export const cvIdentity = {
   name: "Benjamin BODIN",
   phone: "+33 6 48 35 50 42",
-  email: "Benjaminbodin.model@gmail.com",
+  email: "contact@benjaminbodin.fr",
   birthDate: "09/08/1990",
+  age: profile.age,
+  city: profile.city,
+  piedsATerreLine1: profile.secondaryCities
+    .slice(0, secondaryCitiesMid)
+    .join(" · "),
+  piedsATerreLine2: profile.secondaryCities.slice(secondaryCitiesMid).join(" · "),
+  languages: profile.languages.join(" · "),
   height: "176 cm",
   permits: "A, B, Bateau (côtier & fluvial)",
-  hair: "Brun",
-  eyes: "Noisette / vert",
+  hairEyes: "Brun / Noisette-vert",
 } as const;
 
 export type CvTimelineEntry = {
   period: string;
-  title: string;
+  /** Ligne simple (pub, mannequinat, formation…) */
+  title?: string;
   details?: string[];
+  /** Métrage structuré */
+  role?: string;
+  format?: string;
+  film?: string;
+  director?: string;
+  note?: string;
 };
 
 export const cvFormation: CvTimelineEntry[] = [
@@ -44,7 +61,7 @@ export const cvExperiences: CvExperienceGroup[] = [
     entries: [
       {
         period: "Mai 2026",
-        title: "Collection été Nature et Découverte, BioBurger, L’Habit Français",
+        title: "Nature et Découverte, BioBurger, L’Habit Français",
       },
       {
         period: "Mars 2026",
@@ -53,31 +70,46 @@ export const cvExperiences: CvExperienceGroup[] = [
     ],
   },
   {
+    label: "Mannequinat",
+    entries: [
+      {
+        period: "2026",
+        title: "Défilé Paris Fashion Week — UFD",
+      },
+    ],
+  },
+  {
     label: "Métrages",
     entries: [
       {
         period: "2026",
-        title:
-          "1er rôle — court métrage « Le nez » (adaptation de la nouvelle de Nikolaï Gogol)",
+        role: "1er rôle",
+        format: "Court métrage",
+        film: "Le nez",
+        note: "Adaptation de la nouvelle de Nikolaï Gogol",
       },
       {
         period: "2026",
-        title:
-          "Acteur réel Instagram (défi Lena Situation) — Marjori Daviaud",
+        role: "1er rôle",
+        format: "Court métrage",
+        film: "Papa ou rien",
+        director: "Tess Bonhomme",
+        note: "Goldenrod Revision",
       },
       {
         period: "2026",
-        title:
-          "1er rôle — court métrage « Papa ou rien » de Tess Bonhomme — Goldenrod Revision",
-      },
-      {
-        period: "2026",
-        title:
-          "2e rôle — court métrage « Casino » de Alexandra Lesca, Aimie Lefevre, Clémence Le Guyon et Jérémy Gaudin",
+        role: "2e rôle",
+        format: "Court métrage",
+        film: "Casino",
+        director:
+          "Alexandra Lesca, Aimie Lefevre, Clémence Le Guyon & Jérémy Gaudin",
       },
       {
         period: "2025",
-        title: "Figurant — long métrage « Quasimodo » de Jean-François Richet",
+        role: "Figurant",
+        format: "Long métrage",
+        film: "Quasimodo",
+        director: "Jean-François Richet",
       },
     ],
   },

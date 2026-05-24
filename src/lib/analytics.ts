@@ -97,6 +97,10 @@ export function trackLegalFooterClick(): void {
   trackEngagement("legal_footer_click", { destination_path: "/mentions-legales" });
 }
 
+export function trackCvPdfDownload(): void {
+  trackEngagement("cv_pdf_download", { page_path: "/cv" });
+}
+
 export function trackHeroScrollDownClick(): void {
   trackEngagement("hero_scroll_down_click", { target_section: "bio" });
 }

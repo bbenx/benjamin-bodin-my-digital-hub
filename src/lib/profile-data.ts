@@ -52,6 +52,21 @@ export const profile = {
   /** Fourchette d’âge apparent (casting). */
   apparentAge: "25–35",
   languages: ["Français", "Anglais"],
+  /** Ville principale (casting, fiche artiste). */
+  city: "Paris",
+  /** Villes secondaires (pieds à terre). */
+  secondaryCities: [
+    "Lille",
+    "Nantes",
+    "Royan",
+    "Bordeaux",
+    "Montpellier",
+    "Nice",
+    "Porto-Vecchio",
+    "Lyon",
+    "Annecy",
+    "Strasbourg",
+  ],
   skills: ["Mannequinat", "Jeu d’acteur", "Sport de haut niveau"],
   agent: {
     name: "",

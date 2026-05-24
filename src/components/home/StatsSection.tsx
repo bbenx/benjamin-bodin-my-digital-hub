@@ -207,53 +207,31 @@ const StatsSection = () => {
           </div>
         </div>
 
-        {/* Languages + Skills — bottom row */}
-        <div className="flex flex-col md:flex-row md:items-start gap-16 md:gap-24">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            custom={16}
+        {/* Compétences */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          custom={16}
+        >
+          <p
+            className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground/60 mb-4"
+            style={{ fontFamily: "'Outfit', sans-serif" }}
           >
-            <p
-              className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground/60 mb-4"
-              style={{ fontFamily: "'Outfit', sans-serif" }}
-            >
-              Langues
-            </p>
-            <p
-              className="text-lg font-light text-foreground/80 tracking-wide"
-              style={{ fontFamily: "'Cormorant Garamond', serif" }}
-            >
-              {profile.languages.join(" · ")}
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            custom={17}
-          >
-            <p
-              className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground/60 mb-4"
-              style={{ fontFamily: "'Outfit', sans-serif" }}
-            >
-              Compétences
-            </p>
-            <div className="flex flex-wrap gap-2.5">
-              {profile.skills.map((skill) => (
-                <Badge
-                  key={skill}
-                  variant="outline"
-                  className="text-[11px] tracking-[0.15em] font-light px-4 py-1.5 border-primary/20 text-foreground/60 hover:border-primary/40 hover:text-primary transition-colors duration-500"
-                >
-                  {skill}
-                </Badge>
-              ))}
-            </div>
-          </motion.div>
-        </div>
+            Compétences
+          </p>
+          <div className="flex flex-wrap gap-2.5">
+            {profile.skills.map((skill) => (
+              <Badge
+                key={skill}
+                variant="outline"
+                className="text-[11px] tracking-[0.15em] font-light px-4 py-1.5 border-primary/20 text-foreground/60 hover:border-primary/40 hover:text-primary transition-colors duration-500"
+              >
+                {skill}
+              </Badge>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
