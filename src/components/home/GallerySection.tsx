@@ -98,7 +98,7 @@ const GallerySection = () => {
   return (
     <section
       id="galerie"
-      className="relative scroll-mt-[4.5rem] overflow-x-hidden px-4 pb-16 pt-10 md:px-6 md:pb-24 md:pt-12"
+      className="relative scroll-mt-[4.5rem] overflow-x-hidden px-4 pb-16 pt-20 md:px-6 md:pb-24 md:pt-28"
     >
       {galleryItems.length > 0 ? (
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center">

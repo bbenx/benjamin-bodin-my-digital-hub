@@ -46,7 +46,7 @@ const StatsSection = () => {
     <section
       id="mensurations"
       ref={sectionRef}
-      className="relative scroll-mt-24 pt-20 md:pt-28 pb-32 md:pb-44 px-6 overflow-hidden"
+      className="relative scroll-mt-24 pt-20 md:pt-28 pb-12 md:pb-16 px-6 overflow-hidden"
     >
       {/* Decorative vertical line — md+ only so it does not cross labels on narrow viewports */}
       <motion.div
@@ -138,7 +138,7 @@ const StatsSection = () => {
         </motion.div>
 
         {/* Measurements — refined two-column list */}
-        <div className="grid md:grid-cols-[1fr_1px_1fr] gap-8 md:gap-0 mb-24 md:mb-32">
+        <div className="grid md:grid-cols-[1fr_1px_1fr] gap-8 md:gap-0">
           {/* Left column */}
           <div className="md:pr-12 space-y-0">
             {measurements.slice(0, 5).map(([label, value], i) => (
