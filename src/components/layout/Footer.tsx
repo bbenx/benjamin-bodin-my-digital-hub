@@ -13,15 +13,6 @@ const Footer = () => {
             ·
           </span>
           <Link
-            to="/cv"
-            className="text-muted-foreground/55 hover:text-primary/85 transition-colors underline-offset-4 hover:underline"
-          >
-            Fiche artiste
-          </Link>
-          <span className="text-muted-foreground/25 mx-2 sm:mx-3" aria-hidden>
-            ·
-          </span>
-          <Link
             to="/mentions-legales"
             className="text-muted-foreground/55 hover:text-primary/85 transition-colors underline-offset-4 hover:underline"
             onClick={() => trackLegalFooterClick()}
