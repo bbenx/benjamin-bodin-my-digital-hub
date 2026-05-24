@@ -18,79 +18,85 @@ const muted = "#666666";
 
 const styles = StyleSheet.create({
   page: {
-    paddingTop: 44,
-    paddingBottom: 48,
-    paddingHorizontal: 48,
+    paddingTop: 36,
+    paddingBottom: 40,
+    paddingHorizontal: 44,
     fontFamily: "Helvetica",
-    fontSize: 10,
+    fontSize: 9,
     color: "#1a1a1a",
-    lineHeight: 1.45,
+    lineHeight: 1.35,
   },
   header: {
-    marginBottom: 20,
+    marginBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: "#e5e5e5",
-    paddingBottom: 14,
+    paddingBottom: 8,
   },
   title: {
-    fontSize: 22,
+    fontSize: 20,
     fontFamily: "Helvetica-Bold",
-    letterSpacing: 1,
-    marginBottom: 4,
+    letterSpacing: 0.8,
+    marginBottom: 2,
   },
   subtitle: {
-    fontSize: 10,
+    fontSize: 9,
     color: muted,
-    letterSpacing: 0.5,
+    letterSpacing: 0.4,
   },
   section: {
-    marginBottom: 16,
+    marginBottom: 11,
+  },
+  sectionCompact: {
+    marginBottom: 8,
   },
   sectionTitle: {
-    fontSize: 8,
-    letterSpacing: 2,
+    fontSize: 7.5,
+    letterSpacing: 1.8,
     textTransform: "uppercase",
     color: accent,
-    marginBottom: 10,
+    marginBottom: 5,
     fontFamily: "Helvetica-Bold",
   },
   identityColumns: {
     flexDirection: "row",
-    gap: 24,
+    gap: 16,
   },
   identityColumn: {
     flex: 1,
-    gap: 8,
   },
-  identityItem: {
-    marginBottom: 8,
+  identityLine: {
+    flexDirection: "row",
+    marginBottom: 2.5,
+    fontSize: 8.5,
+    lineHeight: 1.3,
   },
   identityLabel: {
+    width: 92,
     fontSize: 7,
+    letterSpacing: 0.8,
+    textTransform: "uppercase",
+    color: muted,
+  },
+  identityValue: {
+    flex: 1,
+    fontSize: 8.5,
+  },
+  subgroupLabel: {
+    fontSize: 7.5,
     letterSpacing: 1.2,
     textTransform: "uppercase",
     color: muted,
-    marginBottom: 2,
-  },
-  identityValue: {
-    fontSize: 10,
-  },
-  subgroupLabel: {
-    fontSize: 8,
-    letterSpacing: 1.5,
-    textTransform: "uppercase",
-    color: muted,
-    marginBottom: 6,
-    marginTop: 2,
+    marginBottom: 4,
+    marginTop: 1,
   },
   timelineRow: {
     flexDirection: "row",
-    marginBottom: 8,
-    gap: 12,
+    marginBottom: 5,
+    gap: 10,
   },
   period: {
-    width: 68,
-    fontSize: 9,
+    width: 62,
+    fontSize: 8.5,
     color: accent,
     fontFamily: "Helvetica-Bold",
   },
@@ -98,50 +104,65 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   lineTitle: {
-    fontSize: 10,
+    fontSize: 9,
   },
   filmTitle: {
-    fontSize: 13,
+    fontSize: 11,
     fontFamily: "Helvetica-Bold",
-    marginBottom: 3,
+    marginBottom: 1,
   },
   filmRole: {
-    fontSize: 9,
+    fontSize: 8.5,
     color: accent,
-    marginBottom: 2,
+    marginBottom: 1,
   },
   filmMeta: {
-    fontSize: 9,
+    fontSize: 8,
     color: muted,
   },
   detailLine: {
-    fontSize: 9,
+    fontSize: 8,
     color: muted,
-    marginTop: 2,
-    paddingLeft: 8,
+    marginTop: 1,
+    paddingLeft: 6,
   },
   skillRow: {
     flexDirection: "row",
-    marginBottom: 6,
-    gap: 12,
+    marginBottom: 4,
+    gap: 10,
   },
   skillLabel: {
-    width: 68,
-    fontSize: 9,
+    width: 62,
+    fontSize: 8.5,
     color: accent,
     fontFamily: "Helvetica-Bold",
   },
   footer: {
     position: "absolute",
-    bottom: 28,
-    left: 48,
-    right: 48,
-    fontSize: 8,
+    bottom: 22,
+    left: 44,
+    right: 44,
+    fontSize: 7.5,
     color: muted,
     textAlign: "center",
     letterSpacing: 1,
   },
 });
+
+function PdfIdentityLine({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) {
+  return (
+    <View style={styles.identityLine}>
+      <Text style={styles.identityLabel}>{label}</Text>
+      <Text style={styles.identityValue}>{value}</Text>
+    </View>
+  );
+}
 
 function PdfTimelineEntry({ entry }: { entry: CvTimelineEntry }) {
   if (entry.film) {
@@ -190,60 +211,37 @@ export function CvPdfDocument() {
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
           <Text style={styles.title}>{cvIdentity.name}</Text>
-          <Text style={styles.subtitle}>Comédien · Mannequin — Fiche artiste</Text>
+          <Text style={styles.subtitle}>Comédien · Mannequin</Text>
         </View>
 
-        <View style={styles.section}>
+        <View style={styles.sectionCompact}>
           <Text style={styles.sectionTitle}>Identité</Text>
           <View style={styles.identityColumns}>
             <View style={styles.identityColumn}>
-              <View style={styles.identityItem}>
-                <Text style={styles.identityLabel}>Téléphone</Text>
-                <Text style={styles.identityValue}>{cvIdentity.phone}</Text>
-              </View>
-              <View style={styles.identityItem}>
-                <Text style={styles.identityLabel}>E-mail</Text>
-                <Text style={styles.identityValue}>{cvIdentity.email}</Text>
-              </View>
-              <View style={styles.identityItem}>
-                <Text style={styles.identityLabel}>Ville</Text>
-                <Text style={styles.identityValue}>{cvIdentity.city}</Text>
-              </View>
-              <View style={styles.identityItem}>
-                <Text style={styles.identityLabel}>Cheveux / yeux</Text>
-                <Text style={styles.identityValue}>{cvIdentity.hairEyes}</Text>
-              </View>
-              <View style={styles.identityItem}>
-                <Text style={styles.identityLabel}>Langues</Text>
-                <Text style={styles.identityValue}>{cvIdentity.languages}</Text>
-              </View>
+              <PdfIdentityLine label="Téléphone" value={cvIdentity.phone} />
+              <PdfIdentityLine label="E-mail" value={cvIdentity.email} />
+              <PdfIdentityLine label="Ville" value={cvIdentity.city} />
+              <PdfIdentityLine label="Cheveux / yeux" value={cvIdentity.hairEyes} />
+              <PdfIdentityLine label="Langues" value={cvIdentity.languages} />
             </View>
             <View style={styles.identityColumn}>
-              <View style={styles.identityItem}>
-                <Text style={styles.identityLabel}>Date de naissance</Text>
-                <Text style={styles.identityValue}>
-                  {cvIdentity.birthDate} ({cvIdentity.age} ans)
-                </Text>
+              <PdfIdentityLine
+                label="Naissance"
+                value={`${cvIdentity.birthDate} (${cvIdentity.age} ans)`}
+              />
+              <PdfIdentityLine label="Taille" value={cvIdentity.height} />
+              <View style={styles.identityLine}>
+                <Text style={styles.identityLabel}>Pieds à terre</Text>
+                <View style={styles.identityValue}>
+                  <Text style={{ fontSize: 8.5, lineHeight: 1.25 }}>
+                    {cvIdentity.piedsATerreLine1}
+                  </Text>
+                  <Text style={{ fontSize: 8.5, lineHeight: 1.25 }}>
+                    {cvIdentity.piedsATerreLine2}
+                  </Text>
+                </View>
               </View>
-              <View style={styles.identityItem}>
-                <Text style={styles.identityLabel}>Taille</Text>
-                <Text style={styles.identityValue}>{cvIdentity.height}</Text>
-              </View>
-              <View style={styles.identityItem}>
-                <Text style={styles.identityLabel}>
-                  Villes secondaires (pieds à terre)
-                </Text>
-                <Text style={styles.identityValue}>
-                  {cvIdentity.piedsATerreLine1}
-                </Text>
-                <Text style={styles.identityValue}>
-                  {cvIdentity.piedsATerreLine2}
-                </Text>
-              </View>
-              <View style={styles.identityItem}>
-                <Text style={styles.identityLabel}>Permis</Text>
-                <Text style={styles.identityValue}>{cvIdentity.permits}</Text>
-              </View>
+              <PdfIdentityLine label="Permis" value={cvIdentity.permits} />
             </View>
           </View>
         </View>
@@ -258,7 +256,7 @@ export function CvPdfDocument() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Expériences artistiques</Text>
           {cvExperiences.map((group) => (
-            <View key={group.label} style={{ marginBottom: 10 }}>
+            <View key={group.label} style={{ marginBottom: 6 }}>
               <Text style={styles.subgroupLabel}>{group.label}</Text>
               {group.entries.map((entry) => (
                 <PdfTimelineEntry

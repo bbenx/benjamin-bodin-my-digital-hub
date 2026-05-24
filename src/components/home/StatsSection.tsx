@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
 import { profile } from "@/lib/profile-data";
 
 const fadeUp = {
@@ -207,31 +206,6 @@ const StatsSection = () => {
           </div>
         </div>
 
-        {/* Compétences */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          custom={16}
-        >
-          <p
-            className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground/60 mb-4"
-            style={{ fontFamily: "'Outfit', sans-serif" }}
-          >
-            Compétences
-          </p>
-          <div className="flex flex-wrap gap-2.5">
-            {profile.skills.map((skill) => (
-              <Badge
-                key={skill}
-                variant="outline"
-                className="text-[11px] tracking-[0.15em] font-light px-4 py-1.5 border-primary/20 text-foreground/60 hover:border-primary/40 hover:text-primary transition-colors duration-500"
-              >
-                {skill}
-              </Badge>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
