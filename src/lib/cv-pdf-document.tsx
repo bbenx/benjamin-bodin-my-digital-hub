@@ -16,8 +16,35 @@ import {
 const accent = "#4a8f88";
 const muted = "#666666";
 
+/** Hauteur visuelle approximative d’une entrée (pour espacer les lignes quand le CV est léger). */
+function estimateTimelineUnits(entries: CvTimelineEntry[]): number {
+  return entries.reduce((units, entry) => {
+    let u = 1;
+    if (entry.details?.length) u += entry.details.length * 0.55;
+    if (entry.film) u += 1.15;
+    if (entry.director || entry.note) u += 0.35;
+    return units + u;
+  }, 0);
+}
+
+function timelineRowMarginBottom(
+  formation: CvTimelineEntry[],
+  experiences: typeof cvExperiences,
+): number {
+  const units =
+    estimateTimelineUnits(formation) +
+    experiences.reduce(
+      (sum, group) => sum + estimateTimelineUnits(group.entries) + 0.4,
+      0,
+    );
+  const targetUnits = 17;
+  const spare = Math.max(0, targetUnits - units);
+  return 5 + Math.min(6, spare * 0.45);
+}
+
 const styles = StyleSheet.create({
   page: {
+    flexDirection: "column",
     paddingTop: 36,
     paddingBottom: 40,
     paddingHorizontal: 44,
@@ -27,21 +54,29 @@ const styles = StyleSheet.create({
     lineHeight: 1.35,
   },
   header: {
+    flexDirection: "column",
     marginBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: "#e5e5e5",
-    paddingBottom: 8,
+    paddingBottom: 10,
   },
   title: {
     fontSize: 20,
     fontFamily: "Helvetica-Bold",
     letterSpacing: 0.8,
-    marginBottom: 2,
+    lineHeight: 1.2,
+    marginBottom: 6,
   },
   subtitle: {
     fontSize: 9,
     color: muted,
     letterSpacing: 0.4,
+    lineHeight: 1.35,
+  },
+  timelineZone: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
   section: {
     marginBottom: 11,
@@ -164,10 +199,17 @@ function PdfIdentityLine({
   );
 }
 
-function PdfTimelineEntry({ entry }: { entry: CvTimelineEntry }) {
+function PdfTimelineEntry({
+  entry,
+  rowMarginBottom,
+}: {
+  entry: CvTimelineEntry;
+  rowMarginBottom: number;
+}) {
+  const rowStyle = [styles.timelineRow, { marginBottom: rowMarginBottom }];
   if (entry.film) {
     return (
-      <View style={styles.timelineRow}>
+      <View style={rowStyle}>
         <Text style={styles.period}>{entry.period}</Text>
         <View style={styles.timelineBody}>
           <Text style={styles.filmTitle}>« {entry.film} »</Text>
@@ -187,7 +229,7 @@ function PdfTimelineEntry({ entry }: { entry: CvTimelineEntry }) {
   }
 
   return (
-    <View style={styles.timelineRow}>
+    <View style={rowStyle}>
       <Text style={styles.period}>{entry.period}</Text>
       <View style={styles.timelineBody}>
         <Text style={styles.lineTitle}>{entry.title}</Text>
@@ -202,6 +244,8 @@ function PdfTimelineEntry({ entry }: { entry: CvTimelineEntry }) {
 }
 
 export function CvPdfDocument() {
+  const timelineRowGap = timelineRowMarginBottom(cvFormation, cvExperiences);
+
   return (
     <Document
       title={`Fiche artiste — ${cvIdentity.name}`}
@@ -246,26 +290,33 @@ export function CvPdfDocument() {
           </View>
         </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Formation artistique</Text>
-          {cvFormation.map((entry) => (
-            <PdfTimelineEntry key={`${entry.period}-${entry.title}`} entry={entry} />
-          ))}
-        </View>
+        <View style={styles.timelineZone}>
+          <View style={[styles.section, { marginBottom: 0 }]}>
+            <Text style={styles.sectionTitle}>Formation artistique</Text>
+            {cvFormation.map((entry) => (
+              <PdfTimelineEntry
+                key={`${entry.period}-${entry.title}`}
+                entry={entry}
+                rowMarginBottom={timelineRowGap}
+              />
+            ))}
+          </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Expériences artistiques</Text>
-          {cvExperiences.map((group) => (
-            <View key={group.label} style={{ marginBottom: 6 }}>
-              <Text style={styles.subgroupLabel}>{group.label}</Text>
-              {group.entries.map((entry) => (
-                <PdfTimelineEntry
-                  key={`${group.label}-${entry.period}-${entry.film ?? entry.title}`}
-                  entry={entry}
-                />
-              ))}
-            </View>
-          ))}
+          <View style={[styles.section, { marginBottom: 0 }]}>
+            <Text style={styles.sectionTitle}>Expériences artistiques</Text>
+            {cvExperiences.map((group) => (
+              <View key={group.label} style={{ marginBottom: 6 }}>
+                <Text style={styles.subgroupLabel}>{group.label}</Text>
+                {group.entries.map((entry) => (
+                  <PdfTimelineEntry
+                    key={`${group.label}-${entry.period}-${entry.film ?? entry.title}`}
+                    entry={entry}
+                    rowMarginBottom={timelineRowGap}
+                  />
+                ))}
+              </View>
+            ))}
+          </View>
         </View>
 
         <View style={styles.section}>
