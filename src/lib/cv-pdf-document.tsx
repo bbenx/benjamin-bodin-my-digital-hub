@@ -74,9 +74,7 @@ const styles = StyleSheet.create({
     lineHeight: 1.35,
   },
   timelineZone: {
-    flex: 1,
     flexDirection: "column",
-    justifyContent: "space-between",
   },
   section: {
     marginBottom: 11,
@@ -291,7 +289,7 @@ export function CvPdfDocument() {
         </View>
 
         <View style={styles.timelineZone}>
-          <View style={[styles.section, { marginBottom: 0 }]}>
+          <View style={styles.section}>
             <Text style={styles.sectionTitle}>Formation artistique</Text>
             {cvFormation.map((entry) => (
               <PdfTimelineEntry
@@ -302,7 +300,7 @@ export function CvPdfDocument() {
             ))}
           </View>
 
-          <View style={[styles.section, { marginBottom: 0 }]}>
+          <View style={styles.section}>
             <Text style={styles.sectionTitle}>Expériences artistiques</Text>
             {cvExperiences.map((group) => (
               <View key={group.label} style={{ marginBottom: 6 }}>
