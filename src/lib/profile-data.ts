@@ -30,7 +30,7 @@ export const profile = {
   demoSectionIntro:
     "En attendant les rushes des différents tournages, voici une vidéo de ma toute première\u00A0expérience. Bon visionnage ! 🎥",
   /** Vidéo de présentation affichée sous la bio via un bouton dépliant. */
-  presentationVideoSrc: "/videos/video-presentation-web.mp4",
+  presentationVideoSrc: "/videos/video-presentation.mp4",
   measurements: {
     "Taille": "176 cm",
     "Poitrine": "86 cm",
