@@ -23,7 +23,7 @@ export const profile = {
    * Vignette avant lecture (attribut poster du lecteur). Chemin sous public/ ou URL https.
    * Chaîne vide = fond noir jusqu’au play (pas de vignette fichier ; sinon la 1re image vidéo réapparaît).
    */
-  demoVideoPoster: "/assets/book/MAJ POLA/Selfie.jpg",
+  demoVideoPoster: "",
   /** URL d’intégration YouTube / Vimeo (iframe). Utilisée si demoVideoSrc est vide. */
   showreelUrl: "",
   /** Court texte sous le titre « Bande démo », au-dessus de la vidéo (vide = masqué). */
