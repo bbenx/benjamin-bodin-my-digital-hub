@@ -21,7 +21,7 @@ export const profile = {
   demoVideoSrc: "/videos/bande-demo.mp4",
   /**
    * Vignette avant lecture (attribut poster du lecteur). Chemin sous public/ ou URL https.
-   * Chaîne vide = fond noir jusqu’au play (pas de vignette fichier ; sinon la 1re image vidéo réapparaît).
+   * Chaîne vide = première image de la vidéo (pas de vignette fichier séparée).
    */
   demoVideoPoster: "",
   /** URL d’intégration YouTube / Vimeo (iframe). Utilisée si demoVideoSrc est vide. */

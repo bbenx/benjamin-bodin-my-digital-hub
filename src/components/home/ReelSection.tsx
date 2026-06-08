@@ -60,6 +60,16 @@ function DemoLocalVideo({
     setHasVideoError(true);
   }, []);
 
+  const handleLoadedData = useCallback(() => {
+    if (posterSrc || hasStartedRef.current) return;
+    const video = videoRef.current;
+    if (!video) return;
+    video.pause();
+    if (video.currentTime === 0) {
+      video.currentTime = 0.001;
+    }
+  }, [posterSrc]);
+
   const videoFilterClass = cn(
     "transition-[filter] duration-500 ease-out",
     showPlayOverlay &&
@@ -83,9 +93,10 @@ function DemoLocalVideo({
         )}
         controls={hasStarted}
         playsInline
-        preload={posterSrc ? "metadata" : "none"}
+        preload="metadata"
         poster={posterSrc || undefined}
         title="Bande démo — Benjamin Bodin"
+        onLoadedData={handleLoadedData}
         onPlay={handleVideoPlay}
         onPause={handleVideoPause}
         onEnded={handleVideoEnded}
