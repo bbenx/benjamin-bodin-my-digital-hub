@@ -76,6 +76,14 @@ export const cvExperiences: CvExperienceGroup[] = [
         period: "2026",
         title: "Défilé Paris Fashion Week — UFD",
       },
+      {
+        period: "Juin 2026",
+        title: "Défilé designers — émission de variété Wow The World",
+        details: [
+          "Épisode spécial mode (saison 2) · en présence de Gong Jun, Liu Yuning, Sun Honglei, Chen He…",
+          "Saison 1 : 300 M+ de vues cumulées (Tencent Video · WeTV · Douyin)",
+        ],
+      },
     ],
   },
   {
@@ -86,7 +94,7 @@ export const cvExperiences: CvExperienceGroup[] = [
         title: "Stinville Festival — sketch absurde (écrit & joué)",
         details: [
           "Catégorie fictive « meilleur acteur pour un film d’animation », trophée reçu en direct (identique aux lauréats)",
-          "~200 spectateurs · en présence de Mathieu Turi et Jodie Ruth-Forest",
+          "En présence de Mathieu Turi et Jodie Ruth-Forest et ~150 spectateurs",
         ],
       },
     ],
