@@ -461,94 +461,6 @@
       "palette": "color"
     },
     {
-      "id": "040",
-      "src": "/assets/book/MAJ%20POLA/BODIN%2010.webp",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-03-14",
-      "type": "photo",
-      "width": 1179,
-      "height": 743,
-      "palette": "color"
-    },
-    {
-      "id": "041",
-      "src": "/assets/book/MAJ%20POLA/BODIN%2011.webp",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-03-14",
-      "type": "photo",
-      "width": 1179,
-      "height": 764,
-      "palette": "color"
-    },
-    {
-      "id": "042",
-      "src": "/assets/book/MAJ%20POLA/BODIN%2012.webp",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-03-14",
-      "type": "photo",
-      "width": 1179,
-      "height": 750,
-      "palette": "color"
-    },
-    {
-      "id": "043",
-      "src": "/assets/book/MAJ%20POLA/BODIN%2013.webp",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-03-14",
-      "type": "photo",
-      "width": 1179,
-      "height": 1732,
-      "palette": "color"
-    },
-    {
-      "id": "044",
-      "src": "/assets/book/MAJ%20POLA/BODIN%2014.webp",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-03-14",
-      "type": "photo",
-      "width": 1179,
-      "height": 1732,
-      "palette": "color"
-    },
-    {
-      "id": "045",
-      "src": "/assets/book/MAJ%20POLA/BODIN%2015.webp",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-03-14",
-      "type": "photo",
-      "width": 1179,
-      "height": 1774,
-      "palette": "color"
-    },
-    {
-      "id": "046",
-      "src": "/assets/book/MAJ%20POLA/BODIN%2016.webp",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-03-14",
-      "type": "photo",
-      "width": 1179,
-      "height": 747,
-      "palette": "color"
-    },
-    {
-      "id": "047",
-      "src": "/assets/book/MAJ%20POLA/BODIN%202.webp",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-03-14",
-      "type": "photo",
-      "width": 1179,
-      "height": 1768,
-      "palette": "color"
-    },
-    {
       "id": "048",
       "src": "/assets/book/MAJ%20POLA/BODIN%203.webp",
       "category": "polas",
@@ -582,28 +494,6 @@
       "palette": "color"
     },
     {
-      "id": "051",
-      "src": "/assets/book/MAJ%20POLA/BODIN%206.webp",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-03-14",
-      "type": "photo",
-      "width": 1179,
-      "height": 1757,
-      "palette": "color"
-    },
-    {
-      "id": "052",
-      "src": "/assets/book/MAJ%20POLA/BODIN%207.webp",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-03-14",
-      "type": "photo",
-      "width": 1179,
-      "height": 1738,
-      "palette": "color"
-    },
-    {
       "id": "053",
       "src": "/assets/book/MAJ%20POLA/BODIN%208.webp",
       "category": "polas",
@@ -615,14 +505,36 @@
       "palette": "color"
     },
     {
-      "id": "054",
-      "src": "/assets/book/MAJ%20POLA/BODIN%209.webp",
+      "id": "044",
+      "src": "/assets/book/MAJ%20POLA/BODIN%2014.webp",
       "category": "polas",
       "photographer": "",
       "date": "2026-03-14",
       "type": "photo",
       "width": 1179,
-      "height": 762,
+      "height": 1732,
+      "palette": "color"
+    },
+    {
+      "id": "065",
+      "src": "/assets/book/MAJ%20POLA/Portrait.jpg",
+      "category": "polas",
+      "photographer": "",
+      "date": "2026-06-08",
+      "type": "photo",
+      "width": 2436,
+      "height": 1926,
+      "palette": "color"
+    },
+    {
+      "id": "066",
+      "src": "/assets/book/MAJ%20POLA/Full%20lenght.jpg",
+      "category": "polas",
+      "photographer": "",
+      "date": "2026-06-08",
+      "type": "photo",
+      "width": 792,
+      "height": 1828,
       "palette": "color"
     },
     {
