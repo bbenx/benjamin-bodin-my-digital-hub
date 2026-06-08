@@ -2,7 +2,32 @@
 
 import { profile } from "@/lib/profile-data";
 
-const secondaryCitiesMid = Math.ceil(profile.secondaryCities.length / 2);
+function formatPiedsATerreLines(cities: readonly string[]) {
+  const line1Count = Math.ceil(cities.length / 2);
+  return {
+    line1: cities.slice(0, line1Count).join(" · "),
+    line2: cities.slice(line1Count).join(" · "),
+  };
+}
+
+/** Ordre alphabétique, coupure avant Montpellier pour la colonne PDF. */
+function formatPiedsATerrePdfLines(cities: readonly string[]) {
+  const sorted = [...cities].sort((a, b) => a.localeCompare(b, "fr"));
+  const montpellierIndex = sorted.indexOf("Montpellier");
+  const line1Count =
+    montpellierIndex > 0 ? montpellierIndex : Math.ceil(sorted.length / 2);
+  const line1Cities = sorted.slice(0, line1Count);
+  const line2Cities = sorted.slice(line1Count);
+  const line2Mid = Math.ceil(line2Cities.length / 2);
+  return {
+    line1: line1Cities.join(" · "),
+    line2: line2Cities.slice(0, line2Mid).join(" · "),
+    line3: line2Cities.slice(line2Mid).join(" · "),
+  };
+}
+
+const piedsATerreSite = formatPiedsATerreLines(profile.secondaryCities);
+const piedsATerrePdf = formatPiedsATerrePdfLines(profile.secondaryCities);
 
 export const cvIdentity = {
   name: "Benjamin BODIN",
@@ -11,10 +36,11 @@ export const cvIdentity = {
   birthDate: "09/08/1990",
   age: profile.age,
   city: profile.city,
-  piedsATerreLine1: profile.secondaryCities
-    .slice(0, secondaryCitiesMid)
-    .join(" · "),
-  piedsATerreLine2: profile.secondaryCities.slice(secondaryCitiesMid).join(" · "),
+  piedsATerreLine1: piedsATerreSite.line1,
+  piedsATerreLine2: piedsATerreSite.line2,
+  piedsATerrePdfLine1: piedsATerrePdf.line1,
+  piedsATerrePdfLine2: piedsATerrePdf.line2,
+  piedsATerrePdfLine3: piedsATerrePdf.line3,
   languages: profile.languages.join(" · "),
   height: "176 cm",
   permits: "A, B, Bateau (côtier & fluvial)",

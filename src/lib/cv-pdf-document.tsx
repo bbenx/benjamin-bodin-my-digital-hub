@@ -1,10 +1,13 @@
 import {
   Document,
+  Font,
   Page,
   StyleSheet,
   Text,
   View,
 } from "@react-pdf/renderer";
+
+Font.registerHyphenationCallback((word) => [word]);
 import {
   cvExperiences,
   cvFormation,
@@ -113,6 +116,10 @@ const styles = StyleSheet.create({
   identityValue: {
     flex: 1,
     fontSize: 8.5,
+  },
+  piedsATerreLine: {
+    fontSize: 8.5,
+    lineHeight: 1.25,
   },
   subgroupLabel: {
     fontSize: 7.5,
@@ -275,11 +282,14 @@ export function CvPdfDocument() {
               <View style={styles.identityLine}>
                 <Text style={styles.identityLabel}>Pieds à terre</Text>
                 <View style={styles.identityValue}>
-                  <Text style={{ fontSize: 8.5, lineHeight: 1.25 }}>
-                    {cvIdentity.piedsATerreLine1}
+                  <Text style={styles.piedsATerreLine} wrap={false}>
+                    {cvIdentity.piedsATerrePdfLine1}
                   </Text>
-                  <Text style={{ fontSize: 8.5, lineHeight: 1.25 }}>
-                    {cvIdentity.piedsATerreLine2}
+                  <Text style={styles.piedsATerreLine} wrap={false}>
+                    {cvIdentity.piedsATerrePdfLine2}
+                  </Text>
+                  <Text style={styles.piedsATerreLine} wrap={false}>
+                    {cvIdentity.piedsATerrePdfLine3}
                   </Text>
                 </View>
               </View>
