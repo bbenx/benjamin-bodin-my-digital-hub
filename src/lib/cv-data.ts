@@ -36,8 +36,12 @@ export type CvTimelineEntry = {
 
 export const cvFormation: CvTimelineEntry[] = [
   {
-    period: "Avril 2026",
-    title: "Formation casting et jeu d’acteur avec Hervé Jakubowicz",
+    period: "2026",
+    title: "Casting & jeu d’acteur",
+    details: [
+      "Avril — Hervé Jakubowicz (cinéma)",
+      "Juin — Ingrid Lubin (TV)",
+    ],
   },
   {
     period: "2025 – 2026",
