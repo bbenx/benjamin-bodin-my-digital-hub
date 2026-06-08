@@ -79,6 +79,19 @@ export const cvExperiences: CvExperienceGroup[] = [
     ],
   },
   {
+    label: "Spectacle vivant",
+    entries: [
+      {
+        period: "Avril 2026",
+        title: "Stinville Festival — sketch absurde (écrit & joué)",
+        details: [
+          "Catégorie fictive « meilleur acteur pour un film d’animation », trophée reçu en direct (identique aux lauréats)",
+          "~200 spectateurs · en présence de Mathieu Turi et Jodie Ruth-Forest",
+        ],
+      },
+    ],
+  },
+  {
     label: "Métrages",
     entries: [
       {
