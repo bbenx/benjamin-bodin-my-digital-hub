@@ -78,6 +78,9 @@ const Book = () => {
     trackBookFilterChange({ filter_type: "category", value: id });
     setActiveCategory(id);
     setActivePalette("all");
+    if (id === "polas" && sortOrder === null) {
+      setSortOrder("newest");
+    }
   };
 
   const handlePaletteChange = (val: "all" | "bw" | "color") => {
