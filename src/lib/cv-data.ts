@@ -73,7 +73,7 @@ export const cvExperiences: CvExperienceGroup[] = [
     label: "Mannequinat",
     entries: [
       {
-        period: "2026",
+        period: "Mars 2026",
         title: "Défilé Paris Fashion Week — UFD",
       },
       {
