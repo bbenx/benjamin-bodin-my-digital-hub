@@ -24,7 +24,34 @@ function spreadPick(pool: BookMediaItem[], n: number): BookMediaItem[] {
   });
 }
 
-/** Jusqu’à `count` images en alternant N&B / couleur pour le carrousel d’accueil. */
+function sortByNewest(items: BookMediaItem[]): BookMediaItem[] {
+  return [...items].sort((a, b) => {
+    const byDate = b.date.localeCompare(a.date);
+    if (byDate !== 0) return byDate;
+    return a.id.localeCompare(b.id, undefined, { numeric: true });
+  });
+}
+
+/** 2 photos les plus récentes + complément alterné N&B / couleur pour le carrousel d’accueil. */
+function pickForHomeCarousel(
+  items: BookMediaItem[],
+  count: number,
+): BookMediaItem[] {
+  if (items.length === 0) return [];
+
+  const total = Math.min(count, items.length);
+  const recentCount = Math.min(2, total);
+  const recent = sortByNewest(items).slice(0, recentCount);
+  const recentIds = new Set(recent.map((item) => item.id));
+  const pool = items.filter((item) => !recentIds.has(item.id));
+  const restCount = total - recent.length;
+  const rest =
+    restCount > 0 ? pickAlternatingForCarousel(pool, restCount) : [];
+
+  return [...recent, ...rest];
+}
+
+/** Jusqu’à `count` images en alternant N&B / couleur. */
 function pickAlternatingForCarousel(
   items: BookMediaItem[],
   count: number,
@@ -78,7 +105,7 @@ const GallerySection = () => {
     if (!manifest || manifest.items.length === 0) return [];
 
     const count = Math.min(10, manifest.items.length);
-    const picked = pickAlternatingForCarousel(manifest.items, count);
+    const picked = pickForHomeCarousel(manifest.items, count);
 
     return picked.map((item) => {
       const labels = itemCategoryIds(item).map(
