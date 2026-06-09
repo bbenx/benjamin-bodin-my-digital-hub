@@ -19,9 +19,6 @@ export type Film = {
   posterSrc?: string;
 };
 
-export const filmsPageIntro =
-  "Versions intégrales — métrages et spectacles";
-
 /** Extrait l’ID YouTube depuis une URL ou un ID brut. */
 export function parseYoutubeId(input: string): string | null {
   const trimmed = input.trim();

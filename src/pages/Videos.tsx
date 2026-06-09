@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { FilmCard } from "@/components/films/FilmCard";
 import { PageSeo } from "@/components/seo/PageSeo";
-import { films, filmsPageIntro } from "@/lib/films-data";
+import { films } from "@/lib/films-data";
 import { SEO_COPY } from "@/lib/seo-config";
 
 const Videos = () => {
@@ -16,7 +16,7 @@ const Videos = () => {
         path="/videos"
       />
 
-      <div className="text-center px-6 pb-10 md:pb-12">
+      <div className="text-center px-6 pb-8">
         <h1
           className="text-5xl md:text-6xl font-light tracking-wide mb-4"
           style={{ fontFamily: "'Cormorant Garamond', serif" }}
@@ -27,10 +27,7 @@ const Videos = () => {
             — métrages intégraux de Benjamin Bodin, comédien
           </span>
         </h1>
-        <Separator className="w-12 mx-auto bg-primary/40 mb-5" />
-        <p className="mx-auto max-w-2xl text-base md:text-lg font-light leading-relaxed text-muted-foreground">
-          {filmsPageIntro}
-        </p>
+        <Separator className="w-12 mx-auto bg-primary/40" />
       </div>
 
       <div className="px-6 space-y-16 md:space-y-20">
