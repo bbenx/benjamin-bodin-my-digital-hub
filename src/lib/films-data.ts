@@ -15,7 +15,7 @@ export type Film = {
 };
 
 export const filmsPageIntro =
-  "Versions intégrales — courts et longs métrages";
+  "Versions intégrales — métrages et spectacles";
 
 /** Extrait l’ID YouTube depuis une URL ou un ID brut. */
 export function parseYoutubeId(input: string): string | null {
@@ -84,6 +84,14 @@ export const films: Film[] = [
     role: "1er rôle",
     format: "Court métrage",
     note: "Adaptation de la nouvelle de Nikolaï Gogol",
+  },
+  {
+    id: "stinville-festival",
+    title: "Stinville Festival — sketch absurde",
+    year: "2026",
+    role: "Écrit & joué",
+    format: "Spectacle vivant",
+    note: "Catégorie fictive « meilleur acteur pour un film d’animation », trophée reçu en direct · En présence de Mathieu Turi et Jodie Ruth-Forest",
     youtubeId: "https://youtu.be/R6QIB1YnpRc",
   },
 ];
