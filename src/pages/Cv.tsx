@@ -139,18 +139,20 @@ const Cv = () => {
           </h1>
           <Separator className="w-12 mx-auto bg-primary/40" />
           <p
-            className="mt-5 text-sm md:text-base font-light text-muted-foreground"
+            className="mt-5 inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm md:text-base font-light text-muted-foreground"
             style={{ fontFamily: "'Outfit', sans-serif" }}
           >
-            {cvIdentity.name}
+            <span>{cvIdentity.name}</span>
+            <span className="text-muted-foreground/35" aria-hidden>
+              ·
+            </span>
+            <a
+              href="/#bande-demo"
+              className="text-[11px] tracking-[0.2em] uppercase text-primary/80 underline underline-offset-4 decoration-primary/40 hover:text-primary hover:decoration-primary transition-colors"
+            >
+              Voir
+            </a>
           </p>
-          <Link
-            to="/#bande-demo"
-            className="mt-3 inline-block text-[11px] tracking-[0.2em] uppercase text-muted-foreground/55 hover:text-primary transition-colors"
-            style={{ fontFamily: "'Outfit', sans-serif" }}
-          >
-            Voir
-          </Link>
           <button
             type="button"
             onClick={() => void handleDownloadPdf()}
