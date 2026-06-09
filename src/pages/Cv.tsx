@@ -144,6 +144,13 @@ const Cv = () => {
           >
             {cvIdentity.name}
           </p>
+          <Link
+            to="/#bande-demo"
+            className="mt-3 inline-block text-[11px] tracking-[0.2em] uppercase text-muted-foreground/55 hover:text-primary transition-colors"
+            style={{ fontFamily: "'Outfit', sans-serif" }}
+          >
+            Voir
+          </Link>
           <button
             type="button"
             onClick={() => void handleDownloadPdf()}
