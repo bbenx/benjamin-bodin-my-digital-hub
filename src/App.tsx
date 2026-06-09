@@ -11,6 +11,7 @@ import Index from "./pages/Index.tsx";
 import Book from "./pages/Book.tsx";
 import Legal from "./pages/Legal.tsx";
 import Cv from "./pages/Cv.tsx";
+import Videos from "./pages/Videos.tsx";
 
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
@@ -32,6 +33,7 @@ const App = () => (
             <Route element={<Layout />}>
               <Route path="/" element={<Index />} />
               <Route path="/book" element={<Book />} />
+              <Route path="/videos" element={<Videos />} />
               <Route path="/cv" element={<Cv />} />
               <Route path="/mentions-legales" element={<Legal />} />
             </Route>

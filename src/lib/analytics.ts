@@ -128,3 +128,14 @@ export function trackBookFilterChange(payload: {
     value: payload.value,
   });
 }
+
+export function trackFilmPlay(payload: {
+  film_id: string;
+  film_title: string;
+}): void {
+  trackEngagement("film_play", {
+    film_id: payload.film_id,
+    film_title: payload.film_title,
+    page_path: "/videos",
+  });
+}

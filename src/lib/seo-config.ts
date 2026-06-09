@@ -17,6 +17,11 @@ export const SEO_COPY = {
     description:
       "Galerie book de Benjamin Bodin, comédien et mannequin à Paris : portraits, éditorial, mode, lingerie et cinéma — photos couleur & noir et blanc.",
   },
+  videos: {
+    title: "Vidéos & métrages — Benjamin Bodin | Comédien",
+    description:
+      "Métrages intégraux de Benjamin Bodin, comédien à Paris : courts et longs métrages en version complète — jeu d’acteur et cinéma.",
+  },
   cv: {
     title: "Fiche artiste & CV | Benjamin Bodin — Comédien & mannequin",
     description:
