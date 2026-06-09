@@ -52,13 +52,8 @@ export function youtubePosterUrl(
   return `https://img.youtube.com/vi/${youtubeId}/${file}.jpg`;
 }
 
-export function youtubeEmbedUrl(youtubeId: string): string {
-  const params = new URLSearchParams({
-    autoplay: "1",
-    modestbranding: "1",
-    rel: "0",
-  });
-  return `https://www.youtube-nocookie.com/embed/${youtubeId}?${params}`;
+export function youtubeWatchUrl(youtubeId: string): string {
+  return `https://www.youtube.com/watch?v=${youtubeId}`;
 }
 
 export function filmPosterSrc(film: Film): string | null {
