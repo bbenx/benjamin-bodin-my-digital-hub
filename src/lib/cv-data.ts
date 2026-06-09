@@ -87,49 +87,6 @@ export type CvExperienceGroup = {
 
 export const cvExperiences: CvExperienceGroup[] = [
   {
-    label: "Pub",
-    entries: [
-      {
-        period: "Mai 2026",
-        title: "Nature et Découverte, BioBurger, L’Habit Français",
-      },
-      {
-        period: "Mars 2026",
-        title: "Garnier",
-      },
-    ],
-  },
-  {
-    label: "Mannequinat",
-    entries: [
-      {
-        period: "Mars 2026",
-        title: "Défilé Paris Fashion Week — UFD",
-      },
-      {
-        period: "Juin 2026",
-        title: "Défilé designers — émission de variété Wow The World",
-        details: [
-          "Épisode spécial mode (saison 2) · en présence de Gong Jun, Liu Yuning, Sun Honglei, Chen He…",
-          "Saison 1 : 300 M+ de vues cumulées (Tencent Video · WeTV · Douyin)",
-        ],
-      },
-    ],
-  },
-  {
-    label: "Spectacle vivant",
-    entries: [
-      {
-        period: "Avril 2026",
-        title: "Stinville Festival — sketch absurde (écrit & joué)",
-        details: [
-          "Catégorie fictive « meilleur acteur pour un film d’animation », trophée reçu en direct (identique aux lauréats)",
-          "En présence de Mathieu Turi et Jodie Ruth-Forest et ~150 spectateurs",
-        ],
-      },
-    ],
-  },
-  {
     label: "Métrages",
     entries: [
       {
@@ -161,6 +118,49 @@ export const cvExperiences: CvExperienceGroup[] = [
         format: "Long métrage",
         film: "Quasimodo",
         director: "Jean-François Richet",
+      },
+    ],
+  },
+  {
+    label: "Spectacle vivant",
+    entries: [
+      {
+        period: "Avril 2026",
+        title: "Stinville Festival — sketch absurde (écrit & joué)",
+        details: [
+          "Catégorie fictive « meilleur acteur pour un film d’animation », trophée reçu en direct (identique aux lauréats)",
+          "En présence de Mathieu Turi et Jodie Ruth-Forest et ~150 spectateurs",
+        ],
+      },
+    ],
+  },
+  {
+    label: "Pub",
+    entries: [
+      {
+        period: "Mai 2026",
+        title: "Nature et Découverte, BioBurger, L’Habit Français",
+      },
+      {
+        period: "Mars 2026",
+        title: "Garnier",
+      },
+    ],
+  },
+  {
+    label: "Mannequinat",
+    entries: [
+      {
+        period: "Mars 2026",
+        title: "Défilé Paris Fashion Week — UFD",
+      },
+      {
+        period: "Juin 2026",
+        title: "Défilé designers — émission de variété Wow The World",
+        details: [
+          "Épisode spécial mode (saison 2) · en présence de Gong Jun, Liu Yuning, Sun Honglei, Chen He…",
+          "Saison 1 : 300 M+ de vues cumulées (Tencent Video · WeTV · Douyin)",
+        ],
       },
     ],
   },
