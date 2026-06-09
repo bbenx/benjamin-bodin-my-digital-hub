@@ -58,6 +58,8 @@ export type CvTimelineEntry = {
   film?: string;
   director?: string;
   note?: string;
+  /** ID film (films-data) — affiche « Voir » sur la fiche web, pas dans le PDF. */
+  videoId?: string;
 };
 
 export const cvFormation: CvTimelineEntry[] = [
@@ -127,6 +129,7 @@ export const cvExperiences: CvExperienceGroup[] = [
       {
         period: "Avril 2026",
         title: "Stinville Festival — sketch absurde (écrit & joué)",
+        videoId: "stinville-festival",
         details: [
           "Catégorie fictive « meilleur acteur pour un film d’animation », trophée reçu en direct (identique aux lauréats)",
           "En présence de Mathieu Turi et Jodie Ruth-Forest et ~150 spectateurs",

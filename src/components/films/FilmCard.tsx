@@ -38,7 +38,10 @@ const FilmCard = ({ film, isPlaying, onPlay }: FilmCardProps) => {
       : null;
 
   return (
-    <article className="w-full max-w-4xl mx-auto">
+    <article
+      id={film.id}
+      className="w-full max-w-4xl mx-auto scroll-mt-28"
+    >
       <div className="mb-6 md:mb-8">
         <FilmMeta film={film} showNote={false} />
       </div>

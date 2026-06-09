@@ -10,8 +10,27 @@ import {
   cvOtherSkills,
   type CvTimelineEntry,
 } from "@/lib/cv-data";
+import { filmIsPlayable, films } from "@/lib/films-data";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { SEO_COPY } from "@/lib/seo-config";
+
+const cvVideoLinkClassName =
+  "shrink-0 text-[10px] tracking-[0.2em] uppercase text-primary/80 underline underline-offset-4 decoration-primary/40 hover:text-primary hover:decoration-primary transition-colors";
+
+function CvEntryVideoLink({ videoId }: { videoId: string }) {
+  const film = films.find((f) => f.id === videoId);
+  if (!film || !filmIsPlayable(film)) return null;
+
+  return (
+    <a
+      href={`/videos#${videoId}`}
+      className={cvVideoLinkClassName}
+      aria-label={`Voir la vidéo — ${film.title}`}
+    >
+      Voir
+    </a>
+  );
+}
 
 function timelineEntryKey(entry: CvTimelineEntry) {
   return `${entry.period}-${entry.film ?? entry.title ?? ""}`;
@@ -22,10 +41,11 @@ function TimelineEntryBody({ entry }: { entry: CvTimelineEntry }) {
     return (
       <div className="space-y-1.5">
         <p
-          className="text-xl md:text-2xl font-light tracking-wide text-foreground"
+          className="inline-flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xl md:text-2xl font-light tracking-wide text-foreground"
           style={{ fontFamily: "'Cormorant Garamond', serif" }}
         >
-          «&nbsp;{entry.film}&nbsp;»
+          <span>«&nbsp;{entry.film}&nbsp;»</span>
+          {entry.videoId ? <CvEntryVideoLink videoId={entry.videoId} /> : null}
         </p>
         <p className="text-sm md:text-[15px] leading-relaxed">
           <span className="font-medium text-primary">{entry.role}</span>
@@ -56,8 +76,9 @@ function TimelineEntryBody({ entry }: { entry: CvTimelineEntry }) {
 
   return (
     <>
-      <p className="text-sm md:text-[15px] font-light leading-relaxed text-foreground/90">
-        {entry.title}
+      <p className="inline-flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm md:text-[15px] font-light leading-relaxed text-foreground/90">
+        <span>{entry.title}</span>
+        {entry.videoId ? <CvEntryVideoLink videoId={entry.videoId} /> : null}
       </p>
       {entry.details && entry.details.length > 0 ? (
         <ul className="mt-2 space-y-1 text-sm font-light leading-relaxed text-muted-foreground">
@@ -139,19 +160,10 @@ const Cv = () => {
           </h1>
           <Separator className="w-12 mx-auto bg-primary/40" />
           <p
-            className="mt-5 inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm md:text-base font-light text-muted-foreground"
+            className="mt-5 text-sm md:text-base font-light text-muted-foreground"
             style={{ fontFamily: "'Outfit', sans-serif" }}
           >
-            <span>{cvIdentity.name}</span>
-            <span className="text-muted-foreground/35" aria-hidden>
-              ·
-            </span>
-            <a
-              href="/#bande-demo"
-              className="text-[11px] tracking-[0.2em] uppercase text-primary/80 underline underline-offset-4 decoration-primary/40 hover:text-primary hover:decoration-primary transition-colors"
-            >
-              Voir
-            </a>
+            {cvIdentity.name}
           </p>
           <button
             type="button"

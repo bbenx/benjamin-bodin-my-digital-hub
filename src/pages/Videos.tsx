@@ -1,12 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { FilmCard } from "@/components/films/FilmCard";
 import { PageSeo } from "@/components/seo/PageSeo";
-import { films } from "@/lib/films-data";
+import { filmIsPlayable, films } from "@/lib/films-data";
 import { SEO_COPY } from "@/lib/seo-config";
 
+function resolveFilmIdFromHash(): string | null {
+  const id = window.location.hash.replace(/^#/, "");
+  if (!id) return null;
+  const film = films.find((f) => f.id === id);
+  return film && filmIsPlayable(film) ? id : null;
+}
+
 const Videos = () => {
-  const [playingFilmId, setPlayingFilmId] = useState<string | null>(null);
+  const [playingFilmId, setPlayingFilmId] = useState<string | null>(() =>
+    resolveFilmIdFromHash(),
+  );
+
+  useEffect(() => {
+    const syncFromHash = () => {
+      const id = resolveFilmIdFromHash();
+      if (id) {
+        setPlayingFilmId(id);
+        requestAnimationFrame(() => {
+          document.getElementById(id)?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        });
+      }
+    };
+
+    syncFromHash();
+    window.addEventListener("hashchange", syncFromHash);
+    return () => window.removeEventListener("hashchange", syncFromHash);
+  }, []);
 
   return (
     <div className="pt-24 pb-16">
