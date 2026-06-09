@@ -52,8 +52,14 @@ export function youtubePosterUrl(
   return `https://img.youtube.com/vi/${youtubeId}/${file}.jpg`;
 }
 
-export function youtubeWatchUrl(youtubeId: string): string {
-  return `https://www.youtube.com/watch?v=${youtubeId}`;
+export function youtubeEmbedUrl(youtubeId: string, origin: string): string {
+  const params = new URLSearchParams({
+    autoplay: "1",
+    modestbranding: "1",
+    rel: "0",
+    origin,
+  });
+  return `https://www.youtube.com/embed/${youtubeId}?${params.toString()}`;
 }
 
 export function filmPosterSrc(film: Film): string | null {

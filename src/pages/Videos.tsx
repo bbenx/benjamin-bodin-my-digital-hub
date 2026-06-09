@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { FilmCard } from "@/components/films/FilmCard";
 import { PageSeo } from "@/components/seo/PageSeo";
@@ -5,6 +6,8 @@ import { films, filmsPageIntro } from "@/lib/films-data";
 import { SEO_COPY } from "@/lib/seo-config";
 
 const Videos = () => {
+  const [playingFilmId, setPlayingFilmId] = useState<string | null>(null);
+
   return (
     <div className="pt-24 pb-16">
       <PageSeo
@@ -32,7 +35,15 @@ const Videos = () => {
 
       <div className="px-6 space-y-16 md:space-y-20">
         {films.length > 0 ? (
-          films.map((film) => <FilmCard key={film.id} film={film} />)
+          films.map((film) => (
+            <FilmCard
+              key={film.id}
+              film={film}
+              isPlaying={playingFilmId === film.id}
+              onPlay={() => setPlayingFilmId(film.id)}
+              onStop={() => setPlayingFilmId(null)}
+            />
+          ))
         ) : (
           <p className="text-center text-sm tracking-[0.15em] uppercase text-muted-foreground">
             Aucune vidéo pour le moment
