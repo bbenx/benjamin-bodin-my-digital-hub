@@ -1,18 +1,17 @@
 import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { FilmCard } from "@/components/films/FilmCard";
-import { FilmLightbox } from "@/components/films/FilmLightbox";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { trackFilmPlay } from "@/lib/analytics";
 import { films, filmsPageIntro, type Film } from "@/lib/films-data";
 import { SEO_COPY } from "@/lib/seo-config";
 
 const Videos = () => {
-  const [activeFilm, setActiveFilm] = useState<Film | null>(null);
+  const [playingFilmId, setPlayingFilmId] = useState<string | null>(null);
 
   const handlePlay = (film: Film) => {
     trackFilmPlay({ film_id: film.id, film_title: film.title });
-    setActiveFilm(film);
+    setPlayingFilmId(film.id);
   };
 
   return (
@@ -46,7 +45,9 @@ const Videos = () => {
             <FilmCard
               key={film.id}
               film={film}
+              isPlaying={playingFilmId === film.id}
               onPlay={() => handlePlay(film)}
+              onStop={() => setPlayingFilmId(null)}
             />
           ))
         ) : (
@@ -55,8 +56,6 @@ const Videos = () => {
           </p>
         )}
       </div>
-
-      <FilmLightbox film={activeFilm} onClose={() => setActiveFilm(null)} />
     </div>
   );
 };
