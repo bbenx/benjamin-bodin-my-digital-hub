@@ -65,8 +65,8 @@ export const cvFormation: CvTimelineEntry[] = [
     period: "2026",
     title: "Casting & jeu d’acteur",
     details: [
-      "Avril — Hervé Jakubowicz (cinéma)",
       "Juin — Ingrid Lubin (TV)",
+      "Avril — Hervé Jakubowicz (cinéma)",
     ],
   },
   {
@@ -74,8 +74,8 @@ export const cvFormation: CvTimelineEntry[] = [
     title: "Cours Florent — 1ère année avec Cendrine Orcier (théâtre)",
     details: [
       "Britannicus, acte II, scène II — rôle Narcisse",
-      "Monologue Pulp Fiction — Capitaine Koons face au jeune Butch",
       "Roméo et Juliette, acte I, scène I — Roméo et Benvolio",
+      "Monologue Pulp Fiction — Capitaine Koons face au jeune Butch",
     ],
   },
 ];
