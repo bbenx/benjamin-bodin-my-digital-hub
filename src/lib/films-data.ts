@@ -8,7 +8,12 @@ export type Film = {
   format: string;
   director?: string;
   note?: string;
-  /** ID YouTube (11 car.) ou URL — vide = vignette « à venir » */
+  /**
+   * MP4 local dans public/videos/ (H.264) — lecture sur le site, sans YouTube.
+   * Prioritaire sur youtubeId.
+   */
+  videoSrc?: string;
+  /** ID ou URL YouTube — repli embed, ou vignette si videoSrc est défini */
   youtubeId?: string;
   /** Affiche locale sous public/ ; sinon miniature YouTube si youtubeId est défini */
   posterSrc?: string;
@@ -69,13 +74,18 @@ export function filmPosterSrc(film: Film): string | null {
   return null;
 }
 
+export function filmHasLocalVideo(film: Film): boolean {
+  return Boolean(film.videoSrc?.trim());
+}
+
 export function filmIsPlayable(film: Film): boolean {
-  return resolveFilmYoutubeId(film) !== null;
+  return filmHasLocalVideo(film) || resolveFilmYoutubeId(film) !== null;
 }
 
 /**
- * Ajouter un métrage : une entrée ici (+ poster optionnel dans public/assets/films/).
- * youtubeId : ID ou lien YouTube non répertorié.
+ * Ajouter une vidéo : une entrée ici.
+ * Préférer videoSrc (MP4 dans public/videos/, &lt; 100 Mo pour Git).
+ * youtubeId : repli ou vignette uniquement.
  */
 /** Ordre : chrono global inversé (plus récent en premier). */
 export const films: Film[] = [
@@ -86,6 +96,7 @@ export const films: Film[] = [
     role: "Écrit & joué",
     format: "Spectacle vivant",
     note: "Catégorie fictive « meilleur acteur pour un film d’animation », trophée reçu en direct · En présence de Mathieu Turi et Jodie Ruth-Forest",
+    // videoSrc: "/videos/stinville-festival.mp4", // lecteur custom — décommenter quand le MP4 est ajouté
     youtubeId: "https://youtu.be/R6QIB1YnpRc",
   },
   {

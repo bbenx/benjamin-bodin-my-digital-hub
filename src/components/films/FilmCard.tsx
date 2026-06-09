@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { trackFilmPlay } from "@/lib/analytics";
+import { FilmLocalVideo } from "@/components/films/FilmLocalVideo";
 import {
+  filmHasLocalVideo,
   filmIsPlayable,
   filmPosterSrc,
   resolveFilmYoutubeId,
@@ -20,6 +22,7 @@ type FilmCardProps = {
 
 const FilmCard = ({ film, isPlaying, onPlay, onStop }: FilmCardProps) => {
   const playable = filmIsPlayable(film);
+  const useLocalVideo = filmHasLocalVideo(film);
   const youtubeId = resolveFilmYoutubeId(film);
   const posterSrc = filmPosterSrc(film);
   const [posterFailed, setPosterFailed] = useState(false);
@@ -31,7 +34,7 @@ const FilmCard = ({ film, isPlaying, onPlay, onStop }: FilmCardProps) => {
   };
 
   const embedSrc =
-    isPlaying && youtubeId
+    isPlaying && !useLocalVideo && youtubeId
       ? youtubeEmbedUrl(youtubeId, window.location.origin)
       : null;
 
@@ -45,7 +48,13 @@ const FilmCard = ({ film, isPlaying, onPlay, onStop }: FilmCardProps) => {
         className="relative w-full overflow-hidden rounded-lg border border-border/30 bg-black"
         style={{ aspectRatio: "16 / 9" }}
       >
-        {embedSrc ? (
+        {useLocalVideo && film.videoSrc ? (
+          <FilmLocalVideo
+            videoSrc={film.videoSrc}
+            posterSrc={posterSrc ?? film.posterSrc}
+            title={`« ${film.title} » — Benjamin Bodin`}
+          />
+        ) : isPlaying && embedSrc ? (
           <iframe
             src={embedSrc}
             title={`« ${film.title} » — Benjamin Bodin`}
@@ -121,7 +130,7 @@ const FilmCard = ({ film, isPlaying, onPlay, onStop }: FilmCardProps) => {
         )}
       </div>
 
-      {isPlaying ? (
+      {isPlaying && !useLocalVideo ? (
         <div className="mt-3 text-center">
           <button
             type="button"
