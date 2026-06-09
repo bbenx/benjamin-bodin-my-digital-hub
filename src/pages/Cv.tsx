@@ -22,13 +22,13 @@ function CvEntryVideoLink({ videoId }: { videoId: string }) {
   if (!film || !filmIsPlayable(film)) return null;
 
   return (
-    <a
-      href={`/videos#${videoId}`}
+    <Link
+      to={{ pathname: "/videos", hash: videoId }}
       className={cvVideoLinkClassName}
       aria-label={`Voir la vidéo — ${film.title}`}
     >
       Voir
-    </a>
+    </Link>
   );
 }
 

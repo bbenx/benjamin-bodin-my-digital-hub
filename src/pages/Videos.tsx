@@ -1,40 +1,27 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import { FilmCard } from "@/components/films/FilmCard";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { filmIsPlayable, films } from "@/lib/films-data";
 import { SEO_COPY } from "@/lib/seo-config";
 
-function resolveFilmIdFromHash(): string | null {
-  const id = window.location.hash.replace(/^#/, "");
+function resolveFilmIdFromHash(hash: string): string | null {
+  const id = decodeURIComponent(hash.replace(/^#/, ""));
   if (!id) return null;
   const film = films.find((f) => f.id === id);
   return film && filmIsPlayable(film) ? id : null;
 }
 
 const Videos = () => {
-  const [playingFilmId, setPlayingFilmId] = useState<string | null>(() =>
-    resolveFilmIdFromHash(),
-  );
+  const location = useLocation();
+  const hashFilmId = resolveFilmIdFromHash(location.hash);
+  const [playingFilmId, setPlayingFilmId] = useState<string | null>(hashFilmId);
 
   useEffect(() => {
-    const syncFromHash = () => {
-      const id = resolveFilmIdFromHash();
-      if (id) {
-        setPlayingFilmId(id);
-        requestAnimationFrame(() => {
-          document.getElementById(id)?.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        });
-      }
-    };
-
-    syncFromHash();
-    window.addEventListener("hashchange", syncFromHash);
-    return () => window.removeEventListener("hashchange", syncFromHash);
-  }, []);
+    if (!hashFilmId) return;
+    setPlayingFilmId(hashFilmId);
+  }, [hashFilmId]);
 
   return (
     <div className="pt-24 pb-16">
