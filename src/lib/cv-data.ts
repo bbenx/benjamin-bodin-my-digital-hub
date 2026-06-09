@@ -151,16 +151,16 @@ export const cvExperiences: CvExperienceGroup[] = [
     label: "Mannequinat",
     entries: [
       {
-        period: "Mars 2026",
-        title: "Défilé Paris Fashion Week — UFD",
-      },
-      {
         period: "Juin 2026",
         title: "Défilé designers — émission de variété Wow The World",
         details: [
           "Épisode spécial mode (saison 2) · en présence de Gong Jun, Liu Yuning, Sun Honglei, Chen He…",
           "Saison 1 : 300 M+ de vues cumulées (Tencent Video · WeTV · Douyin)",
         ],
+      },
+      {
+        period: "Mars 2026",
+        title: "Défilé Paris Fashion Week — UFD",
       },
     ],
   },
