@@ -76,15 +76,8 @@ export function filmIsPlayable(film: Film): boolean {
  * Ajouter un métrage : une entrée ici (+ poster optionnel dans public/assets/films/).
  * youtubeId : ID ou lien YouTube non répertorié.
  */
+/** Ordre : chrono global inversé (plus récent en premier). */
 export const films: Film[] = [
-  {
-    id: "le-nez",
-    title: "Le nez",
-    year: "2026",
-    role: "1er rôle",
-    format: "Court métrage",
-    note: "Adaptation de la nouvelle de Nikolaï Gogol",
-  },
   {
     id: "stinville-festival",
     title: "Stinville Festival — sketch absurde",
@@ -93,5 +86,13 @@ export const films: Film[] = [
     format: "Spectacle vivant",
     note: "Catégorie fictive « meilleur acteur pour un film d’animation », trophée reçu en direct · En présence de Mathieu Turi et Jodie Ruth-Forest",
     youtubeId: "https://youtu.be/R6QIB1YnpRc",
+  },
+  {
+    id: "le-nez",
+    title: "Le nez",
+    year: "2026",
+    role: "1er rôle",
+    format: "Court métrage",
+    note: "Adaptation de la nouvelle de Nikolaï Gogol",
   },
 ];

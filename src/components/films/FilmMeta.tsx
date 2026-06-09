@@ -4,12 +4,14 @@ type FilmMetaProps = {
   film: Film;
   titleClassName?: string;
   align?: "center" | "left";
+  showNote?: boolean;
 };
 
 const FilmMeta = ({
   film,
   titleClassName = "text-2xl md:text-3xl",
   align = "center",
+  showNote = true,
 }: FilmMetaProps) => {
   const alignClass = align === "center" ? "text-center" : "text-left";
 
@@ -37,7 +39,7 @@ const FilmMeta = ({
           Réal. {film.director}
         </p>
       ) : null}
-      {film.note ? (
+      {showNote && film.note ? (
         <p className="mt-1.5 text-sm font-light text-muted-foreground/80">
           {film.note}
         </p>

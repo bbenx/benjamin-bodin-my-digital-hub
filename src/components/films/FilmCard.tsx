@@ -25,6 +25,10 @@ const FilmCard = ({ film, onPlay }: FilmCardProps) => {
 
   return (
     <article className="w-full max-w-4xl mx-auto">
+      <div className="mb-6 md:mb-8">
+        <FilmMeta film={film} showNote={false} />
+      </div>
+
       <button
         type="button"
         disabled={!playable}
@@ -92,9 +96,11 @@ const FilmCard = ({ film, onPlay }: FilmCardProps) => {
         ) : null}
       </button>
 
-      <div className="mt-6 md:mt-8">
-        <FilmMeta film={film} />
-      </div>
+      {film.note ? (
+        <p className="mt-5 md:mt-6 text-center text-sm font-light leading-relaxed text-muted-foreground/80">
+          {film.note}
+        </p>
+      ) : null}
     </article>
   );
 };
