@@ -38,7 +38,6 @@ const Videos = () => {
               film={film}
               isPlaying={playingFilmId === film.id}
               onPlay={() => setPlayingFilmId(film.id)}
-              onStop={() => setPlayingFilmId(null)}
             />
           ))
         ) : (

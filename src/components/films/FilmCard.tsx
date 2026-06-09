@@ -17,10 +17,9 @@ type FilmCardProps = {
   film: Film;
   isPlaying: boolean;
   onPlay: () => void;
-  onStop: () => void;
 };
 
-const FilmCard = ({ film, isPlaying, onPlay, onStop }: FilmCardProps) => {
+const FilmCard = ({ film, isPlaying, onPlay }: FilmCardProps) => {
   const playable = filmIsPlayable(film);
   const useLocalVideo = filmHasLocalVideo(film);
   const youtubeId = resolveFilmYoutubeId(film);
@@ -129,18 +128,6 @@ const FilmCard = ({ film, isPlaying, onPlay, onStop }: FilmCardProps) => {
           </button>
         )}
       </div>
-
-      {isPlaying && !useLocalVideo ? (
-        <div className="mt-3 text-center">
-          <button
-            type="button"
-            className="text-xs tracking-[0.15em] uppercase text-muted-foreground transition-colors hover:text-primary"
-            onClick={onStop}
-          >
-            Réduire
-          </button>
-        </div>
-      ) : null}
 
       {film.note ? (
         <p className="mt-5 md:mt-6 text-center text-sm font-light leading-relaxed text-muted-foreground/80">
