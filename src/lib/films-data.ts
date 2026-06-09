@@ -94,7 +94,7 @@ export const films: Film[] = [
     format: "Spectacle vivant",
     note: "Catégorie fictive « meilleur acteur pour un film d’animation », trophée reçu en direct · En présence de Mathieu Turi et Jodie Ruth-Forest",
     // videoSrc: "/videos/stinville-festival.mp4", // lecteur custom — décommenter quand le MP4 est ajouté
-    youtubeId: "https://youtu.be/R6QIB1YnpRc",
+    youtubeId: "https://youtu.be/UjNlZFQ4t80",
   },
   {
     id: "le-nez",
