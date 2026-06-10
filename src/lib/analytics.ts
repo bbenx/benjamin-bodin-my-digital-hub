@@ -60,6 +60,13 @@ export function trackInstagramLinkClick(
   trackEngagement("instagram_click", { section, link_url: linkUrl });
 }
 
+export function trackFilmmakersLinkClick(linkUrl: string): void {
+  trackEngagement("filmmakers_click", {
+    section: "contact",
+    link_url: linkUrl,
+  });
+}
+
 export function trackViewFullBookClick(): void {
   trackEngagement("view_full_book_click", {
     source: "gallery_section",

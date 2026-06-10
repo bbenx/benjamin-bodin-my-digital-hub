@@ -12,6 +12,10 @@ export const profile = {
     handle: "@_benjaminbodin",
     url: "https://instagram.com/_benjaminbodin",
   },
+  filmmakers: {
+    label: "Filmmakers",
+    url: "https://www.filmmakers.eu/fr/actors/benjamin-bodin",
+  },
   website: "www.benjaminbodin.fr",
   /**
    * Vidéo locale dans public/videos/ — préférer du H.264 dans un conteneur .mp4 pour la compatibilité navigateurs
