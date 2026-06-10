@@ -1,8 +1,14 @@
-import { useMemo } from "react";
+import { lazy, Suspense, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Separator } from "@/components/ui/separator";
-import { CircularGallery, type GalleryItem } from "@/components/ui/circular-gallery";
+import type { GalleryItem } from "@/components/ui/circular-gallery";
+
+const CircularGallery = lazy(() =>
+  import("@/components/ui/circular-gallery").then((m) => ({
+    default: m.CircularGallery,
+  })),
+);
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { trackViewFullBookClick } from "@/lib/analytics";
@@ -148,11 +154,20 @@ const GallerySection = () => {
 
         {galleryItems.length > 0 ? (
           <div className={galleryHeightClass}>
-            <CircularGallery
-              items={galleryItems}
-              radius={500}
-              autoRotateSpeed={0.03}
-            />
+            <Suspense
+              fallback={
+                <div
+                  className="h-full w-full animate-pulse rounded-lg bg-muted/15"
+                  aria-hidden
+                />
+              }
+            >
+              <CircularGallery
+                items={galleryItems}
+                radius={500}
+                autoRotateSpeed={0.03}
+              />
+            </Suspense>
           </div>
         ) : (
           <div

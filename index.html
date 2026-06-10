@@ -110,31 +110,48 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Hero : polices minimales, chargement prioritaire -->
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&family=Fira+Code:wght@700&family=Antic&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Outfit:wght@300;400&display=swap"
     />
+    <!-- Titres : non bloquant -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
+      />
+    </noscript>
     <link
       rel="preload"
       as="image"
       href="/assets/book/Ludo%202/LYNE9458.webp"
       fetchpriority="high"
     />
-    <link rel="prefetch" href="/assets/book/manifest.json" as="fetch" crossorigin />
 
-    <!-- Google tag (gtag.js) — même ID que VITE_GA_MEASUREMENT_ID (remplacé au build par Vite) -->
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=%VITE_GA_MEASUREMENT_ID%"
-    ></script>
+    <!-- Google Analytics : après le chargement pour ne pas concurrencer le hero -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "%VITE_GA_MEASUREMENT_ID%");
+      window.addEventListener("load", function () {
+        var id = "%VITE_GA_MEASUREMENT_ID%";
+        if (!id || id.indexOf("VITE_") === 0) return;
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        window.gtag = gtag;
+        gtag("js", new Date());
+        gtag("config", id);
+        var s = document.createElement("script");
+        s.async = true;
+        s.src = "https://www.googletagmanager.com/gtag/js?id=" + id;
+        document.head.appendChild(s);
+      });
     </script>
   </head>
 

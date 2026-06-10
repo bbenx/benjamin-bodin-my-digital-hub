@@ -8,12 +8,16 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { Layout } from "@/components/layout/Layout";
 import Index from "./pages/Index.tsx";
-import Book from "./pages/Book.tsx";
-import Legal from "./pages/Legal.tsx";
-import Cv from "./pages/Cv.tsx";
-import Videos from "./pages/Videos.tsx";
 
+const Book = lazy(() => import("./pages/Book.tsx"));
+const Cv = lazy(() => import("./pages/Cv.tsx"));
+const Videos = lazy(() => import("./pages/Videos.tsx"));
+const Legal = lazy(() => import("./pages/Legal.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
+
+const pageFallback = (
+  <div className="min-h-[50vh] w-full" aria-hidden />
+);
 
 const notFoundFallback = (
   <div className="flex min-h-dvh w-full items-center justify-center bg-muted" aria-hidden />
@@ -32,10 +36,38 @@ const App = () => (
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Index />} />
-              <Route path="/book" element={<Book />} />
-              <Route path="/videos" element={<Videos />} />
-              <Route path="/cv" element={<Cv />} />
-              <Route path="/mentions-legales" element={<Legal />} />
+              <Route
+                path="/book"
+                element={
+                  <Suspense fallback={pageFallback}>
+                    <Book />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/videos"
+                element={
+                  <Suspense fallback={pageFallback}>
+                    <Videos />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/cv"
+                element={
+                  <Suspense fallback={pageFallback}>
+                    <Cv />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/mentions-legales"
+                element={
+                  <Suspense fallback={pageFallback}>
+                    <Legal />
+                  </Suspense>
+                }
+              />
             </Route>
             <Route
               path="*"

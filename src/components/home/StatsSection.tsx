@@ -1,23 +1,7 @@
 import { useRef } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { useInView } from "@/hooks/use-in-view";
 import { profile } from "@/lib/profile-data";
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 },
-  }),
-};
-
-const lineReveal = {
-  hidden: { scaleX: 0 },
-  visible: {
-    scaleX: 1,
-    transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.3 },
-  },
-};
 
 const keyStats = [
   { label: "Taille", value: "176", unit: "cm" },
@@ -39,178 +23,170 @@ const measurements = [
 ];
 
 const StatsSection = () => {
-  const sectionRef = useRef(null);
-  const reduceMotion = useReducedMotion();
-  const isInView = useInView(sectionRef, {
+  const sectionRef = useRef<HTMLElement>(null);
+  const showContent = useInView(sectionRef, {
     once: true,
-    margin: "120px 0px",
+    rootMargin: "120px 0px",
   });
-  const showContent = reduceMotion || isInView;
 
   return (
     <section
       id="mensurations"
       ref={sectionRef}
-      className="relative scroll-mt-24 pt-20 md:pt-28 pb-12 md:pb-16 px-6 overflow-hidden"
+      className="relative scroll-mt-24 overflow-hidden px-6 pb-12 pt-20 md:pb-16 md:pt-28"
     >
-      {/* Decorative vertical line — md+ only so it does not cross labels on narrow viewports */}
-      <motion.div
-        className="pointer-events-none absolute bottom-0 left-[12%] top-0 hidden w-px bg-primary/10 origin-top md:block"
-        initial={{ scaleY: 0 }}
-        animate={showContent ? { scaleY: 1 } : {}}
-        transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
+      <div
+        className={cn(
+          "pointer-events-none absolute bottom-0 left-[12%] top-0 hidden w-px origin-top bg-primary/10 md:block",
+          "stats-line-reveal-y",
+          showContent && "stats-line-reveal-y--in",
+        )}
+        style={{ ["--stats-delay" as string]: "0ms" }}
       />
 
-      <div className="max-w-5xl mx-auto">
-        {/* Heading */}
+      <div className="mx-auto max-w-5xl">
         <div className="mb-20 md:mb-28">
-          <motion.h2
-            className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-foreground/90"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
-            variants={fadeUp}
-            initial="hidden"
-            animate={showContent ? "visible" : "hidden"}
-            custom={0}
+          <h2
+            className={cn(
+              "stats-fade-up text-5xl font-light tracking-tight text-foreground/90 md:text-7xl lg:text-8xl",
+              showContent && "stats-fade-up--in",
+            )}
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              ["--stats-delay" as string]: "0ms",
+            }}
           >
             Mensurations
-          </motion.h2>
+          </h2>
 
-          <motion.div
-            className="h-px bg-primary/40 mt-8 origin-left"
-            style={{ maxWidth: "4rem" }}
-            variants={lineReveal}
-            initial="hidden"
-            animate={showContent ? "visible" : "hidden"}
+          <div
+            className={cn(
+              "stats-line-reveal-x mt-8 h-px max-w-[4rem] origin-left bg-primary/40",
+              showContent && "stats-line-reveal-x--in",
+            )}
+            style={{ ["--stats-delay" as string]: "300ms" }}
           />
         </div>
 
-        {/* Key stats — large editorial numbers */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-14 md:gap-y-0 mb-16 md:mb-20">
+        <div className="mb-16 grid grid-cols-2 gap-x-8 gap-y-14 md:mb-20 md:grid-cols-4 md:gap-y-0">
           {keyStats.map((stat, i) => (
-            <motion.div
+            <div
               key={stat.label}
-              className="relative"
-              variants={fadeUp}
-              initial="hidden"
-              animate={showContent ? "visible" : "hidden"}
-              custom={i + 1}
+              className={cn(
+                "stats-fade-up relative",
+                showContent && "stats-fade-up--in",
+              )}
+              style={{ ["--stats-delay" as string]: `${(i + 1) * 80}ms` }}
             >
               <p
-                className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground/60 mb-3"
+                className="mb-3 text-[10px] uppercase tracking-[0.4em] text-muted-foreground/60"
                 style={{ fontFamily: "'Outfit', sans-serif" }}
               >
                 {stat.label}
               </p>
               <div className="flex items-baseline gap-1.5">
                 <span
-                  className="text-4xl md:text-5xl lg:text-6xl font-extralight text-foreground/90 leading-none"
+                  className="text-4xl font-extralight leading-none text-foreground/90 md:text-5xl lg:text-6xl"
                   style={{ fontFamily: "'Cormorant Garamond', serif" }}
                 >
                   {stat.value}
                 </span>
-                {stat.unit && (
-                  <span className="text-xs tracking-widest uppercase text-primary/50">
+                {stat.unit ? (
+                  <span className="text-xs uppercase tracking-widest text-primary/50">
                     {stat.unit}
                   </span>
-                )}
+                ) : null}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        {/* Yeux & cheveux — discrets, avant le détail des mensurations */}
-        <motion.div
-          className="flex flex-wrap items-baseline gap-x-8 gap-y-2 mb-8 md:mb-10 text-sm md:text-base text-muted-foreground/70"
-          style={{ fontFamily: "'Outfit', sans-serif" }}
-          variants={fadeUp}
-          initial="hidden"
-          animate={showContent ? "visible" : "hidden"}
-          custom={5}
+        <div
+          className={cn(
+            "stats-fade-up mb-8 flex flex-wrap items-baseline gap-x-8 gap-y-2 text-sm text-muted-foreground/70 md:mb-10 md:text-base",
+            showContent && "stats-fade-up--in",
+          )}
+          style={{
+            fontFamily: "'Outfit', sans-serif",
+            ["--stats-delay" as string]: "400ms",
+          }}
         >
           <span>
-            <span className="text-[10px] tracking-[0.32em] uppercase text-muted-foreground/50 mr-2.5">
+            <span className="mr-2.5 text-[10px] uppercase tracking-[0.32em] text-muted-foreground/50">
               Yeux
             </span>
             <span className="font-light text-foreground/80">{profile.eyes}</span>
           </span>
-          <span className="hidden sm:inline text-border/60">·</span>
+          <span className="hidden text-border/60 sm:inline">·</span>
           <span>
-            <span className="text-[10px] tracking-[0.32em] uppercase text-muted-foreground/50 mr-2.5">
+            <span className="mr-2.5 text-[10px] uppercase tracking-[0.32em] text-muted-foreground/50">
               Cheveux
             </span>
             <span className="font-light text-foreground/80">{profile.hair}</span>
           </span>
-        </motion.div>
+        </div>
 
-        {/* Measurements — refined two-column list */}
-        <div className="grid md:grid-cols-[1fr_1px_1fr] gap-8 md:gap-0">
-          {/* Left column */}
-          <div className="md:pr-12 space-y-0">
+        <div className="grid gap-8 md:grid-cols-[1fr_1px_1fr] md:gap-0">
+          <div className="space-y-0 md:pr-12">
             {measurements.slice(0, 5).map(([label, value], i) => (
-              <motion.div
+              <div
                 key={label}
-                className="flex items-center justify-between py-3.5 border-b border-border/15"
-                variants={fadeUp}
-                initial="hidden"
-                animate={showContent ? "visible" : "hidden"}
-                custom={i + 6}
+                className={cn(
+                  "stats-fade-up flex items-center justify-between border-b border-border/15 py-3.5",
+                  showContent && "stats-fade-up--in",
+                )}
+                style={{ ["--stats-delay" as string]: `${(i + 6) * 80}ms` }}
               >
                 <span
-                  className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground/50"
+                  className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground/50"
                   style={{ fontFamily: "'Outfit', sans-serif" }}
                 >
                   {label}
                 </span>
                 <span
-                  className="text-sm text-foreground/80 font-light"
+                  className="text-sm font-light text-foreground/80"
                   style={{ fontFamily: "'Outfit', sans-serif" }}
                 >
                   {value}
                 </span>
-              </motion.div>
+              </div>
             ))}
           </div>
 
-          {/* Center divider */}
-          <motion.div
-            className="hidden md:block bg-border/20 origin-top"
-            initial={{ scaleY: 0 }}
-            animate={showContent ? { scaleY: 1 } : {}}
-            transition={{
-              duration: 1,
-              ease: [0.22, 1, 0.36, 1],
-              delay: 0.6,
-            }}
+          <div
+            className={cn(
+              "stats-line-reveal-y hidden origin-top bg-border/20 md:block",
+              showContent && "stats-line-reveal-y--in",
+            )}
+            style={{ ["--stats-delay" as string]: "600ms" }}
           />
 
-          {/* Right column */}
-          <div className="md:pl-12 space-y-0">
+          <div className="space-y-0 md:pl-12">
             {measurements.slice(5).map(([label, value], i) => (
-              <motion.div
+              <div
                 key={label}
-                className="flex items-center justify-between py-3.5 border-b border-border/15"
-                variants={fadeUp}
-                initial="hidden"
-                animate={showContent ? "visible" : "hidden"}
-                custom={i + 11}
+                className={cn(
+                  "stats-fade-up flex items-center justify-between border-b border-border/15 py-3.5",
+                  showContent && "stats-fade-up--in",
+                )}
+                style={{ ["--stats-delay" as string]: `${(i + 11) * 80}ms` }}
               >
                 <span
-                  className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground/50"
+                  className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground/50"
                   style={{ fontFamily: "'Outfit', sans-serif" }}
                 >
                   {label}
                 </span>
                 <span
-                  className="text-sm text-foreground/80 font-light"
+                  className="text-sm font-light text-foreground/80"
                   style={{ fontFamily: "'Outfit', sans-serif" }}
                 >
                   {value}
                 </span>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );
