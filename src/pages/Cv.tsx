@@ -11,6 +11,7 @@ import {
   type CvTimelineEntry,
 } from "@/lib/cv-data";
 import { filmIsPlayable, films } from "@/lib/films-data";
+import { profile } from "@/lib/profile-data";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { SEO_COPY } from "@/lib/seo-config";
 
@@ -163,7 +164,7 @@ const Cv = () => {
             className="mt-5 text-sm md:text-base font-light text-muted-foreground"
             style={{ fontFamily: "'Outfit', sans-serif" }}
           >
-            {cvIdentity.name}
+            {profile.subtitle}
           </p>
           <button
             type="button"
