@@ -104,6 +104,7 @@ export const cvExperiences: CvExperienceGroup[] = [
         role: "1er rôle",
         format: "Court métrage",
         film: "Le nez",
+        director: "Matthias Lauber",
         note: "Adaptation de la nouvelle de Nikolaï Gogol",
       },
       {

@@ -102,6 +102,7 @@ export const films: Film[] = [
     year: "2026",
     role: "1er rôle",
     format: "Court métrage",
+    director: "Matthias Lauber",
     note: "Adaptation de la nouvelle de Nikolaï Gogol",
   },
 ];
