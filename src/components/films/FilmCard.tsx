@@ -1,7 +1,12 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { trackFilmPlay } from "@/lib/analytics";
+import {
+  fetchYoutubeViewCount,
+  formatYoutubeViewCount,
+} from "@/lib/youtube-views";
 import { FilmLocalVideo } from "@/components/films/FilmLocalVideo";
 import {
   filmHasLocalVideo,
@@ -26,6 +31,18 @@ const FilmCard = ({ film, isPlaying, onPlay }: FilmCardProps) => {
   const posterSrc = filmPosterSrc(film);
   const [posterFailed, setPosterFailed] = useState(false);
 
+  const { data: liveViewCount } = useQuery({
+    queryKey: ["youtube-view-count", youtubeId],
+    queryFn: () => fetchYoutubeViewCount(youtubeId!),
+    enabled: Boolean(youtubeId),
+    staleTime: 1000 * 60 * 60,
+    retry: false,
+  });
+
+  const viewCount = liveViewCount ?? film.viewCount ?? null;
+  const viewCountLabel =
+    viewCount != null ? formatYoutubeViewCount(viewCount) : null;
+
   const handlePosterClick = () => {
     if (!playable) return;
     trackFilmPlay({ film_id: film.id, film_title: film.title });
@@ -43,7 +60,11 @@ const FilmCard = ({ film, isPlaying, onPlay }: FilmCardProps) => {
       className="w-full max-w-4xl mx-auto scroll-mt-28"
     >
       <div className="mb-6 md:mb-8">
-        <FilmMeta film={film} showNote={false} />
+        <FilmMeta
+          film={film}
+          showNote={false}
+          viewCountLabel={viewCountLabel}
+        />
       </div>
 
       <div

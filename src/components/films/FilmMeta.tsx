@@ -5,6 +5,7 @@ type FilmMetaProps = {
   titleClassName?: string;
   align?: "center" | "left";
   showNote?: boolean;
+  viewCountLabel?: string | null;
 };
 
 const FilmMeta = ({
@@ -12,6 +13,7 @@ const FilmMeta = ({
   titleClassName = "text-2xl md:text-3xl",
   align = "center",
   showNote = true,
+  viewCountLabel = null,
 }: FilmMetaProps) => {
   const alignClass = align === "center" ? "text-center" : "text-left";
 
@@ -33,6 +35,16 @@ const FilmMeta = ({
           ·
         </span>
         <span className="font-light text-foreground/85">{film.year}</span>
+        {viewCountLabel ? (
+          <>
+            <span className="text-muted-foreground/40 mx-2" aria-hidden>
+              ·
+            </span>
+            <span className="font-light text-muted-foreground">
+              {viewCountLabel}
+            </span>
+          </>
+        ) : null}
       </p>
       {film.director ? (
         <p className="mt-1.5 text-sm font-light text-muted-foreground">

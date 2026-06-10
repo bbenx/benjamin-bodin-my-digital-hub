@@ -17,6 +17,8 @@ export type Film = {
   youtubeId?: string;
   /** Affiche locale sous public/ ; sinon miniature YouTube si youtubeId est défini */
   posterSrc?: string;
+  /** Repli si l’API YouTube n’est pas configurée (vues affichées sur /videos). */
+  viewCount?: number;
 };
 
 /** Extrait l’ID YouTube depuis une URL ou un ID brut. */
