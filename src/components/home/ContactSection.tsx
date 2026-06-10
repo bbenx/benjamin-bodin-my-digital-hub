@@ -56,7 +56,9 @@ const ContactSection = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 transition-colors duration-300"
-              onClick={() => trackFilmmakersLinkClick(profile.filmmakers.url)}
+              onClick={() =>
+                trackFilmmakersLinkClick(profile.filmmakers.url, "contact")
+              }
             >
               <img
                 src="/filmmakers-favicon.svg"

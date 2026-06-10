@@ -4,6 +4,7 @@ import { Menu, X, Instagram, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   trackEmailClick,
+  trackFilmmakersLinkClick,
   trackInstagramLinkClick,
   trackLogoClick,
   trackNavMenuClick,
@@ -203,6 +204,24 @@ const Header = () => {
             }
           >
             <Instagram className="w-6 h-6" />
+          </a>
+          <a
+            href={profile.filmmakers.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 transition-opacity duration-300 opacity-80 hover:opacity-100"
+            aria-label="Profil casting sur Filmmakers"
+            onClick={() =>
+              trackFilmmakersLinkClick(profile.filmmakers.url, "header")
+            }
+          >
+            <img
+              src="/filmmakers-favicon.svg"
+              alt=""
+              width={24}
+              height={24}
+              className="h-6 w-6"
+            />
           </a>
         </div>
       </nav>
