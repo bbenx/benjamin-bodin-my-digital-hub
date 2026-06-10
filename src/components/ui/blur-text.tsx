@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useLayoutEffect, useRef, useMemo } from "react";
 import { cn } from "@/lib/utils";
 
 interface BlurTextProps {
@@ -8,6 +8,22 @@ interface BlurTextProps {
   direction?: "top" | "bottom";
   className?: string;
   style?: React.CSSProperties;
+  /** Affiche le texte tout de suite (hero, above-the-fold). */
+  immediate?: boolean;
+}
+
+function isElementInViewport(el: HTMLElement): boolean {
+  const rect = el.getBoundingClientRect();
+  return (
+    rect.top < window.innerHeight &&
+    rect.bottom > 0 &&
+    rect.left < window.innerWidth &&
+    rect.right > 0
+  );
+}
+
+function prefersReducedMotion(): boolean {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 const BlurText: React.FC<BlurTextProps> = ({
@@ -17,32 +33,55 @@ const BlurText: React.FC<BlurTextProps> = ({
   direction = "top",
   className = "",
   style,
+  immediate = false,
 }) => {
-  const [inView, setInView] = useState(false);
+  const [inView, setInView] = useState(immediate);
+  const [reduceMotion, setReduceMotion] = useState(false);
   const ref = useRef<HTMLParagraphElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    setReduceMotion(prefersReducedMotion());
+  }, []);
+
+  useLayoutEffect(() => {
+    if (immediate || reduceMotion) {
+      setInView(true);
+      return;
+    }
+
     const el = ref.current;
     if (!el) return;
+
+    if (isElementInViewport(el)) {
+      setInView(true);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true);
+          observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0, rootMargin: "80px 0px" },
     );
 
     observer.observe(el);
-    return () => {
-      observer.unobserve(el);
-    };
-  }, []);
+    return () => observer.disconnect();
+  }, [immediate, reduceMotion]);
 
   const segments = useMemo(() => {
     return animateBy === "words" ? text.split(" ") : text.split("");
   }, [text, animateBy]);
+
+  if (reduceMotion) {
+    return (
+      <p className={className} style={style}>
+        {text}
+      </p>
+    );
+  }
 
   return (
     <p
@@ -50,7 +89,7 @@ const BlurText: React.FC<BlurTextProps> = ({
       className={cn(
         "inline-flex",
         animateBy === "letters" ? "flex-nowrap" : "flex-wrap",
-        className
+        className,
       )}
       style={style}
     >

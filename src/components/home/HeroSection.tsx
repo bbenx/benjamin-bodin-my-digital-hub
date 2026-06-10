@@ -32,6 +32,7 @@ const HeroSection = () => {
           <div>
             <BlurText
               text="BENJAMIN"
+              immediate
               delay={80}
               animateBy="letters"
               direction="top"
@@ -45,6 +46,7 @@ const HeroSection = () => {
           <div>
             <BlurText
               text="BODIN"
+              immediate
               delay={80}
               animateBy="letters"
               direction="top"
@@ -74,6 +76,7 @@ const HeroSection = () => {
         <div className="mt-8 sm:mt-10 md:mt-12">
           <BlurText
             text={profile.tagline}
+            immediate
             delay={120}
             animateBy="words"
             direction="top"

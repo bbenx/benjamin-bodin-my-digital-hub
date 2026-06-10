@@ -90,9 +90,10 @@ function pickAlternatingForCarousel(
 const GallerySection = () => {
   const navigate = useNavigate();
 
-  const { data: manifest } = useQuery({
+  const { data: manifest, isPending } = useQuery({
     queryKey: ["book-manifest"],
     queryFn: fetchBookManifest,
+    staleTime: 5 * 60 * 1000,
   });
 
   const categoryLabelById = useMemo(() => {
@@ -122,28 +123,45 @@ const GallerySection = () => {
     });
   }, [manifest, categoryLabelById]);
 
+  const galleryHeightClass =
+    "relative isolate h-[min(50vh,480px)] w-full min-h-[260px] max-w-6xl shrink-0 overflow-hidden md:h-[min(58vh,560px)] md:min-h-[300px] max-[419px]:h-[min(42vh,320px)] max-[419px]:min-h-[200px]";
+
+  if (!isPending && galleryItems.length === 0) {
+    return null;
+  }
+
   return (
     <section
       id="galerie"
       className="relative scroll-mt-[4.5rem] overflow-x-hidden px-4 pb-16 pt-20 md:px-6 md:pb-24 md:pt-28"
     >
-      {galleryItems.length > 0 ? (
-        <div className="mx-auto flex w-full max-w-6xl flex-col items-center">
-          <header className="mb-8 text-center md:mb-10">
-            <h2
-              className="mb-4 text-4xl font-light tracking-wide md:text-5xl"
-              style={{ fontFamily: "'Cormorant Garamond', serif" }}
-            >
-              Galerie
-            </h2>
-            <Separator className="mx-auto w-12 bg-primary/40" />
-          </header>
+      <div className="mx-auto flex w-full max-w-6xl flex-col items-center">
+        <header className="mb-8 text-center md:mb-10">
+          <h2
+            className="mb-4 text-4xl font-light tracking-wide md:text-5xl"
+            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+          >
+            Galerie
+          </h2>
+          <Separator className="mx-auto w-12 bg-primary/40" />
+        </header>
 
-          {/* 3D Gallery — overflow-hidden clippe le 3D ; hauteurs plus basses sur très petites largeurs (ex. Galaxy J6+) */}
-          <div className="relative isolate h-[min(50vh,480px)] w-full min-h-[260px] max-w-6xl shrink-0 overflow-hidden md:h-[min(58vh,560px)] md:min-h-[300px] max-[419px]:h-[min(42vh,320px)] max-[419px]:min-h-[200px]">
-            <CircularGallery items={galleryItems} radius={500} autoRotateSpeed={0.03} />
+        {galleryItems.length > 0 ? (
+          <div className={galleryHeightClass}>
+            <CircularGallery
+              items={galleryItems}
+              radius={500}
+              autoRotateSpeed={0.03}
+            />
           </div>
+        ) : (
+          <div
+            className={`${galleryHeightClass} animate-pulse rounded-lg bg-muted/15`}
+            aria-hidden
+          />
+        )}
 
+        {galleryItems.length > 0 ? (
           <div className="relative z-10 mt-8 flex w-full shrink-0 justify-center max-[419px]:mt-6 md:mt-14">
             <Button
               variant="outline"
@@ -157,8 +175,8 @@ const GallerySection = () => {
               <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
-        </div>
-      ) : null}
+        ) : null}
+      </div>
     </section>
   );
 };

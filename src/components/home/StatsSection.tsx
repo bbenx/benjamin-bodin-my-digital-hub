@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { profile } from "@/lib/profile-data";
 
 const fadeUp = {
@@ -40,7 +40,12 @@ const measurements = [
 
 const StatsSection = () => {
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const reduceMotion = useReducedMotion();
+  const isInView = useInView(sectionRef, {
+    once: true,
+    margin: "120px 0px",
+  });
+  const showContent = reduceMotion || isInView;
 
   return (
     <section
@@ -52,7 +57,7 @@ const StatsSection = () => {
       <motion.div
         className="pointer-events-none absolute bottom-0 left-[12%] top-0 hidden w-px bg-primary/10 origin-top md:block"
         initial={{ scaleY: 0 }}
-        animate={isInView ? { scaleY: 1 } : {}}
+        animate={showContent ? { scaleY: 1 } : {}}
         transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
       />
 
@@ -64,7 +69,7 @@ const StatsSection = () => {
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
             variants={fadeUp}
             initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            animate={showContent ? "visible" : "hidden"}
             custom={0}
           >
             Mensurations
@@ -75,7 +80,7 @@ const StatsSection = () => {
             style={{ maxWidth: "4rem" }}
             variants={lineReveal}
             initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            animate={showContent ? "visible" : "hidden"}
           />
         </div>
 
@@ -87,7 +92,7 @@ const StatsSection = () => {
               className="relative"
               variants={fadeUp}
               initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
+              animate={showContent ? "visible" : "hidden"}
               custom={i + 1}
             >
               <p
@@ -119,7 +124,7 @@ const StatsSection = () => {
           style={{ fontFamily: "'Outfit', sans-serif" }}
           variants={fadeUp}
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          animate={showContent ? "visible" : "hidden"}
           custom={5}
         >
           <span>
@@ -147,7 +152,7 @@ const StatsSection = () => {
                 className="flex items-center justify-between py-3.5 border-b border-border/15"
                 variants={fadeUp}
                 initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
+                animate={showContent ? "visible" : "hidden"}
                 custom={i + 6}
               >
                 <span
@@ -170,7 +175,7 @@ const StatsSection = () => {
           <motion.div
             className="hidden md:block bg-border/20 origin-top"
             initial={{ scaleY: 0 }}
-            animate={isInView ? { scaleY: 1 } : {}}
+            animate={showContent ? { scaleY: 1 } : {}}
             transition={{
               duration: 1,
               ease: [0.22, 1, 0.36, 1],
@@ -186,7 +191,7 @@ const StatsSection = () => {
                 className="flex items-center justify-between py-3.5 border-b border-border/15"
                 variants={fadeUp}
                 initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
+                animate={showContent ? "visible" : "hidden"}
                 custom={i + 11}
               >
                 <span
