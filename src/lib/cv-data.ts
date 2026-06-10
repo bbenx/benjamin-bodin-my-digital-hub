@@ -93,6 +93,14 @@ export const cvExperiences: CvExperienceGroup[] = [
     entries: [
       {
         period: "2026",
+        role: "2e rôle",
+        format: "Court métrage",
+        film: "Dissonance",
+        director: "Daphné Quintin-Durand",
+        note: "Rôle de Guillaume",
+      },
+      {
+        period: "2026",
         role: "1er rôle",
         format: "Court métrage",
         film: "Le nez",
