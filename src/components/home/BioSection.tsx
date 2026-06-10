@@ -1,6 +1,9 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import { profile } from "@/lib/profile-data";
+
+const PRESENTATION_HASH = "presentation";
 
 function resolvePublicMediaUrl(raw: string): string {
   const t = raw.trim();
@@ -17,6 +20,8 @@ function getVideoMimeType(src: string): string {
 }
 
 const BioSection = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [isPresentationExpanded, setIsPresentationExpanded] = useState(false);
   const [hasPresentationVideoError, setHasPresentationVideoError] =
     useState(false);
@@ -26,12 +31,49 @@ const BioSection = () => {
   );
   const presentationVideoType = getVideoMimeType(presentationVideoSrc);
 
+  const currentHash = location.hash
+    ? decodeURIComponent(location.hash.slice(1))
+    : "";
+
+  useEffect(() => {
+    if (currentHash === PRESENTATION_HASH && presentationVideoSrc) {
+      setIsPresentationExpanded(true);
+    }
+  }, [currentHash, presentationVideoSrc]);
+
   useLayoutEffect(() => {
     if (!isPresentationExpanded || !presentationVideoSrc) return;
     const el = presentationVideoRef.current;
     if (!el) return;
     void el.play().catch(() => {});
   }, [isPresentationExpanded, presentationVideoSrc]);
+
+  useLayoutEffect(() => {
+    if (!isPresentationExpanded || currentHash !== PRESENTATION_HASH) return;
+    const target = document.getElementById(PRESENTATION_HASH);
+    if (!target) return;
+    requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, [isPresentationExpanded, currentHash]);
+
+  const togglePresentation = () => {
+    setIsPresentationExpanded((prev) => {
+      const next = !prev;
+      if (next) {
+        void navigate(
+          { pathname: "/", hash: PRESENTATION_HASH },
+          { replace: true },
+        );
+      } else {
+        setHasPresentationVideoError(false);
+        if (currentHash === PRESENTATION_HASH) {
+          void navigate({ pathname: "/", hash: "" }, { replace: true });
+        }
+      }
+      return next;
+    });
+  };
   return (
     <section
       id="bio"
@@ -55,16 +97,14 @@ const BioSection = () => {
 
         </div>
 
-        <div className="mt-6 md:mt-8 flex flex-col items-center">
+        <div
+          id={PRESENTATION_HASH}
+          className="scroll-mt-page mt-6 flex flex-col items-center md:mt-8"
+        >
           <button
             type="button"
             className="inline-flex items-center justify-center rounded-full border-2 border-primary bg-white px-7 py-3 text-sm font-medium tracking-[0.08em] text-primary uppercase shadow-sm transition-colors duration-200 hover:border-primary hover:bg-primary hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-40"
-            onClick={() => {
-              setIsPresentationExpanded((prev) => {
-                if (prev) setHasPresentationVideoError(false);
-                return !prev;
-              });
-            }}
+            onClick={togglePresentation}
             aria-expanded={isPresentationExpanded}
             aria-controls="presentation-video-content"
             disabled={!presentationVideoSrc}
