@@ -42,6 +42,9 @@
     --sidebar-accent-foreground: 40 10% 90%;
     --sidebar-border: 0 0% 15%;
     --sidebar-ring: 175 35% 40%;
+
+    /* Hauteur du header fixe — aligner le padding-top des pages intérieures. */
+    --site-header-height: 4.5rem;
   }
 
   .dark {
@@ -104,5 +107,15 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Cormorant Garamond', serif;
+  }
+}
+
+@layer utilities {
+  .pt-page {
+    padding-top: var(--site-header-height);
+  }
+
+  .scroll-mt-page {
+    scroll-margin-top: var(--site-header-height);
   }
 }

@@ -39,13 +39,18 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const isHomePage = location.pathname === "/";
+
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 8);
     };
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [location.pathname]);
+
+  const showOpaqueHeader = scrolled || !isHomePage;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -124,22 +129,23 @@ const Header = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 px-6 py-5 transition-all duration-300 relative",
-        scrolled &&
-          "bg-background border-b border-border/30 md:bg-background/80 md:backdrop-blur-md"
+        "fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow,border-color] duration-300",
+        showOpaqueHeader &&
+          "border-b border-border/30 bg-background/95 shadow-sm backdrop-blur-md",
       )}
     >
-      <button
-        type="button"
-        onClick={handleLogoClick}
-        className="absolute left-1/2 top-1/2 z-[1] -translate-x-1/2 -translate-y-1/2 text-4xl text-foreground transition-colors duration-300 hover:text-primary"
-        style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300 }}
-        aria-label="Retour en haut de la page"
-      >
-        B
-      </button>
+      <div className="relative px-6 py-3.5">
+        <button
+          type="button"
+          onClick={handleLogoClick}
+          className="absolute left-1/2 top-1/2 z-[1] -translate-x-1/2 -translate-y-1/2 text-4xl text-foreground transition-colors duration-300 hover:text-primary"
+          style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300 }}
+          aria-label="Retour en haut de la page"
+        >
+          B
+        </button>
 
-      <nav className="relative z-10 flex items-center justify-between max-w-screen-2xl mx-auto">
+        <nav className="relative z-10 flex items-center justify-between max-w-screen-2xl mx-auto">
         {/* Menu Button */}
         <div className="relative">
           <button
@@ -214,7 +220,8 @@ const Header = () => {
             <Clapperboard className="w-6 h-6" strokeWidth={1.75} />
           </a>
         </div>
-      </nav>
+        </nav>
+      </div>
     </header>
   );
 };

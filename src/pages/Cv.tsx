@@ -145,23 +145,23 @@ const Cv = () => {
   };
 
   return (
-    <div className="pt-24 pb-20 px-6">
+    <div className="pt-page pb-20 px-6">
       <PageSeo
         title={SEO_COPY.cv.title}
         description={SEO_COPY.cv.description}
         path="/cv"
       />
       <div className="max-w-3xl mx-auto">
-        <div className="mb-12 text-center">
+        <div className="mb-8 text-center">
           <h1
-            className="text-4xl md:text-5xl font-light tracking-wide mb-3"
+            className="text-4xl md:text-5xl font-light tracking-wide mb-2"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >
             Fiche artiste
           </h1>
           <Separator className="w-12 mx-auto bg-primary/40" />
           <p
-            className="mt-5 text-sm md:text-base font-light text-muted-foreground"
+            className="mt-3 text-sm md:text-base font-light text-muted-foreground"
             style={{ fontFamily: "'Outfit', sans-serif" }}
           >
             {profile.subtitle}

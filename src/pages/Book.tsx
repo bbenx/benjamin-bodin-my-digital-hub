@@ -112,16 +112,16 @@ const Book = () => {
   };
 
   return (
-    <div className="pt-24">
+    <div className="pt-page">
       <PageSeo
         title={SEO_COPY.book.title}
         description={SEO_COPY.book.description}
         path="/book"
       />
       {/* Page heading */}
-      <div className="text-center px-6 pb-8">
+      <div className="text-center px-6 pb-4 md:pb-6">
         <h1
-          className="text-5xl md:text-6xl font-light tracking-wide mb-4"
+          className="text-5xl md:text-6xl font-light tracking-wide mb-3"
           style={{ fontFamily: "'Cormorant Garamond', serif" }}
         >
           Book

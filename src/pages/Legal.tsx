@@ -6,7 +6,7 @@ import { SEO_COPY } from "@/lib/seo-config";
 
 const Legal = () => {
   return (
-    <div className="pt-24 pb-20 px-6">
+    <div className="pt-page pb-20 px-6">
       <PageSeo
         title={SEO_COPY.legal.title}
         description={SEO_COPY.legal.description}
