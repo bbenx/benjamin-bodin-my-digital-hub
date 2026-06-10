@@ -24,9 +24,7 @@ function scrollToHashTarget(id: string) {
 }
 
 const menuItems = [
-  { label: "ACCUEIL", href: "/", type: "route" as const },
   { label: "PRÉSENTATION", href: "#bio", type: "anchor" as const },
-  { label: "MENSURATIONS", href: "#mensurations", type: "anchor" as const },
   { label: "BOOK", href: "/book", type: "route" as const },
   { label: "VIDÉOS", href: "/videos", type: "route" as const },
   { label: "BANDE DÉMO", href: "#bande-demo", type: "anchor" as const },
