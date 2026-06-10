@@ -1,4 +1,4 @@
-import { Mail, Instagram, Building2, Phone } from "lucide-react";
+import { Clapperboard, Mail, Instagram, Building2, Phone } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
   trackEmailClick,
@@ -60,12 +60,9 @@ const ContactSection = () => {
                 trackFilmmakersLinkClick(profile.filmmakers.url, "contact")
               }
             >
-              <img
-                src="/filmmakers-favicon.svg"
-                alt=""
-                width={20}
-                height={20}
-                className="h-5 w-5 shrink-0 opacity-80 transition-opacity group-hover:opacity-100"
+              <Clapperboard
+                className="h-5 w-5 shrink-0 text-primary/60 group-hover:text-primary transition-colors"
+                strokeWidth={1.75}
               />
               <span className="text-foreground group-hover:text-primary transition-colors">
                 {profile.filmmakers.label}
