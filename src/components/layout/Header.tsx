@@ -134,92 +134,94 @@ const Header = () => {
           "border-b border-border/30 bg-background/95 shadow-sm backdrop-blur-md",
       )}
     >
-      <div className="relative px-6 py-3.5">
-        <button
-          type="button"
-          onClick={handleLogoClick}
-          className="absolute left-1/2 top-1/2 z-[1] -translate-x-1/2 -translate-y-1/2 text-4xl text-foreground transition-colors duration-300 hover:text-primary"
-          style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300 }}
-          aria-label="Retour en haut de la page"
-        >
-          B
-        </button>
+      <div className="px-4 py-3.5 sm:px-6">
+        <nav className="relative z-10 mx-auto grid max-w-screen-2xl grid-cols-[1fr_auto_1fr] items-center">
+          {/* Menu — colonne gauche */}
+          <div className="relative justify-self-start">
+            <button
+              ref={buttonRef}
+              type="button"
+              className="p-1.5 text-muted-foreground transition-colors duration-300 hover:text-foreground sm:p-2"
+              aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? (
+                <X className="h-6 w-6 sm:h-7 sm:w-7" strokeWidth={2} />
+              ) : (
+                <Menu className="h-6 w-6 sm:h-7 sm:w-7" strokeWidth={2} />
+              )}
+            </button>
 
-        <nav className="relative z-10 flex items-center justify-between max-w-screen-2xl mx-auto">
-        {/* Menu Button */}
-        <div className="relative">
-          <button
-            ref={buttonRef}
-            type="button"
-            className="p-2 transition-colors duration-300 z-50 text-muted-foreground hover:text-foreground"
-            aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? (
-              <X className="w-7 h-7 transition-colors duration-300" strokeWidth={2} />
-            ) : (
-              <Menu className="w-7 h-7 transition-colors duration-300" strokeWidth={2} />
+            {isMenuOpen && (
+              <div
+                ref={menuRef}
+                className="absolute left-0 top-full z-[100] mt-2 w-[220px] rounded-lg border border-border/30 bg-background p-4 shadow-2xl md:w-[260px] md:bg-background/95 md:backdrop-blur-md"
+              >
+                {menuItems.map((item) => (
+                  <button
+                    key={item.label}
+                    type="button"
+                    className={cn(
+                      "block w-full cursor-pointer py-1.5 px-2 text-left text-lg font-bold tracking-tight transition-colors duration-300 md:text-xl",
+                      isActive(item)
+                        ? "text-primary"
+                        : "text-foreground hover:text-primary",
+                    )}
+                    onClick={() => handleNavClick(item)}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
             )}
+          </div>
+
+          {/* B — colonne centrale, vraiment au milieu de l’écran */}
+          <button
+            type="button"
+            onClick={handleLogoClick}
+            className="justify-self-center text-3xl text-foreground transition-colors duration-300 hover:text-primary sm:text-4xl"
+            style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300 }}
+            aria-label="Retour en haut de la page"
+          >
+            B
           </button>
 
-          {isMenuOpen && (
-            <div
-              ref={menuRef}
-              className="absolute top-full left-0 w-[220px] md:w-[260px] shadow-2xl mt-2 ml-2 p-4 rounded-lg z-[100] bg-background border border-border/30 md:bg-background/95 md:backdrop-blur-md"
+          {/* Icônes — colonne droite */}
+          <div className="flex flex-nowrap items-center justify-self-end gap-0 sm:gap-1 md:gap-3">
+            <a
+              href={`mailto:${profile.email}`}
+              className="p-1.5 text-muted-foreground transition-colors duration-300 hover:text-primary sm:p-2"
+              aria-label="Envoyer un e-mail"
+              onClick={() => trackEmailClick("header")}
             >
-              {menuItems.map((item) => (
-                <button
-                  key={item.label}
-                  type="button"
-                  className={cn(
-                    "block w-full text-left text-lg md:text-xl font-bold tracking-tight py-1.5 px-2 cursor-pointer transition-colors duration-300",
-                    isActive(item)
-                      ? "text-primary"
-                      : "text-foreground hover:text-primary"
-                  )}
-                  onClick={() => handleNavClick(item)}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-
-        <div className="flex flex-nowrap items-center gap-4">
-          <a
-            href={`mailto:${profile.email}`}
-            className="p-2 text-muted-foreground hover:text-primary transition-colors duration-300"
-            aria-label="Envoyer un e-mail"
-            onClick={() => trackEmailClick("header")}
-          >
-            <Mail className="w-6 h-6" />
-          </a>
-          <a
-            href={profile.instagram.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 text-muted-foreground hover:text-primary transition-colors duration-300"
-            aria-label="Instagram"
-            onClick={() =>
-              trackInstagramLinkClick("header", profile.instagram.url)
-            }
-          >
-            <Instagram className="w-6 h-6" />
-          </a>
-          <a
-            href={profile.filmmakers.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 text-muted-foreground hover:text-primary transition-colors duration-300"
-            aria-label="Profil casting sur Filmmakers"
-            onClick={() =>
-              trackFilmmakersLinkClick(profile.filmmakers.url, "header")
-            }
-          >
-            <Clapperboard className="w-6 h-6" strokeWidth={1.75} />
-          </a>
-        </div>
+              <Mail className="h-5 w-5 sm:h-6 sm:w-6" />
+            </a>
+            <a
+              href={profile.instagram.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 text-muted-foreground transition-colors duration-300 hover:text-primary sm:p-2"
+              aria-label="Instagram"
+              onClick={() =>
+                trackInstagramLinkClick("header", profile.instagram.url)
+              }
+            >
+              <Instagram className="h-5 w-5 sm:h-6 sm:w-6" />
+            </a>
+            <a
+              href={profile.filmmakers.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 text-muted-foreground transition-colors duration-300 hover:text-primary sm:p-2"
+              aria-label="Profil casting sur Filmmakers"
+              onClick={() =>
+                trackFilmmakersLinkClick(profile.filmmakers.url, "header")
+              }
+            >
+              <Clapperboard className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={1.75} />
+            </a>
+          </div>
         </nav>
       </div>
     </header>
