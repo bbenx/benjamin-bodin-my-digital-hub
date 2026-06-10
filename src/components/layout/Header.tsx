@@ -124,12 +124,22 @@ const Header = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 px-6 py-5 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 px-6 py-5 transition-all duration-300 relative",
         scrolled &&
           "bg-background border-b border-border/30 md:bg-background/80 md:backdrop-blur-md"
       )}
     >
-      <nav className="flex items-center justify-between max-w-screen-2xl mx-auto">
+      <button
+        type="button"
+        onClick={handleLogoClick}
+        className="absolute left-1/2 top-1/2 z-[1] -translate-x-1/2 -translate-y-1/2 text-4xl text-foreground transition-colors duration-300 hover:text-primary"
+        style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300 }}
+        aria-label="Retour en haut de la page"
+      >
+        B
+      </button>
+
+      <nav className="relative z-10 flex items-center justify-between max-w-screen-2xl mx-auto">
         {/* Menu Button */}
         <div className="relative">
           <button
@@ -169,17 +179,6 @@ const Header = () => {
             </div>
           )}
         </div>
-
-        {/* Signature */}
-        <button
-          type="button"
-          onClick={handleLogoClick}
-          className="text-4xl text-foreground hover:text-primary transition-colors duration-300"
-          style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300 }}
-          aria-label="Retour en haut de la page"
-        >
-          B
-        </button>
 
         <div className="flex flex-nowrap items-center gap-4">
           <a
