@@ -155,7 +155,7 @@ const Header = () => {
             {isMenuOpen && (
               <div
                 ref={menuRef}
-                className="absolute left-0 top-full z-[100] mt-2 w-[220px] rounded-lg border border-border/30 bg-background p-4 shadow-2xl md:w-[260px] md:bg-background/95 md:backdrop-blur-md"
+                className="absolute left-0 top-full z-[100] mt-2 w-[220px] rounded-lg border border-border/30 bg-background/80 p-4 shadow-2xl backdrop-blur-md md:w-[260px]"
               >
                 {menuItems.map((item) => (
                   <button
