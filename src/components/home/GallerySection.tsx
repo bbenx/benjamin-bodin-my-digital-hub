@@ -139,7 +139,7 @@ const GallerySection = () => {
   return (
     <section
       id="galerie"
-      className="relative scroll-mt-[4.5rem] overflow-x-hidden px-4 pb-16 pt-20 md:px-6 md:pb-24 md:pt-28"
+      className="relative scroll-mt-[4.5rem] overflow-x-hidden px-4 pb-8 pt-20 md:px-6 md:pb-20 md:pt-28"
     >
       <div className="mx-auto flex w-full max-w-6xl flex-col items-center">
         <header className="mb-8 text-center md:mb-10">

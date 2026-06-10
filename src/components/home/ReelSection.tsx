@@ -141,7 +141,7 @@ const ReelSection = () => {
   const hasEmbed = Boolean(profile.showreelUrl?.trim());
 
   return (
-    <section id="bande-demo" className="scroll-mt-24 py-24 px-6">
+    <section id="bande-demo" className="scroll-mt-24 px-6 pb-10 pt-10 md:py-20">
       <div className="max-w-4xl mx-auto">
         <h2
           className="text-4xl md:text-5xl font-light tracking-wide text-center mb-4"

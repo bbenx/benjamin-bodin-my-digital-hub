@@ -12,7 +12,7 @@ const ContactSection = () => {
   const hasAgent = profile.agent.name || profile.agent.agency;
 
   return (
-    <section id="contact" className="scroll-mt-24 pt-24 pb-5 md:pb-6 px-6">
+    <section id="contact" className="scroll-mt-24 px-6 pb-5 pt-10 md:pb-6 md:pt-20">
       <div className="max-w-4xl mx-auto">
         {/* Heading */}
         <h2
