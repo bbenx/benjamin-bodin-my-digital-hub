@@ -24,12 +24,11 @@ function scrollToHashTarget(id: string) {
 }
 
 const menuItems = [
-  { label: "PRÉSENTATION", href: "#bio", type: "anchor" as const },
+  { label: "ACCUEIL", href: "/", type: "route" as const },
   { label: "BOOK", href: "/book", type: "route" as const },
   { label: "VIDÉOS", href: "/videos", type: "route" as const },
   { label: "BANDE DÉMO", href: "#bande-demo", type: "anchor" as const },
-  { label: "FICHE ARTISTE", href: "/cv", type: "route" as const },
-  { label: "CONTACT", href: "#contact", type: "anchor" as const },
+  { label: "CV", href: "/cv", type: "route" as const },
 ];
 
 const Header = () => {
