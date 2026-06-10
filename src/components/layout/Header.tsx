@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Instagram, Mail } from "lucide-react";
+import { Clapperboard, Menu, X, Instagram, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   trackEmailClick,
@@ -209,19 +209,13 @@ const Header = () => {
             href={profile.filmmakers.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 transition-opacity duration-300 opacity-80 hover:opacity-100"
+            className="p-2 text-muted-foreground hover:text-primary transition-colors duration-300"
             aria-label="Profil casting sur Filmmakers"
             onClick={() =>
               trackFilmmakersLinkClick(profile.filmmakers.url, "header")
             }
           >
-            <img
-              src="/filmmakers-favicon.svg"
-              alt=""
-              width={24}
-              height={24}
-              className="h-6 w-6"
-            />
+            <Clapperboard className="w-6 h-6" strokeWidth={1.75} />
           </a>
         </div>
       </nav>

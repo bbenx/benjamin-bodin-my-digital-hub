@@ -2,7 +2,6 @@ import { Mail, Instagram, Building2, Phone } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
   trackEmailClick,
-  trackFilmmakersLinkClick,
   trackInstagramLinkClick,
   trackPhoneClick,
 } from "@/lib/analytics";
@@ -48,27 +47,6 @@ const ContactSection = () => {
               <Instagram className="w-5 h-5 shrink-0 text-primary/60 group-hover:text-primary transition-colors" />
               <span className="text-foreground group-hover:text-primary transition-colors">
                 {profile.instagram.handle}
-              </span>
-            </a>
-
-            <a
-              href={profile.filmmakers.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 transition-colors duration-300"
-              onClick={() =>
-                trackFilmmakersLinkClick(profile.filmmakers.url, "contact")
-              }
-            >
-              <img
-                src="/filmmakers-favicon.svg"
-                alt=""
-                width={20}
-                height={20}
-                className="h-5 w-5 shrink-0 opacity-80 transition-opacity group-hover:opacity-100"
-              />
-              <span className="text-foreground group-hover:text-primary transition-colors">
-                {profile.filmmakers.label}
               </span>
             </a>
           </div>
