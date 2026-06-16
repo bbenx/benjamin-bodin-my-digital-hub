@@ -93,7 +93,7 @@ function DemoLocalVideo({
         )}
         controls={hasStarted}
         playsInline
-        preload="metadata"
+        preload="none"
         poster={posterSrc || undefined}
         title="Bande démo — Benjamin Bodin"
         onLoadedData={handleLoadedData}

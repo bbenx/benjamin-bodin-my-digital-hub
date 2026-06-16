@@ -125,7 +125,7 @@ const BioSection = () => {
                   className="absolute inset-0 h-full w-full object-contain"
                   controls
                   playsInline
-                  preload="auto"
+                  preload="metadata"
                   title="Vidéo de présentation — Benjamin Bodin"
                   onError={() => setHasPresentationVideoError(true)}
                 >

@@ -1,9 +1,7 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { Layout } from "@/components/layout/Layout";
@@ -14,6 +12,12 @@ const Cv = lazy(() => import("./pages/Cv.tsx"));
 const Videos = lazy(() => import("./pages/Videos.tsx"));
 const Legal = lazy(() => import("./pages/Legal.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
+const Toaster = lazy(() =>
+  import("@/components/ui/toaster").then((m) => ({ default: m.Toaster })),
+);
+const Sonner = lazy(() =>
+  import("@/components/ui/sonner").then((m) => ({ default: m.Toaster })),
+);
 
 const pageFallback = (
   <div className="min-h-[50vh] w-full" aria-hidden />
@@ -25,12 +29,35 @@ const notFoundFallback = (
 
 const queryClient = new QueryClient();
 
+function DeferredUi() {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    if (typeof window.requestIdleCallback === "function") {
+      const id = window.requestIdleCallback(() => setReady(true), {
+        timeout: 3000,
+      });
+      return () => window.cancelIdleCallback(id);
+    }
+    const timer = window.setTimeout(() => setReady(true), 1500);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  if (!ready) return null;
+
+  return (
+    <Suspense fallback={null}>
+      <Toaster />
+      <Sonner />
+    </Suspense>
+  );
+}
+
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
+        <DeferredUi />
         <BrowserRouter>
           <GoogleAnalytics />
           <Routes>

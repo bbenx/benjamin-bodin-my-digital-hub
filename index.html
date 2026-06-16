@@ -162,34 +162,32 @@
       }
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Hero : polices minimales, non bloquantes (texte visible tout de suite) -->
     <link
       rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Outfit:wght@300;400&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
+      as="image"
+      href="/assets/hero-portrait-360.webp"
+      fetchpriority="high"
+      media="(max-width: 767px)"
     />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Outfit:wght@300;400&display=swap"
-      />
-    </noscript>
-    <!-- Titres : non bloquant -->
     <link
       rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
+      as="image"
+      href="/assets/hero-portrait.webp"
+      fetchpriority="high"
+      media="(min-width: 768px)"
     />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
-      />
-    </noscript>
+
+    <!-- Polices : après le premier rendu pour ne pas bloquer le hero -->
+    <script>
+      window.addEventListener("load", function () {
+        var families =
+          "https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Outfit:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap";
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = families;
+        document.head.appendChild(link);
+      });
+    </script>
 
     <!-- Google Analytics : après le chargement pour ne pas concurrencer le hero -->
     <script>

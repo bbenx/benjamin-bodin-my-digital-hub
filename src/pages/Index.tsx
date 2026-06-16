@@ -1,20 +1,12 @@
-import { lazy, Suspense, useEffect } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { lazy, Suspense } from "react";
 import { HeroSection } from "@/components/home/HeroSection";
+import { BioSection } from "@/components/home/BioSection";
+import { StatsSection } from "@/components/home/StatsSection";
+import { ContactSection } from "@/components/home/ContactSection";
+import { LazyWhenVisible } from "@/components/ui/lazy-when-visible";
 import { PageSeo } from "@/components/seo/PageSeo";
-import { fetchBookManifest } from "@/lib/book-manifest";
 import { SEO_COPY } from "@/lib/seo-config";
 
-const BioSection = lazy(() =>
-  import("@/components/home/BioSection").then((m) => ({
-    default: m.BioSection,
-  })),
-);
-const StatsSection = lazy(() =>
-  import("@/components/home/StatsSection").then((m) => ({
-    default: m.StatsSection,
-  })),
-);
 const GallerySection = lazy(() =>
   import("@/components/home/GallerySection").then((m) => ({
     default: m.GallerySection,
@@ -25,33 +17,8 @@ const ReelSection = lazy(() =>
     default: m.ReelSection,
   })),
 );
-const ContactSection = lazy(() =>
-  import("@/components/home/ContactSection").then((m) => ({
-    default: m.ContactSection,
-  })),
-);
-
-function deferIdle(task: () => void): () => void {
-  if (typeof window.requestIdleCallback === "function") {
-    const id = window.requestIdleCallback(task, { timeout: 4000 });
-    return () => window.cancelIdleCallback(id);
-  }
-  const timer = window.setTimeout(task, 2000);
-  return () => window.clearTimeout(timer);
-}
 
 const Index = () => {
-  const queryClient = useQueryClient();
-
-  useEffect(() => {
-    return deferIdle(() => {
-      void queryClient.prefetchQuery({
-        queryKey: ["book-manifest"],
-        queryFn: fetchBookManifest,
-      });
-    });
-  }, [queryClient]);
-
   return (
     <>
       <PageSeo
@@ -60,21 +27,50 @@ const Index = () => {
         path="/"
       />
       <HeroSection />
-      <Suspense fallback={null}>
-        <BioSection />
-      </Suspense>
-      <Suspense fallback={null}>
-        <StatsSection />
-      </Suspense>
-      <Suspense fallback={null}>
-        <GallerySection />
-      </Suspense>
-      <Suspense fallback={null}>
-        <ReelSection />
-      </Suspense>
-      <Suspense fallback={null}>
-        <ContactSection />
-      </Suspense>
+      <BioSection />
+      <StatsSection />
+      <LazyWhenVisible
+        minHeight="min(50vh, 480px)"
+        fallback={
+          <section
+            id="galerie"
+            className="scroll-mt-[4.5rem] px-4 pb-8 pt-20 md:px-6 md:pb-20 md:pt-28"
+            aria-hidden
+          >
+            <div className="mx-auto max-w-6xl">
+              <div className="mb-8 h-10 animate-pulse rounded bg-muted/10 md:mb-10" />
+              <div className="mx-auto h-[min(42vh,320px)] max-w-6xl animate-pulse rounded-lg bg-muted/10 md:h-[min(50vh,480px)]" />
+            </div>
+          </section>
+        }
+      >
+        <Suspense fallback={null}>
+          <GallerySection />
+        </Suspense>
+      </LazyWhenVisible>
+      <LazyWhenVisible
+        minHeight="60vh"
+        fallback={
+          <section
+            id="bande-demo"
+            className="scroll-mt-24 px-6 pb-10 pt-10 md:py-20"
+            aria-hidden
+          >
+            <div className="mx-auto max-w-4xl">
+              <div className="mx-auto mb-8 h-10 w-48 animate-pulse rounded bg-muted/10" />
+              <div
+                className="w-full animate-pulse rounded-lg bg-muted/10"
+                style={{ aspectRatio: "16 / 9" }}
+              />
+            </div>
+          </section>
+        }
+      >
+        <Suspense fallback={null}>
+          <ReelSection />
+        </Suspense>
+      </LazyWhenVisible>
+      <ContactSection />
     </>
   );
 };

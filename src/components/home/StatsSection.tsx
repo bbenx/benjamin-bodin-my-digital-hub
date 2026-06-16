@@ -1,6 +1,4 @@
-import { useRef } from "react";
 import { cn } from "@/lib/utils";
-import { useInView } from "@/hooks/use-in-view";
 import { profile } from "@/lib/profile-data";
 
 const keyStats = [
@@ -23,23 +21,16 @@ const measurements = [
 ];
 
 const StatsSection = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const showContent = useInView(sectionRef, {
-    once: true,
-    rootMargin: "120px 0px",
-  });
-
   return (
     <section
       id="mensurations"
-      ref={sectionRef}
       className="relative scroll-mt-24 overflow-hidden px-6 pb-12 pt-20 md:pb-16 md:pt-28"
     >
       <div
         className={cn(
           "pointer-events-none absolute bottom-0 left-[12%] top-0 hidden w-px origin-top bg-primary/10 md:block",
           "stats-line-reveal-y",
-          showContent && "stats-line-reveal-y--in",
+          "stats-line-reveal-y--in",
         )}
         style={{ ["--stats-delay" as string]: "0ms" }}
       />
@@ -49,7 +40,7 @@ const StatsSection = () => {
           <h2
             className={cn(
               "stats-fade-up text-5xl font-light tracking-tight text-foreground/90 md:text-7xl lg:text-8xl",
-              showContent && "stats-fade-up--in",
+              "stats-fade-up--in",
             )}
             style={{
               fontFamily: "'Cormorant Garamond', serif",
@@ -62,7 +53,7 @@ const StatsSection = () => {
           <div
             className={cn(
               "stats-line-reveal-x mt-8 h-px max-w-[4rem] origin-left bg-primary/40",
-              showContent && "stats-line-reveal-x--in",
+              "stats-line-reveal-x--in",
             )}
             style={{ ["--stats-delay" as string]: "300ms" }}
           />
@@ -74,7 +65,7 @@ const StatsSection = () => {
               key={stat.label}
               className={cn(
                 "stats-fade-up relative",
-                showContent && "stats-fade-up--in",
+                "stats-fade-up--in",
               )}
               style={{ ["--stats-delay" as string]: `${(i + 1) * 80}ms` }}
             >
@@ -104,7 +95,7 @@ const StatsSection = () => {
         <div
           className={cn(
             "stats-fade-up mb-8 flex flex-wrap items-baseline gap-x-8 gap-y-2 text-sm text-muted-foreground/70 md:mb-10 md:text-base",
-            showContent && "stats-fade-up--in",
+            "stats-fade-up--in",
           )}
           style={{
             fontFamily: "'Outfit', sans-serif",
@@ -133,7 +124,7 @@ const StatsSection = () => {
                 key={label}
                 className={cn(
                   "stats-fade-up flex items-center justify-between border-b border-border/15 py-3.5",
-                  showContent && "stats-fade-up--in",
+                  "stats-fade-up--in",
                 )}
                 style={{ ["--stats-delay" as string]: `${(i + 6) * 80}ms` }}
               >
@@ -156,7 +147,7 @@ const StatsSection = () => {
           <div
             className={cn(
               "stats-line-reveal-y hidden origin-top bg-border/20 md:block",
-              showContent && "stats-line-reveal-y--in",
+              "stats-line-reveal-y--in",
             )}
             style={{ ["--stats-delay" as string]: "600ms" }}
           />
@@ -167,7 +158,7 @@ const StatsSection = () => {
                 key={label}
                 className={cn(
                   "stats-fade-up flex items-center justify-between border-b border-border/15 py-3.5",
-                  showContent && "stats-fade-up--in",
+                  "stats-fade-up--in",
                 )}
                 style={{ ["--stats-delay" as string]: `${(i + 11) * 80}ms` }}
               >
