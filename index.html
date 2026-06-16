@@ -21,6 +21,60 @@
         min-height: 100%;
         width: 100%;
       }
+
+      /* Hero statique : visible avant le chargement du JavaScript */
+      #app-shell {
+        box-sizing: border-box;
+        display: flex;
+        min-height: 100dvh;
+        min-height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 4.5rem 1rem 2rem;
+        text-align: center;
+      }
+
+      #app-shell * {
+        box-sizing: border-box;
+      }
+
+      .app-shell-title {
+        position: relative;
+        width: 100%;
+      }
+
+      .app-shell-title span {
+        display: block;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          monospace;
+        font-weight: 700;
+        font-size: clamp(2.5rem, 16vw, 6.25rem);
+        line-height: 0.8;
+        letter-spacing: -0.05em;
+        color: hsl(175 35% 40%);
+      }
+
+      .app-shell-portrait {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        width: 70px;
+        height: 115px;
+        transform: translate(-50%, -50%);
+        border-radius: 9999px;
+        border: 1px solid hsl(0 0% 100% / 0.12);
+        object-fit: cover;
+      }
+
+      .app-shell-tagline {
+        margin: 2rem 0 0;
+        font-family: system-ui, -apple-system, sans-serif;
+        font-size: 16px;
+        letter-spacing: 0.3em;
+        color: hsl(0 0% 50%);
+      }
     </style>
     <meta name="theme-color" content="#3d7a71" />
     <title>Benjamin Bodin — Comédien &amp; mannequin à Paris | Book &amp; contact</title>
@@ -110,11 +164,19 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Hero : polices minimales, chargement prioritaire -->
+    <!-- Hero : polices minimales, non bloquantes (texte visible tout de suite) -->
     <link
-      rel="stylesheet"
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Outfit:wght@300;400&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Outfit:wght@300;400&display=swap"
+      />
+    </noscript>
     <!-- Titres : non bloquant -->
     <link
       rel="preload"
@@ -128,12 +190,6 @@
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
       />
     </noscript>
-    <link
-      rel="preload"
-      as="image"
-      href="/assets/book/Ludo%202/LYNE9458.webp"
-      fetchpriority="high"
-    />
 
     <!-- Google Analytics : après le chargement pour ne pas concurrencer le hero -->
     <script>
@@ -156,7 +212,25 @@
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="app-shell" aria-hidden="true">
+        <div class="app-shell-title">
+          <span>BENJAMIN</span>
+          <span>BODIN</span>
+          <img
+            class="app-shell-portrait"
+            src="/assets/hero-portrait-360.webp"
+            srcset="/assets/hero-portrait-360.webp 360w, /assets/hero-portrait.webp 540w"
+            sizes="135px"
+            alt=""
+            width="70"
+            height="115"
+            decoding="async"
+          />
+        </div>
+        <p class="app-shell-tagline">Comédien · Mannequin</p>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

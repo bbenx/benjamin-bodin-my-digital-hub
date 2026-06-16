@@ -2,7 +2,8 @@ import { ChevronDown } from "lucide-react";
 import { BlurText } from "@/components/ui/blur-text";
 import { trackHeroScrollDownClick } from "@/lib/analytics";
 import { profile } from "@/lib/profile-data";
-const portrait = "/assets/book/Ludo%202/LYNE9458.webp";
+const portraitMobile = "/assets/hero-portrait-360.webp";
+const portraitDesktop = "/assets/hero-portrait.webp";
 
 /** Recoupe la logique `sr-only` si le CSS Tailwind n’est pas encore chargé. */
 const visuallyHiddenStyle = {
@@ -62,9 +63,13 @@ const HeroSection = () => {
           <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
             <div className="h-[115px] w-[70px] cursor-pointer overflow-hidden rounded-full border border-border/30 shadow-2xl transition-transform duration-300 hover:scale-110 sm:h-[155px] sm:w-[95px] md:h-[190px] md:w-[115px] lg:h-[225px] lg:w-[135px]">
               <img
-                src={portrait}
+                src={portraitMobile}
+                srcSet={`${portraitMobile} 360w, ${portraitDesktop} 540w`}
+                sizes="135px"
                 alt="Portrait de Benjamin Bodin, comédien et mannequin"
                 className="h-full w-full object-cover"
+                width={135}
+                height={225}
                 fetchPriority="high"
                 loading="eager"
                 decoding="async"
