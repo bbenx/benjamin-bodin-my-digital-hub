@@ -75,6 +75,107 @@
         letter-spacing: 0.3em;
         color: hsl(0 0% 50%);
       }
+
+      /* Header immédiat : cliquable avant React */
+      #early-chrome {
+        min-height: 100dvh;
+        min-height: 100vh;
+      }
+
+      .early-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        padding: 0.875rem 1rem;
+      }
+
+      .early-nav {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        max-width: 1536px;
+        margin: 0 auto;
+      }
+
+      .early-menu-wrap {
+        position: relative;
+        justify-self: start;
+      }
+
+      .early-menu-btn {
+        padding: 0.375rem;
+        border: 0;
+        background: transparent;
+        color: hsl(0 0% 50%);
+        cursor: pointer;
+        touch-action: manipulation;
+      }
+
+      .early-menu-btn svg {
+        display: block;
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+
+      .early-menu-panel {
+        position: absolute;
+        left: 0;
+        top: calc(100% + 0.5rem);
+        z-index: 100;
+        width: 220px;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid hsl(0 0% 100% / 0.12);
+        background: hsl(0 0% 4% / 0.8);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+      }
+
+      .early-menu-panel[hidden] {
+        display: none;
+      }
+
+      .early-menu-panel a {
+        display: block;
+        padding: 0.375rem 0.5rem;
+        color: hsl(40 10% 90%);
+        font: 700 1.125rem/1.2 system-ui, sans-serif;
+        letter-spacing: -0.02em;
+        text-decoration: none;
+      }
+
+      .early-menu-panel a:first-child {
+        color: hsl(175 35% 40%);
+      }
+
+      .early-logo {
+        justify-self: center;
+        color: hsl(40 10% 90%);
+        font: 300 1.875rem/1 Georgia, "Times New Roman", serif;
+        text-decoration: none;
+      }
+
+      .early-icons {
+        display: flex;
+        align-items: center;
+        justify-self: end;
+        gap: 0;
+      }
+
+      .early-icons a {
+        display: block;
+        padding: 0.375rem;
+        color: hsl(0 0% 50%);
+      }
+
+      .early-icons svg {
+        display: block;
+        width: 1.25rem;
+        height: 1.25rem;
+      }
     </style>
     <meta name="theme-color" content="#3d7a71" />
     <title>Benjamin Bodin — Comédien &amp; mannequin à Paris | Book &amp; contact</title>
@@ -162,22 +263,7 @@
       }
     </script>
 
-    <link
-      rel="preload"
-      as="image"
-      href="/assets/hero-portrait-360.webp"
-      fetchpriority="high"
-      media="(max-width: 767px)"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href="/assets/hero-portrait.webp"
-      fetchpriority="high"
-      media="(min-width: 768px)"
-    />
-
-    <!-- Polices : après le premier rendu pour ne pas bloquer le hero -->
+    <!-- Polices : après le premier rendu -->
     <script>
       window.addEventListener("load", function () {
         var families =
@@ -207,14 +293,61 @@
         document.head.appendChild(s);
       });
     </script>
+
+    <script type="module" src="/src/main.tsx"></script>
   </head>
 
   <body>
-    <div id="root">
+    <div id="early-chrome">
+      <header class="early-header">
+        <nav class="early-nav" aria-label="Navigation principale">
+          <div class="early-menu-wrap">
+            <button
+              type="button"
+              class="early-menu-btn"
+              id="early-menu-btn"
+              aria-expanded="false"
+              aria-controls="early-menu-panel"
+              aria-label="Ouvrir le menu"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            <nav class="early-menu-panel" id="early-menu-panel" hidden>
+              <a href="/">ACCUEIL</a>
+              <a href="/book">BOOK</a>
+              <a href="/videos">VIDÉOS</a>
+              <a href="/#bande-demo">BANDE DÉMO</a>
+              <a href="/cv">CV</a>
+            </nav>
+          </div>
+          <a href="/" class="early-logo" aria-label="Retour en haut de la page">B</a>
+          <div class="early-icons">
+            <a href="mailto:contact@benjaminbodin.fr" aria-label="Envoyer un e-mail">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="m2 7 10 7 10-7" />
+              </svg>
+            </a>
+            <a href="https://instagram.com/_benjaminbodin" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
+            <a href="https://www.filmmakers.eu/fr/actors/benjamin-bodin" target="_blank" rel="noopener noreferrer" aria-label="Profil casting sur Filmmakers">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <path d="M4 6h16v12H4z" />
+                <path d="M8 10h8M8 14h5" />
+              </svg>
+            </a>
+          </div>
+        </nav>
+      </header>
       <div id="app-shell" aria-hidden="true">
         <div class="app-shell-title">
-          <span>BENJAMIN</span>
-          <span>BODIN</span>
           <img
             class="app-shell-portrait"
             src="/assets/hero-portrait-360.webp"
@@ -223,12 +356,51 @@
             alt=""
             width="70"
             height="115"
+            fetchpriority="high"
             decoding="async"
           />
+          <span>BENJAMIN</span>
+          <span>BODIN</span>
         </div>
         <p class="app-shell-tagline">Comédien · Mannequin</p>
       </div>
     </div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div id="root"></div>
+    <script>
+      (function () {
+        var btn = document.getElementById("early-menu-btn");
+        var menu = document.getElementById("early-menu-panel");
+        if (!btn || !menu) return;
+
+        function closeMenu() {
+          menu.hidden = true;
+          btn.setAttribute("aria-expanded", "false");
+          btn.setAttribute("aria-label", "Ouvrir le menu");
+        }
+
+        btn.addEventListener("click", function (event) {
+          event.stopPropagation();
+          var willOpen = menu.hidden;
+          menu.hidden = !willOpen;
+          btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+          btn.setAttribute("aria-label", willOpen ? "Fermer le menu" : "Ouvrir le menu");
+        });
+
+        menu.addEventListener("click", function () {
+          closeMenu();
+        });
+
+        document.addEventListener("click", function (event) {
+          if (menu.hidden) return;
+          if (
+            event.target !== btn &&
+            !btn.contains(event.target) &&
+            !menu.contains(event.target)
+          ) {
+            closeMenu();
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

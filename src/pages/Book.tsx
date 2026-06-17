@@ -15,9 +15,10 @@ import {
   type BookSortOrder,
 } from "@/lib/book-manifest";
 import { PageSeo } from "@/components/seo/PageSeo";
+import { QueryProvider } from "@/providers/QueryProvider";
 import { SEO_COPY } from "@/lib/seo-config";
 
-const Book = () => {
+function BookPage() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [activePalette, setActivePalette] = useState<"all" | "bw" | "color">(
     "all",
@@ -163,5 +164,13 @@ const Book = () => {
     </div>
   );
 };
+
+function Book() {
+  return (
+    <QueryProvider>
+      <BookPage />
+    </QueryProvider>
+  );
+}
 
 export default Book;

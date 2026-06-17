@@ -1,5 +1,4 @@
 import { lazy, Suspense, useEffect, useState } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -27,8 +26,6 @@ const notFoundFallback = (
   <div className="flex min-h-dvh w-full items-center justify-center bg-muted" aria-hidden />
 );
 
-const queryClient = new QueryClient();
-
 function DeferredUi() {
   const [ready, setReady] = useState(false);
 
@@ -55,59 +52,57 @@ function DeferredUi() {
 
 const App = () => (
   <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <DeferredUi />
-        <BrowserRouter>
-          <GoogleAnalytics />
-          <Routes>
-            <Route element={<Layout />}>
-              <Route path="/" element={<Index />} />
-              <Route
-                path="/book"
-                element={
-                  <Suspense fallback={pageFallback}>
-                    <Book />
-                  </Suspense>
-                }
-              />
-              <Route
-                path="/videos"
-                element={
-                  <Suspense fallback={pageFallback}>
-                    <Videos />
-                  </Suspense>
-                }
-              />
-              <Route
-                path="/cv"
-                element={
-                  <Suspense fallback={pageFallback}>
-                    <Cv />
-                  </Suspense>
-                }
-              />
-              <Route
-                path="/mentions-legales"
-                element={
-                  <Suspense fallback={pageFallback}>
-                    <Legal />
-                  </Suspense>
-                }
-              />
-            </Route>
+    <TooltipProvider>
+      <DeferredUi />
+      <BrowserRouter>
+        <GoogleAnalytics />
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Index />} />
             <Route
-              path="*"
+              path="/book"
               element={
-                <Suspense fallback={notFoundFallback}>
-                  <NotFound />
+                <Suspense fallback={pageFallback}>
+                  <Book />
                 </Suspense>
               }
             />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+            <Route
+              path="/videos"
+              element={
+                <Suspense fallback={pageFallback}>
+                  <Videos />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/cv"
+              element={
+                <Suspense fallback={pageFallback}>
+                  <Cv />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/mentions-legales"
+              element={
+                <Suspense fallback={pageFallback}>
+                  <Legal />
+                </Suspense>
+              }
+            />
+          </Route>
+          <Route
+            path="*"
+            element={
+              <Suspense fallback={notFoundFallback}>
+                <NotFound />
+              </Suspense>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
   </HelmetProvider>
 );
 

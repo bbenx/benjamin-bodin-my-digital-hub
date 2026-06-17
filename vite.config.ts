@@ -23,6 +23,7 @@ function modulePreloadPlugin(): Plugin {
           if (/^react-dom-/.test(chunk.fileName)) return true;
           if (/^react-[^/]+\.js$/.test(chunk.fileName)) return true;
           if (/^router-/.test(chunk.fileName)) return true;
+          if (/^query-/.test(chunk.fileName)) return false;
           return false;
         };
 

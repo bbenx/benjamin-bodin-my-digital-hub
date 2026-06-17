@@ -1,6 +1,5 @@
-import { lazy, Suspense, useMemo } from "react";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import { Separator } from "@/components/ui/separator";
 import type { GalleryItem } from "@/components/ui/circular-gallery";
 
@@ -17,6 +16,7 @@ import {
   fetchBookManifest,
   itemCategoryIds,
   itemPalette,
+  type BookManifest,
   type BookMediaItem,
 } from "@/lib/book-manifest";
 
@@ -95,12 +95,25 @@ function pickAlternatingForCarousel(
 
 const GallerySection = () => {
   const navigate = useNavigate();
+  const [manifest, setManifest] = useState<BookManifest | null>(null);
+  const [isPending, setIsPending] = useState(true);
 
-  const { data: manifest, isPending } = useQuery({
-    queryKey: ["book-manifest"],
-    queryFn: fetchBookManifest,
-    staleTime: 5 * 60 * 1000,
-  });
+  useEffect(() => {
+    let cancelled = false;
+    void fetchBookManifest()
+      .then((data) => {
+        if (!cancelled) setManifest(data);
+      })
+      .catch(() => {
+        if (!cancelled) setManifest(null);
+      })
+      .finally(() => {
+        if (!cancelled) setIsPending(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const categoryLabelById = useMemo(() => {
     if (!manifest) return {} as Record<string, string>;

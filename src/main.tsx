@@ -12,3 +12,5 @@ createRoot(document.getElementById("root")!).render(
     <App />
   </ErrorBoundary>,
 );
+
+document.getElementById("early-chrome")?.remove();
