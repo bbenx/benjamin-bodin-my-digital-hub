@@ -15,7 +15,6 @@ import {
   type BookSortOrder,
 } from "@/lib/book-manifest";
 import { PageSeo } from "@/components/seo/PageSeo";
-import { QueryProvider } from "@/providers/QueryProvider";
 import { SEO_COPY } from "@/lib/seo-config";
 
 function BookPage() {
@@ -166,11 +165,7 @@ function BookPage() {
 };
 
 function Book() {
-  return (
-    <QueryProvider>
-      <BookPage />
-    </QueryProvider>
-  );
+  return <BookPage />;
 }
 
 export default Book;

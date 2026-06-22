@@ -27,7 +27,7 @@ export const profile = {
    * Vignette avant lecture (attribut poster du lecteur). Chemin sous public/ ou URL https.
    * Chaîne vide = première image de la vidéo (pas de vignette fichier séparée).
    */
-  demoVideoPoster: "",
+  demoVideoPoster: "/videos/bande-demo-poster.webp",
   /** URL d’intégration YouTube / Vimeo (iframe). Utilisée si demoVideoSrc est vide. */
   showreelUrl: "",
   /** Court texte sous le titre « Bande démo », au-dessus de la vidéo (vide = masqué). */

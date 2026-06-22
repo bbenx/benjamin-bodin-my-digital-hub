@@ -24,6 +24,8 @@ function DemoLocalVideo({
   videoSrc: string;
   posterSrc: string;
 }) {
+  const effectivePoster =
+    posterSrc || "/videos/bande-demo-poster.webp";
   const videoRef = useRef<HTMLVideoElement>(null);
   const hasStartedRef = useRef(false);
   const [showPlayOverlay, setShowPlayOverlay] = useState(true);
@@ -61,18 +63,16 @@ function DemoLocalVideo({
   }, []);
 
   const handleLoadedData = useCallback(() => {
-    if (posterSrc || hasStartedRef.current) return;
+    if (hasStartedRef.current) return;
     const video = videoRef.current;
     if (!video) return;
     video.pause();
-    if (video.currentTime === 0) {
-      video.currentTime = 0.001;
-    }
-  }, [posterSrc]);
+  }, []);
 
   const videoFilterClass = cn(
-    "transition-[filter] duration-500 ease-out",
+    "transition-[filter,opacity] duration-500 ease-out",
     showPlayOverlay &&
+      hasStarted &&
       "brightness-[0.68] saturate-[0.72] contrast-[1.03]",
     !showPlayOverlay &&
       isPlaying &&
@@ -85,16 +85,26 @@ function DemoLocalVideo({
 
   return (
     <>
+      {showPlayOverlay && !hasStarted ? (
+        <img
+          src={effectivePoster}
+          alt="Aperçu de la bande démo — Benjamin Bodin"
+          className="absolute inset-0 h-full w-full rounded-lg object-cover"
+          decoding="async"
+        />
+      ) : null}
+
       <video
         ref={videoRef}
         className={cn(
-          "absolute inset-0 h-full w-full cursor-pointer rounded-lg border border-border/30 object-contain bg-black",
+          "absolute inset-0 h-full w-full cursor-pointer rounded-lg object-contain bg-black",
           videoFilterClass,
+          showPlayOverlay && !hasStarted && "opacity-0",
         )}
         controls={hasStarted}
         playsInline
         preload="none"
-        poster={posterSrc || undefined}
+        poster={effectivePoster}
         title="Bande démo — Benjamin Bodin"
         onLoadedData={handleLoadedData}
         onPlay={handleVideoPlay}
@@ -109,8 +119,13 @@ function DemoLocalVideo({
       {showPlayOverlay ? (
         <button
           type="button"
-          className="absolute inset-0 z-10 flex cursor-pointer items-center justify-center rounded-lg bg-black/45 transition-colors hover:bg-black/55"
-          aria-label="Lire la présentation vidéo"
+          className={cn(
+            "absolute inset-0 z-10 flex cursor-pointer items-center justify-center rounded-lg transition-colors",
+            hasStarted
+              ? "bg-black/45 hover:bg-black/55"
+              : "bg-black/25 hover:bg-black/35",
+          )}
+          aria-label="Lire la bande démo"
           onClick={handleOverlayClick}
         >
           <span
@@ -162,7 +177,7 @@ const ReelSection = () => {
 
         <div
           id="bande-demo-content"
-          className="relative w-full"
+          className="relative w-full overflow-hidden rounded-lg border border-border/40 bg-muted/10 shadow-lg ring-1 ring-white/5"
           style={{ aspectRatio: "16 / 9" }}
         >
           {hasLocalVideo ? (

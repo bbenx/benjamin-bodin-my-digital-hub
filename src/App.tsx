@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { Layout } from "@/components/layout/Layout";
+import { QueryProvider } from "@/providers/QueryProvider";
 import Index from "./pages/Index.tsx";
 
 const Book = lazy(() => import("./pages/Book.tsx"));
@@ -52,7 +53,8 @@ function DeferredUi() {
 
 const App = () => (
   <HelmetProvider>
-    <TooltipProvider>
+    <QueryProvider>
+      <TooltipProvider>
       <DeferredUi />
       <BrowserRouter>
         <GoogleAnalytics />
@@ -102,7 +104,8 @@ const App = () => (
           />
         </Routes>
       </BrowserRouter>
-    </TooltipProvider>
+      </TooltipProvider>
+    </QueryProvider>
   </HelmetProvider>
 );
 
