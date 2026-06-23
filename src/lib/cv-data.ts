@@ -151,7 +151,7 @@ export const cvExperiences: CvExperienceGroup[] = [
     entries: [
       {
         period: "Juin 2026",
-        title: "Jackery",
+        title: "Happn, Jackery",
       },
       {
         period: "Mai 2026",
