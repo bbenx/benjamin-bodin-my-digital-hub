@@ -6,7 +6,7 @@ export const profile = {
   tagline: "Comédien · Mannequin",
   /** Texte de la section Bio (à personnaliser). */
   bio:
-    "Benjamin, 35 ans, sportif dans l'âme, basé à Paris.\n\nBordelais d'origine, je suis monté l'été dernier, en moto, sur un coup de tête, pour réaliser mes rêves : devenir comédien et mannequin ! Formé aux Cours Florent, ce sont maintenant mes métiers.\n\nJe suis aujourd'hui représenté par les agences \"Céline\", \"John Doe\", \"Cute Models\" et la JJ Agency.\n\nFrançais d'origine, je suis également résident permanent canadien et ouvert aux opportunités outre-Atlantique.",
+    "Benjamin, 35 ans, sportif dans l'âme, basé à Paris.\n\nBordelais d'origine, je suis monté l'été dernier, en moto, sur un coup de tête, pour réaliser mes rêves : devenir comédien et mannequin ! Formé aux Cours Florent, ce sont maintenant mes métiers.\n\nJe suis aujourd'hui représenté par les agences \"Céline\", \"Alterego\", \"Smith & Smithe\", \"John Doe\", \"Cute Models\" et la JJ Agency.\n\nFrançais d'origine, je suis également résident permanent canadien et ouvert aux opportunités outre-Atlantique.",
   email: "contact@benjaminbodin.fr",
   instagram: {
     handle: "@_benjaminbodin",
