@@ -150,6 +150,10 @@ export const cvExperiences: CvExperienceGroup[] = [
     label: "Pub",
     entries: [
       {
+        period: "Juillet 2026",
+        title: "Casino Partouche",
+      },
+      {
         period: "Juin 2026",
         title: "Happn, Jackery, Glasseo",
       },
