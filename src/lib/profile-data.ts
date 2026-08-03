@@ -51,7 +51,7 @@ export const profile = {
   /** Poids affiché à côté de la taille (chiffre seul, l’unité « kg » est dans l’UI). */
   weight: "64",
   /** Âge réel. */
-  age: "35",
+  age: "36",
   /** Fourchette d’âge apparent (casting). */
   apparentAge: "25–35",
   languages: ["Français", "Anglais"],
