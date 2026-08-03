@@ -103,7 +103,7 @@ export const cvExperiences: CvExperienceGroup[] = [
         period: "2026",
         role: "1er rôle",
         format: "Court métrage",
-        film: "Le nez",
+        film: "Le Pif",
         director: "Matthias Lauber",
         note: "Adaptation de la nouvelle de Nikolaï Gogol",
       },
