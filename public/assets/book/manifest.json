@@ -569,6 +569,39 @@
       "width": 1179,
       "height": 1282,
       "palette": "color"
+    },
+    {
+      "id": "067",
+      "src": "/assets/book/Ben/Portrait.webp",
+      "category": "portrait",
+      "photographer": "Benjamin Khalfa",
+      "date": "2026-08-26",
+      "type": "photo",
+      "width": 1166,
+      "height": 1487,
+      "palette": "color"
+    },
+    {
+      "id": "068",
+      "src": "/assets/book/Ben/Underground.webp",
+      "category": "portrait",
+      "photographer": "Benjamin Khalfa",
+      "date": "2026-08-26",
+      "type": "photo",
+      "width": 1179,
+      "height": 1565,
+      "palette": "color"
+    },
+    {
+      "id": "069",
+      "src": "/assets/book/Ben/jewlery.webp",
+      "category": "portrait",
+      "photographer": "Benjamin Khalfa",
+      "date": "2026-08-26",
+      "type": "photo",
+      "width": 1179,
+      "height": 1447,
+      "palette": "color"
     }
   ]
 }
