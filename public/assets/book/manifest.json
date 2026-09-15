@@ -17,10 +17,6 @@
       "label": "Cinéma"
     },
     {
-      "id": "polas",
-      "label": "Polas"
-    },
-    {
       "id": "mode",
       "label": "Mode"
     },
@@ -448,94 +444,6 @@
       "width": 3648,
       "height": 5472,
       "palette": "bw"
-    },
-    {
-      "id": "039",
-      "src": "/assets/book/MAJ%20POLA/BODIN%201.webp",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-03-14",
-      "type": "photo",
-      "width": 1179,
-      "height": 1728,
-      "palette": "color"
-    },
-    {
-      "id": "048",
-      "src": "/assets/book/MAJ%20POLA/BODIN%203.webp",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-03-14",
-      "type": "photo",
-      "width": 1179,
-      "height": 1747,
-      "palette": "color"
-    },
-    {
-      "id": "049",
-      "src": "/assets/book/MAJ%20POLA/BODIN%204.webp",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-03-14",
-      "type": "photo",
-      "width": 1171,
-      "height": 1710,
-      "palette": "color"
-    },
-    {
-      "id": "050",
-      "src": "/assets/book/MAJ%20POLA/BODIN%205.webp",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-03-14",
-      "type": "photo",
-      "width": 1179,
-      "height": 1711,
-      "palette": "color"
-    },
-    {
-      "id": "053",
-      "src": "/assets/book/MAJ%20POLA/BODIN%208.webp",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-03-14",
-      "type": "photo",
-      "width": 1179,
-      "height": 759,
-      "palette": "color"
-    },
-    {
-      "id": "044",
-      "src": "/assets/book/MAJ%20POLA/BODIN%2014.webp",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-03-14",
-      "type": "photo",
-      "width": 1179,
-      "height": 1732,
-      "palette": "color"
-    },
-    {
-      "id": "065",
-      "src": "/assets/book/MAJ%20POLA/Portrait%20copie.jpg",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-06-08",
-      "type": "photo",
-      "width": 2436,
-      "height": 1926,
-      "palette": "color"
-    },
-    {
-      "id": "066",
-      "src": "/assets/book/MAJ%20POLA/Full%20lenght.jpg",
-      "category": "polas",
-      "photographer": "",
-      "date": "2026-06-08",
-      "type": "photo",
-      "width": 792,
-      "height": 1828,
-      "palette": "color"
     },
     {
       "id": "055",
