@@ -42,7 +42,7 @@ export const profile = {
     "Entrejambe": "67 cm",
     "Cou": "34 cm",
     "Tour de tête": "56 cm",
-    "Veste": "44",
+    "Veste": "46",
     "Pantalon": "36",
     "Chaussures": "44",
   },
