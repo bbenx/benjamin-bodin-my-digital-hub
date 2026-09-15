@@ -17,6 +17,10 @@
       "label": "Cinéma"
     },
     {
+      "id": "polas",
+      "label": "Polas"
+    },
+    {
       "id": "mode",
       "label": "Mode"
     },
@@ -509,6 +513,171 @@
       "type": "photo",
       "width": 1179,
       "height": 1447,
+      "palette": "color"
+    },
+    {
+      "id": "070",
+      "src": "/assets/book/MAJ%20Pola/Benjamin%20BODIN.webp",
+      "category": "polas",
+      "photographer": "Troubadour",
+      "date": "2026-09-15",
+      "type": "photo",
+      "width": 4024,
+      "height": 6048,
+      "palette": "color"
+    },
+    {
+      "id": "071",
+      "src": "/assets/book/MAJ%20Pola/Benjamin%20BODIN%201.webp",
+      "category": "polas",
+      "photographer": "Troubadour",
+      "date": "2026-09-15",
+      "type": "photo",
+      "width": 4024,
+      "height": 6048,
+      "palette": "color"
+    },
+    {
+      "id": "072",
+      "src": "/assets/book/MAJ%20Pola/Benjamin%20BODIN%202.webp",
+      "category": "polas",
+      "photographer": "Troubadour",
+      "date": "2026-09-15",
+      "type": "photo",
+      "width": 4024,
+      "height": 6048,
+      "palette": "color"
+    },
+    {
+      "id": "073",
+      "src": "/assets/book/MAJ%20Pola/Benjamin%20BODIN%203.webp",
+      "category": "polas",
+      "photographer": "Troubadour",
+      "date": "2026-09-15",
+      "type": "photo",
+      "width": 4024,
+      "height": 6048,
+      "palette": "color"
+    },
+    {
+      "id": "074",
+      "src": "/assets/book/MAJ%20Pola/Benjamin%20BODIN%204.webp",
+      "category": "polas",
+      "photographer": "Troubadour",
+      "date": "2026-09-15",
+      "type": "photo",
+      "width": 4024,
+      "height": 6048,
+      "palette": "color"
+    },
+    {
+      "id": "075",
+      "src": "/assets/book/MAJ%20Pola/Benjamin%20BODIN%205.webp",
+      "category": "polas",
+      "photographer": "Troubadour",
+      "date": "2026-09-15",
+      "type": "photo",
+      "width": 4024,
+      "height": 6048,
+      "palette": "color"
+    },
+    {
+      "id": "076",
+      "src": "/assets/book/MAJ%20Pola/Benjamin%20BODIN%206.webp",
+      "category": "polas",
+      "photographer": "Troubadour",
+      "date": "2026-09-15",
+      "type": "photo",
+      "width": 4024,
+      "height": 6048,
+      "palette": "color"
+    },
+    {
+      "id": "077",
+      "src": "/assets/book/MAJ%20Pola/Benjamin%20BODIN%207.webp",
+      "category": "polas",
+      "photographer": "Troubadour",
+      "date": "2026-09-15",
+      "type": "photo",
+      "width": 4024,
+      "height": 6048,
+      "palette": "color"
+    },
+    {
+      "id": "078",
+      "src": "/assets/book/MAJ%20Pola/Benjamin%20BODIN%208.webp",
+      "category": "polas",
+      "photographer": "Troubadour",
+      "date": "2026-09-15",
+      "type": "photo",
+      "width": 4024,
+      "height": 6048,
+      "palette": "color"
+    },
+    {
+      "id": "079",
+      "src": "/assets/book/MAJ%20Pola/Benjamin%20BODIN%209.webp",
+      "category": "polas",
+      "photographer": "Troubadour",
+      "date": "2026-09-15",
+      "type": "photo",
+      "width": 4024,
+      "height": 6048,
+      "palette": "color"
+    },
+    {
+      "id": "080",
+      "src": "/assets/book/MAJ%20Pola/Benjamin%20BODIN%2010.webp",
+      "category": "polas",
+      "photographer": "Troubadour",
+      "date": "2026-09-15",
+      "type": "photo",
+      "width": 4024,
+      "height": 6048,
+      "palette": "color"
+    },
+    {
+      "id": "081",
+      "src": "/assets/book/MAJ%20Pola/Benjamin%20BODIN%2011.webp",
+      "category": "polas",
+      "photographer": "Troubadour",
+      "date": "2026-09-15",
+      "type": "photo",
+      "width": 4024,
+      "height": 6048,
+      "palette": "color"
+    },
+    {
+      "id": "082",
+      "src": "/assets/book/MAJ%20Pola/Benjamin%20BODIN%2012.webp",
+      "category": "polas",
+      "photographer": "Troubadour",
+      "date": "2026-09-15",
+      "type": "photo",
+      "width": 4024,
+      "height": 6048,
+      "palette": "color"
+    },
+    {
+      "id": "083",
+      "src": "/assets/book/MAJ%20Pola/Benjamin%20BODIN%2013.webp",
+      "category": "polas",
+      "photographer": "Troubadour",
+      "date": "2026-09-15",
+      "type": "photo",
+      "width": 4024,
+      "height": 6048,
+      "palette": "color"
+    },
+    {
+      "id": "084",
+      "src": "/assets/book/MAJ%20Pola/Benjamin%20BODIN%20-%20Full%20lengh.webp",
+      "category": "polas",
+      "photographer": "Troubadour",
+      "date": "2026-09-15",
+      "type": "photo",
+      "width": 4024,
+      "height": 6048,
       "palette": "color"
     }
   ]
