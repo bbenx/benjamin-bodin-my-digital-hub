@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
+import {
+  isGoogleAnalyticsEnabled,
+  openAnalyticsConsentPreferences,
+} from "@/lib/analytics";
 import { legal } from "@/lib/legal-data";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { SEO_COPY } from "@/lib/seo-config";
@@ -93,6 +97,27 @@ const Legal = () => {
               </a>
               .
             </p>
+          </section>
+
+          <section>
+            <h2 className="text-[10px] tracking-[0.35em] uppercase text-muted-foreground/70 mb-4">
+              Cookies et mesure d’audience
+            </h2>
+            <p className="text-muted-foreground">
+              Ce site peut utiliser Google Analytics (Google Ireland Limited) pour
+              mesurer la fréquentation : pages vues et interactions. Ce traceur
+              n’est déposé qu’après votre acceptation. Le refus n’a aucun effet sur
+              la navigation. Vous pouvez modifier ce choix à tout moment.
+            </p>
+            {isGoogleAnalyticsEnabled() ? (
+              <button
+                type="button"
+                className="mt-4 text-[11px] tracking-[0.25em] uppercase text-primary/80 hover:text-primary transition-colors"
+                onClick={() => openAnalyticsConsentPreferences()}
+              >
+                Gérer les cookies
+              </button>
+            ) : null}
           </section>
         </div>
 

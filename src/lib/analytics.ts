@@ -1,9 +1,19 @@
 /**
- * Suivi des navigations SPA (premier chargement = balise dans index.html).
+ * Google Analytics 4, chargé seulement après consentement.
  * VITE_GA_MEASUREMENT_ID doit être défini au build (local .env + Vercel).
  *
  * Événements personnalisés : voir Temps réel / Engagement → Événements dans GA4.
  */
+
+const CONSENT_STORAGE_KEY = "bb-analytics-consent";
+
+/** Choix enregistré (acceptation ou refus). */
+export const ANALYTICS_CONSENT_EVENT = "bb-analytics-consent";
+
+/** Demande d’ouvrir à nouveau la bannière (pied de page, mentions légales). */
+export const OPEN_ANALYTICS_CONSENT_EVENT = "bb-open-analytics-consent";
+
+export type AnalyticsConsent = "granted" | "denied";
 
 declare global {
   interface Window {
@@ -15,6 +25,122 @@ declare global {
 const getMeasurementId = () =>
   import.meta.env.VITE_GA_MEASUREMENT_ID?.trim() || "";
 
+let analyticsScriptRequested = false;
+
+export function isGoogleAnalyticsEnabled(): boolean {
+  return Boolean(getMeasurementId());
+}
+
+export function getAnalyticsConsent(): AnalyticsConsent | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const value = localStorage.getItem(CONSENT_STORAGE_KEY);
+    if (value === "granted" || value === "denied") return value;
+  } catch {
+    return null;
+  }
+  return null;
+}
+
+function gaDisableKey(id: string) {
+  return `ga-disable-${id}`;
+}
+
+function setGoogleAnalyticsDisabled(disabled: boolean) {
+  const id = getMeasurementId();
+  if (!id || typeof window === "undefined") return;
+  (window as unknown as Record<string, boolean>)[gaDisableKey(id)] = disabled;
+}
+
+function clearGoogleAnalyticsCookies() {
+  if (typeof document === "undefined") return;
+  const hostname = window.location.hostname;
+  const domains = new Set<string>(["", hostname, `.${hostname}`]);
+  const parts = hostname.split(".");
+  if (parts.length >= 2) {
+    domains.add(`.${parts.slice(-2).join(".")}`);
+  }
+
+  const names = document.cookie
+    .split(";")
+    .map((part) => part.split("=")[0]?.trim() ?? "")
+    .filter(
+      (name) => name === "_ga" || name === "_gid" || name.startsWith("_ga_"),
+    );
+
+  for (const name of names) {
+    for (const domain of domains) {
+      const domainAttr = domain ? `; domain=${domain}` : "";
+      document.cookie = `${name}=; Max-Age=0; path=/${domainAttr}`;
+    }
+  }
+}
+
+export function setAnalyticsConsent(value: AnalyticsConsent): void {
+  try {
+    localStorage.setItem(CONSENT_STORAGE_KEY, value);
+  } catch {
+    // Stockage indisponible : le choix s’applique au moins à cette page.
+  }
+
+  if (value === "denied") {
+    setGoogleAnalyticsDisabled(true);
+    clearGoogleAnalyticsCookies();
+  } else {
+    setGoogleAnalyticsDisabled(false);
+  }
+
+  window.dispatchEvent(
+    new CustomEvent(ANALYTICS_CONSENT_EVENT, { detail: value }),
+  );
+}
+
+export function openAnalyticsConsentPreferences(): void {
+  window.dispatchEvent(new Event(OPEN_ANALYTICS_CONSENT_EVENT));
+}
+
+/** Sans accord enregistré, bloque la mesure et retire d’éventuels cookies GA déjà posés. */
+export function enforceAnalyticsConsent(): void {
+  if (getAnalyticsConsent() === "granted") return;
+  setGoogleAnalyticsDisabled(true);
+  clearGoogleAnalyticsCookies();
+}
+
+function canTrack(): boolean {
+  return (
+    isGoogleAnalyticsEnabled() &&
+    getAnalyticsConsent() === "granted" &&
+    typeof window !== "undefined" &&
+    typeof window.gtag === "function"
+  );
+}
+
+/** Injecte gtag.js une seule fois, puis envoie la page courante. */
+export function loadGoogleAnalytics(pagePath: string): void {
+  const id = getMeasurementId();
+  if (!id || typeof window === "undefined") return;
+  if (getAnalyticsConsent() !== "granted") return;
+
+  setGoogleAnalyticsDisabled(false);
+
+  if (!analyticsScriptRequested) {
+    analyticsScriptRequested = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() {
+      // La bibliothèque gtag lit l’objet `arguments`, pas un tableau.
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer?.push(arguments as unknown);
+    };
+    window.gtag("js", new Date());
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
+    document.head.appendChild(script);
+  }
+
+  trackPageView(pagePath);
+}
+
 type EngagementParams = Record<
   string,
   string | number | boolean | undefined | null
@@ -25,8 +151,7 @@ export function trackEngagement(
   eventName: string,
   params?: EngagementParams,
 ): void {
-  const id = getMeasurementId();
-  if (!id || typeof window === "undefined" || !window.gtag) return;
+  if (!canTrack() || !window.gtag) return;
 
   const payload = Object.fromEntries(
     Object.entries(params ?? {}).filter(
@@ -37,13 +162,9 @@ export function trackEngagement(
   window.gtag("event", eventName, payload);
 }
 
-export function isGoogleAnalyticsEnabled(): boolean {
-  return Boolean(getMeasurementId());
-}
-
 export function trackPageView(pagePath: string): void {
   const id = getMeasurementId();
-  if (!id || typeof window === "undefined" || !window.gtag) return;
+  if (!id || !canTrack() || !window.gtag) return;
 
   window.gtag("config", id, {
     page_path: pagePath,

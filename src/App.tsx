@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { CookieConsent } from "@/components/CookieConsent";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { Layout } from "@/components/layout/Layout";
 import { QueryProvider } from "@/providers/QueryProvider";
@@ -58,6 +59,7 @@ const App = () => (
       <DeferredUi />
       <BrowserRouter>
         <GoogleAnalytics />
+        <CookieConsent />
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Index />} />

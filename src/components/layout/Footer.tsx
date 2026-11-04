@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
-import { trackLegalFooterClick } from "@/lib/analytics";
+import {
+  isGoogleAnalyticsEnabled,
+  openAnalyticsConsentPreferences,
+  trackLegalFooterClick,
+} from "@/lib/analytics";
 
 const Footer = () => {
   return (
@@ -19,6 +23,20 @@ const Footer = () => {
           >
             Mentions légales
           </Link>
+          {isGoogleAnalyticsEnabled() ? (
+            <>
+              <span className="text-muted-foreground/25 mx-2 sm:mx-3" aria-hidden>
+                ·
+              </span>
+              <button
+                type="button"
+                className="text-muted-foreground/55 hover:text-primary/85 transition-colors underline-offset-4 hover:underline"
+                onClick={() => openAnalyticsConsentPreferences()}
+              >
+                Cookies
+              </button>
+            </>
+          ) : null}
         </p>
       </div>
     </footer>

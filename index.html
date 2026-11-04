@@ -275,25 +275,6 @@
       });
     </script>
 
-    <!-- Google Analytics : après le chargement pour ne pas concurrencer le hero -->
-    <script>
-      window.addEventListener("load", function () {
-        var id = "%VITE_GA_MEASUREMENT_ID%";
-        if (!id || id.indexOf("VITE_") === 0) return;
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-          dataLayer.push(arguments);
-        }
-        window.gtag = gtag;
-        gtag("js", new Date());
-        gtag("config", id);
-        var s = document.createElement("script");
-        s.async = true;
-        s.src = "https://www.googletagmanager.com/gtag/js?id=" + id;
-        document.head.appendChild(s);
-      });
-    </script>
-
     <script type="module" src="/src/main.tsx"></script>
   </head>
 
