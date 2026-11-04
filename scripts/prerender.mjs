@@ -7,13 +7,6 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const origin = "https://www.benjaminbodin.fr";
 const serverDir = resolve(root, ".prerender");
 
-const expectedHeading = {
-  "/book": "Book",
-  "/videos": "Vidéos",
-  "/cv": "Fiche artiste",
-  "/mentions-legales": "Mentions légales",
-};
-
 export async function prerenderRoutes() {
   rmSync(serverDir, { recursive: true, force: true });
 
@@ -37,18 +30,7 @@ export async function prerenderRoutes() {
     throw new Error("index.html ne contient pas les marqueurs de pré-rendu.");
   }
 
-  for (const route of PRERENDER_ROUTES) {
-    const { html, head, state } = await render(route, manifest);
-    const canonical = `${origin}${route}`;
-    const heading = expectedHeading[route];
-
-    if (!head.includes(canonical)) {
-      throw new Error(`Canonique absente pour ${route}`);
-    }
-    if (!html.includes(heading)) {
-      throw new Error(`Contenu « ${heading} » absent pour ${route}`);
-    }
-
+  const writePage = (route, html, head, state, file) => {
     const stateJson = JSON.stringify(state).replace(/</g, "\\u003c");
     let page = template.replace(
       /<!--route-seo-->[\s\S]*?<!--\/route-seo-->/,
@@ -59,12 +41,36 @@ export async function prerenderRoutes() {
       '<div id="root"></div>',
       `<script>window.__PRERENDER_STATE__=${stateJson}</script>\n    <div id="root">${html}</div>`,
     );
-
-    const file = resolve(root, "dist", route.slice(1), "index.html");
     mkdirSync(dirname(file), { recursive: true });
     writeFileSync(file, page);
     console.log(`prerender ${route}`);
+  };
+
+  for (const route of PRERENDER_ROUTES) {
+    const { html, head, state } = await render(route.path, manifest);
+    const canonical = `${origin}${route.path}`;
+
+    if (!head.includes(canonical)) {
+      throw new Error(`Canonique absente pour ${route.path}`);
+    }
+    if (!html.includes(route.heading)) {
+      throw new Error(`Contenu « ${route.heading} » absent pour ${route.path}`);
+    }
+
+    writePage(route.path, html, head, state, resolve(root, "dist", route.path.slice(1), "index.html"));
   }
+
+  const notFound = await render("/adresse-inconnue", manifest);
+  if (!notFound.head.includes("noindex")) {
+    throw new Error("La page 404 n’est pas en noindex");
+  }
+  if (notFound.head.includes("rel=\"canonical\"")) {
+    throw new Error("La page 404 ne doit pas avoir de canonique");
+  }
+  if (!notFound.html.includes("Page introuvable")) {
+    throw new Error("Contenu de la page 404 absent");
+  }
+  writePage("/404", notFound.html, notFound.head, notFound.state, resolve(root, "dist/404.html"));
 
   rmSync(serverDir, { recursive: true, force: true });
 }

@@ -1,15 +1,18 @@
-import { lazy, Suspense, type ReactNode } from "react";
+import { createElement, lazy, Suspense, type ComponentType, type ReactNode } from "react";
 import { HelmetProvider, type HelmetServerState } from "react-helmet-async";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CookieConsent } from "@/components/CookieConsent";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { Layout } from "@/components/layout/Layout";
+import { PRERENDER_ROUTES, type PrerenderPath } from "@/lib/site-routes";
 import Index from "./pages/Index.tsx";
 
-const Book = lazy(() => import("./pages/Book.tsx"));
-const Cv = lazy(() => import("./pages/Cv.tsx"));
-const Videos = lazy(() => import("./pages/Videos.tsx"));
-const Legal = lazy(() => import("./pages/Legal.tsx"));
+const pages: Record<PrerenderPath, ComponentType> = {
+  "/book": lazy(() => import("./pages/Book.tsx")),
+  "/videos": lazy(() => import("./pages/Videos.tsx")),
+  "/cv": lazy(() => import("./pages/Cv.tsx")),
+  "/mentions-legales": lazy(() => import("./pages/Legal.tsx")),
+};
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 const pageFallback = (
@@ -28,38 +31,17 @@ export function AppRoutes() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Index />} />
-          <Route
-            path="/book"
-            element={
-              <Suspense fallback={pageFallback}>
-                <Book />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/videos"
-            element={
-              <Suspense fallback={pageFallback}>
-                <Videos />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/cv"
-            element={
-              <Suspense fallback={pageFallback}>
-                <Cv />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/mentions-legales"
-            element={
-              <Suspense fallback={pageFallback}>
-                <Legal />
-              </Suspense>
-            }
-          />
+          {PRERENDER_ROUTES.map(({ path }) => (
+            <Route
+              key={path}
+              path={path}
+              element={
+                <Suspense fallback={pageFallback}>
+                  {createElement(pages[path])}
+                </Suspense>
+              }
+            />
+          ))}
         </Route>
         <Route
           path="*"

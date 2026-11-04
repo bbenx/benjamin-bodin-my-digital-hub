@@ -9,7 +9,7 @@ import type { BookManifest } from "./lib/book-manifest";
 import { writePrerenderState, type PrerenderState } from "./lib/prerender-state";
 import type { HelmetServerState } from "react-helmet-async";
 
-export const PRERENDER_ROUTES = ["/book", "/videos", "/cv", "/mentions-legales"] as const;
+export { PRERENDER_ROUTES } from "./lib/site-routes";
 
 type HelmetContext = { helmet?: HelmetServerState };
 
