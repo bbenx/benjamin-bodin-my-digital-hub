@@ -8,12 +8,11 @@ import {
 } from "@/lib/analytics";
 
 const CookieConsent = () => {
-  const [open, setOpen] = useState(
-    () => isGoogleAnalyticsEnabled() && getAnalyticsConsent() === null,
-  );
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (!isGoogleAnalyticsEnabled()) return;
+    if (getAnalyticsConsent() === null) setOpen(true);
 
     const onOpen = () => setOpen(true);
     window.addEventListener(OPEN_ANALYTICS_CONSENT_EVENT, onOpen);

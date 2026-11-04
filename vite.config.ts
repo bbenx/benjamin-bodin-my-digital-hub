@@ -1,6 +1,7 @@
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import { pathToFileURL } from "node:url";
 import type { OutputChunk } from "rollup";
 
 /** Précharge les chunks JS critiques pour accélérer le premier rendu React. */
@@ -42,8 +43,21 @@ function modulePreloadPlugin(): Plugin {
   };
 }
 
+function prerenderPlugin(): Plugin {
+  return {
+    name: "prerender-routes",
+    apply: "build",
+    async closeBundle() {
+      const mod = await import(
+        pathToFileURL(path.resolve(__dirname, "scripts/prerender.mjs")).href
+      );
+      await mod.prerenderRoutes();
+    },
+  };
+}
+
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ isSsrBuild }) => ({
   server: {
     host: "::",
     port: 8080,
@@ -51,7 +65,10 @@ export default defineConfig({
       overlay: false,
     },
   },
-  plugins: [react(), modulePreloadPlugin()],
+  plugins: [
+    react(),
+    ...(isSsrBuild ? [] : [modulePreloadPlugin(), prerenderPlugin()]),
+  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -59,17 +76,24 @@ export default defineConfig({
     dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime"],
   },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (!id.includes("node_modules")) return;
-          if (id.includes("framer-motion")) return "motion";
-          if (id.includes("@tanstack/react-query")) return "query";
-          if (id.includes("react-router")) return "router";
-          if (id.includes("react-dom")) return "react-dom";
-          if (id.includes("/react/") || id.endsWith("/react/index.js")) return "react";
+    rollupOptions: isSsrBuild
+      ? {
+          output: {
+            inlineDynamicImports: true,
+            format: "es",
+          },
+        }
+      : {
+          output: {
+            manualChunks(id) {
+              if (!id.includes("node_modules")) return;
+              if (id.includes("framer-motion")) return "motion";
+              if (id.includes("@tanstack/react-query")) return "query";
+              if (id.includes("react-router")) return "router";
+              if (id.includes("react-dom")) return "react-dom";
+              if (id.includes("/react/") || id.endsWith("/react/index.js")) return "react";
+            },
+          },
         },
-      },
-    },
   },
-});
+}));

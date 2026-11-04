@@ -17,6 +17,7 @@ import {
   type Film,
 } from "@/lib/films-data";
 import { FilmMeta } from "@/components/films/FilmMeta";
+import { SITE_URL } from "@/lib/seo-config";
 
 type FilmCardProps = {
   film: Film;
@@ -51,7 +52,10 @@ const FilmCard = ({ film, isPlaying, onPlay }: FilmCardProps) => {
 
   const embedSrc =
     isPlaying && !useLocalVideo && youtubeId
-      ? youtubeEmbedUrl(youtubeId, window.location.origin)
+      ? youtubeEmbedUrl(
+          youtubeId,
+          typeof window === "undefined" ? SITE_URL : window.location.origin,
+        )
       : null;
 
   return (

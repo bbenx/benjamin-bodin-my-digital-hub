@@ -1,5 +1,5 @@
-import { lazy, Suspense, useEffect, useState } from "react";
-import { HelmetProvider } from "react-helmet-async";
+import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
+import { HelmetProvider, type HelmetServerState } from "react-helmet-async";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CookieConsent } from "@/components/CookieConsent";
@@ -52,63 +52,85 @@ function DeferredUi() {
   );
 }
 
-const App = () => (
-  <HelmetProvider>
-    <QueryProvider>
-      <TooltipProvider>
-      <DeferredUi />
-      <BrowserRouter>
-        <GoogleAnalytics />
-        <CookieConsent />
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Index />} />
-            <Route
-              path="/book"
-              element={
-                <Suspense fallback={pageFallback}>
-                  <Book />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/videos"
-              element={
-                <Suspense fallback={pageFallback}>
-                  <Videos />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/cv"
-              element={
-                <Suspense fallback={pageFallback}>
-                  <Cv />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/mentions-legales"
-              element={
-                <Suspense fallback={pageFallback}>
-                  <Legal />
-                </Suspense>
-              }
-            />
-          </Route>
+export function AppRoutes() {
+  return (
+    <>
+      <GoogleAnalytics />
+      <CookieConsent />
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Index />} />
           <Route
-            path="*"
+            path="/book"
             element={
-              <Suspense fallback={notFoundFallback}>
-                <NotFound />
+              <Suspense fallback={pageFallback}>
+                <Book />
               </Suspense>
             }
           />
-        </Routes>
-      </BrowserRouter>
-      </TooltipProvider>
-    </QueryProvider>
-  </HelmetProvider>
+          <Route
+            path="/videos"
+            element={
+              <Suspense fallback={pageFallback}>
+                <Videos />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/cv"
+            element={
+              <Suspense fallback={pageFallback}>
+                <Cv />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/mentions-legales"
+            element={
+              <Suspense fallback={pageFallback}>
+                <Legal />
+              </Suspense>
+            }
+          />
+        </Route>
+        <Route
+          path="*"
+          element={
+            <Suspense fallback={notFoundFallback}>
+              <NotFound />
+            </Suspense>
+          }
+        />
+      </Routes>
+    </>
+  );
+}
+
+export function AppProviders({
+  children,
+  helmetContext,
+}: {
+  children: ReactNode;
+  helmetContext?: { helmet?: HelmetServerState };
+}) {
+  return (
+    <HelmetProvider context={helmetContext}>
+      <QueryProvider>
+        <TooltipProvider>
+          <DeferredUi />
+          {children}
+        </TooltipProvider>
+      </QueryProvider>
+    </HelmetProvider>
+  );
+}
+
+const App = () => (
+  <AppProviders>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  </AppProviders>
 );
 
 export default App;

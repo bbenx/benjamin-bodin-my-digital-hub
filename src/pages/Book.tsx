@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Separator } from "@/components/ui/separator";
 import { BookFilters } from "@/components/book/BookFilters";
@@ -15,9 +15,13 @@ import {
   type BookSortOrder,
 } from "@/lib/book-manifest";
 import { PageSeo } from "@/components/seo/PageSeo";
+import { createPageRandom } from "@/lib/prerender-state";
 import { SEO_COPY } from "@/lib/seo-config";
 
 function BookPage() {
+  const randomRef = useRef<(() => number) | null>(null);
+  if (!randomRef.current) randomRef.current = createPageRandom();
+
   const [activeCategory, setActiveCategory] = useState("all");
   const [activePalette, setActivePalette] = useState<"all" | "bw" | "color">(
     "all",
@@ -58,7 +62,7 @@ function BookPage() {
       });
     } else if (activeCategory === "all") {
       for (let i = items.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
+        const j = Math.floor(randomRef.current() * (i + 1));
         [items[i], items[j]] = [items[j], items[i]];
       }
     }
