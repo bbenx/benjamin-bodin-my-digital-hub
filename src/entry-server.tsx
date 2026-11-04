@@ -1,14 +1,12 @@
 /// <reference types="node" />
 import { PassThrough } from "node:stream";
 import type { ReactElement } from "react";
-import { dehydrate } from "@tanstack/react-query";
 import { renderToPipeableStream } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
 import { AppProviders, AppRoutes } from "./App";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import type { BookManifest } from "./lib/book-manifest";
 import { writePrerenderState, type PrerenderState } from "./lib/prerender-state";
-import { queryClient } from "./providers/QueryProvider";
 import type { HelmetServerState } from "react-helmet-async";
 
 export const PRERENDER_ROUTES = ["/book", "/videos", "/cv", "/mentions-legales"] as const;
@@ -52,11 +50,10 @@ function renderHtml(element: ReactElement): Promise<string> {
 }
 
 export async function render(url: string, manifest: BookManifest) {
-  queryClient.clear();
-  queryClient.setQueryData(["book-manifest"], manifest);
-
   const bookOrderSeed = Math.floor(Math.random() * 2_000_000_000) + 1;
-  writePrerenderState({ bookOrderSeed });
+  const state: PrerenderState =
+    url === "/book" ? { bookOrderSeed, bookManifest: manifest } : {};
+  writePrerenderState(state);
 
   const helmetContext: HelmetContext = {};
 
@@ -78,13 +75,6 @@ export async function render(url: string, manifest: BookManifest) {
       .map((part) => part.toString().trim())
       .filter(Boolean)
       .join("\n    ");
-
-    const state: PrerenderState = {
-      bookOrderSeed,
-      queryState: dehydrate(queryClient, {
-        shouldDehydrateQuery: (query) => query.queryKey[0] === "book-manifest",
-      }),
-    };
 
     return { html, head, state };
   } finally {

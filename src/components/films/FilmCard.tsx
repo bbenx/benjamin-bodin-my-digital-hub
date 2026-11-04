@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { trackFilmPlay } from "@/lib/analytics";
 import {
-  fetchYoutubeViewCount,
   formatYoutubeViewCount,
+  useYoutubeViewCount,
 } from "@/lib/youtube-views";
 import { FilmLocalVideo } from "@/components/films/FilmLocalVideo";
 import {
@@ -32,13 +31,7 @@ const FilmCard = ({ film, isPlaying, onPlay }: FilmCardProps) => {
   const posterSrc = filmPosterSrc(film);
   const [posterFailed, setPosterFailed] = useState(false);
 
-  const { data: liveViewCount } = useQuery({
-    queryKey: ["youtube-view-count", youtubeId],
-    queryFn: () => fetchYoutubeViewCount(youtubeId!),
-    enabled: Boolean(youtubeId),
-    staleTime: 1000 * 60 * 60,
-    retry: false,
-  });
+  const liveViewCount = useYoutubeViewCount(youtubeId);
 
   const viewCount = liveViewCount ?? film.viewCount ?? null;
   const viewCountLabel =

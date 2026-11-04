@@ -13,7 +13,7 @@ import { ArrowRight } from "lucide-react";
 import { trackViewFullBookClick } from "@/lib/analytics";
 import {
   bookMediaAltText,
-  fetchBookManifest,
+  loadBookManifest,
   itemCategoryIds,
   itemPalette,
   type BookManifest,
@@ -100,7 +100,7 @@ const GallerySection = () => {
 
   useEffect(() => {
     let cancelled = false;
-    void fetchBookManifest()
+    void loadBookManifest()
       .then((data) => {
         if (!cancelled) setManifest(data);
       })

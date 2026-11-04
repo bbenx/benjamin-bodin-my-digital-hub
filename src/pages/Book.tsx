@@ -1,5 +1,4 @@
-import { useMemo, useRef, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { BookFilters } from "@/components/book/BookFilters";
 import { BookGallery } from "@/components/book/BookGallery";
@@ -9,14 +8,45 @@ import {
   trackBookLightboxOpen,
 } from "@/lib/analytics";
 import {
-  fetchBookManifest,
+  loadBookManifest,
+  rememberBookManifest,
   itemCategoryIds,
   itemPalette,
+  type BookManifest,
   type BookSortOrder,
 } from "@/lib/book-manifest";
 import { PageSeo } from "@/components/seo/PageSeo";
-import { createPageRandom } from "@/lib/prerender-state";
+import { createPageRandom, readPrerenderState } from "@/lib/prerender-state";
 import { SEO_COPY } from "@/lib/seo-config";
+
+function useBookManifest() {
+  const prerendered = readPrerenderState()?.bookManifest;
+  const [manifest, setManifest] = useState<BookManifest | undefined>(() => {
+    if (prerendered) rememberBookManifest(prerendered);
+    return prerendered;
+  });
+  const [isLoading, setIsLoading] = useState(prerendered == null);
+
+  useEffect(() => {
+    if (prerendered) return;
+    let cancelled = false;
+    loadBookManifest()
+      .then((data) => {
+        if (!cancelled) setManifest(data);
+      })
+      .catch(() => {
+        if (!cancelled) setManifest(undefined);
+      })
+      .finally(() => {
+        if (!cancelled) setIsLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [prerendered]);
+
+  return { manifest, isLoading };
+}
 
 function BookPage() {
   const randomRef = useRef<(() => number) | null>(null);
@@ -29,10 +59,7 @@ function BookPage() {
   const [sortOrder, setSortOrder] = useState<BookSortOrder | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  const { data: manifest, isLoading } = useQuery({
-    queryKey: ["book-manifest"],
-    queryFn: fetchBookManifest,
-  });
+  const { manifest, isLoading } = useBookManifest();
 
   const filteredItems = useMemo(() => {
     if (!manifest) return [];

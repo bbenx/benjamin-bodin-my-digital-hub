@@ -1,8 +1,8 @@
-import type { DehydratedState } from "@tanstack/react-query";
+import type { BookManifest } from "@/lib/book-manifest";
 
 export type PrerenderState = {
-  bookOrderSeed: number;
-  queryState?: DehydratedState;
+  bookOrderSeed?: number;
+  bookManifest?: BookManifest;
 };
 
 const globalState = globalThis as typeof globalThis & {

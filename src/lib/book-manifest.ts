@@ -33,6 +33,30 @@ export async function fetchBookManifest(): Promise<BookManifest> {
   return res.json();
 }
 
+let cachedManifest: BookManifest | undefined;
+let manifestRequest: Promise<BookManifest> | undefined;
+
+export function rememberBookManifest(manifest: BookManifest) {
+  cachedManifest = manifest;
+}
+
+/** Une seule requête par session, partagée entre l’accueil et le book. */
+export function loadBookManifest(): Promise<BookManifest> {
+  if (cachedManifest) return Promise.resolve(cachedManifest);
+  if (!manifestRequest) {
+    manifestRequest = fetchBookManifest()
+      .then((data) => {
+        cachedManifest = data;
+        return data;
+      })
+      .catch((error: unknown) => {
+        manifestRequest = undefined;
+        throw error;
+      });
+  }
+  return manifestRequest;
+}
+
 export function itemCategoryIds(item: Pick<BookMediaItem, "category">): string[] {
   const c = item.category;
   return Array.isArray(c) ? c : [c];

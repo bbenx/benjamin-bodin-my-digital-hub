@@ -24,7 +24,6 @@ function modulePreloadPlugin(): Plugin {
           if (/^react-dom-/.test(chunk.fileName)) return true;
           if (/^react-[^/]+\.js$/.test(chunk.fileName)) return true;
           if (/^router-/.test(chunk.fileName)) return true;
-          if (/^query-/.test(chunk.fileName)) return false;
           return false;
         };
 
@@ -88,7 +87,6 @@ export default defineConfig(({ isSsrBuild }) => ({
             manualChunks(id) {
               if (!id.includes("node_modules")) return;
               if (id.includes("framer-motion")) return "motion";
-              if (id.includes("@tanstack/react-query")) return "query";
               if (id.includes("react-router")) return "router";
               if (id.includes("react-dom")) return "react-dom";
               if (id.includes("/react/") || id.endsWith("/react/index.js")) return "react";
