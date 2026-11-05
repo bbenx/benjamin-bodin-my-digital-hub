@@ -41,22 +41,16 @@ const CookieConsent = () => {
     <div
       role="dialog"
       aria-modal="false"
-      aria-labelledby="cookie-consent-title"
+      aria-label="Cookies"
       className="fixed inset-x-0 bottom-0 z-[60] border-t border-border/60 bg-background/95 px-6 pt-4 shadow-[0_-12px_40px_rgba(0,0,0,0.35)] backdrop-blur-md pb-[max(1rem,env(safe-area-inset-bottom))]"
     >
       <div className="mx-auto flex max-w-6xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div className="max-w-2xl">
-          <p
-            id="cookie-consent-title"
-            className="text-[10px] tracking-[0.28em] uppercase text-muted-foreground/80 mb-2"
-          >
-            Cookies
-          </p>
           <p className="text-sm font-light leading-relaxed text-foreground/80">
             Ce site utilise des cookies pour mesurer son audience. Vous pouvez les
             accepter ou les refuser.{" "}
             <Link
-              to="/mentions-legales"
+              to="/mentions-legales#cookies"
               className="text-primary/80 underline-offset-4 hover:text-primary hover:underline"
             >
               En savoir plus

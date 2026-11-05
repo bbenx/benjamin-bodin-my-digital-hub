@@ -99,7 +99,7 @@ const Legal = () => {
             </p>
           </section>
 
-          <section>
+          <section id="cookies" className="scroll-mt-page">
             <h2 className="text-[10px] tracking-[0.35em] uppercase text-muted-foreground/70 mb-4">
               Cookies et mesure d’audience
             </h2>
