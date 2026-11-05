@@ -50,11 +50,11 @@ const CookieConsent = () => {
             id="cookie-consent-title"
             className="text-[10px] tracking-[0.28em] uppercase text-muted-foreground/80 mb-2"
           >
-            Mesure d’audience
+            Cookies
           </p>
           <p className="text-sm font-light leading-relaxed text-foreground/80">
-            Google Analytics n’est chargé que si vous l’acceptez. Aucun cookie de
-            mesure n’est déposé avant ce choix.{" "}
+            Ce site utilise des cookies pour mesurer son audience. Vous pouvez les
+            accepter ou les refuser.{" "}
             <Link
               to="/mentions-legales"
               className="text-primary/80 underline-offset-4 hover:text-primary hover:underline"
