@@ -16,7 +16,10 @@ export interface BookMediaItem {
   /** N&B ou couleur — filtre Book uniquement, non affiché sur les vignettes. */
   palette?: BookPalette;
   photographer: string;
+  /** Jour du shooting. */
   date: string;
+  /** Jour de mise en ligne. Le tri du book s’en sert quand il est renseigné. */
+  published?: string;
   type: "photo" | "video";
   width: number;
   height: number;

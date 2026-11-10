@@ -5,6 +5,8 @@ import type { BookMediaItem } from "@/lib/book-manifest";
 interface BookGalleryProps {
   items: BookMediaItem[];
   isLoading: boolean;
+  /** Tri par date : ordre de lecture gauche-droite, pas le remplissage par colonnes. */
+  readingOrder?: boolean;
   categoryLabelById: Record<string, string>;
   onItemClick: (index: number) => void;
 }
@@ -12,6 +14,7 @@ interface BookGalleryProps {
 const BookGallery = ({
   items,
   isLoading,
+  readingOrder = false,
   categoryLabelById,
   onItemClick,
 }: BookGalleryProps) => {
@@ -48,6 +51,21 @@ const BookGallery = ({
         <p className="text-muted-foreground text-sm tracking-wider uppercase">
           Aucune photo dans cette catégorie
         </p>
+      </div>
+    );
+  }
+
+  if (readingOrder) {
+    return (
+      <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-6 px-4 py-8 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map((item, index) => (
+          <BookItem
+            key={item.id}
+            item={item}
+            categoryLabelById={categoryLabelById}
+            onClick={() => onItemClick(index)}
+          />
+        ))}
       </div>
     );
   }

@@ -16,7 +16,7 @@ import {
   type BookSortOrder,
 } from "@/lib/book-manifest";
 import { PageSeo } from "@/components/seo/PageSeo";
-import { pinLatestPublished } from "@/lib/book-order";
+import { compareByPublication, pinLatestPublished } from "@/lib/book-order";
 import { createPageRandom, readPrerenderState } from "@/lib/prerender-state";
 import { SEO_COPY } from "@/lib/seo-config";
 
@@ -80,14 +80,7 @@ function BookPage() {
     }
 
     if (sortOrder === "newest" || sortOrder === "oldest") {
-      items.sort((a, b) => {
-        const byDate =
-          sortOrder === "newest"
-            ? b.date.localeCompare(a.date)
-            : a.date.localeCompare(b.date);
-        if (byDate !== 0) return byDate;
-        return a.id.localeCompare(b.id, undefined, { numeric: true });
-      });
+      items.sort((a, b) => compareByPublication(a, b, sortOrder));
     } else if (activeCategory === "all") {
       items = pinLatestPublished(items, randomRef.current);
     }
@@ -177,6 +170,7 @@ function BookPage() {
       <BookGallery
         items={filteredItems}
         isLoading={isLoading}
+        readingOrder={sortOrder === "newest" || sortOrder === "oldest"}
         categoryLabelById={categoryLabelById}
         onItemClick={handleGalleryItemClick}
       />
