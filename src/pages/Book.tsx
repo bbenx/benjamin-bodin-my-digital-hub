@@ -16,6 +16,7 @@ import {
   type BookSortOrder,
 } from "@/lib/book-manifest";
 import { PageSeo } from "@/components/seo/PageSeo";
+import { pinLatestPublished } from "@/lib/book-order";
 import { createPageRandom, readPrerenderState } from "@/lib/prerender-state";
 import { SEO_COPY } from "@/lib/seo-config";
 
@@ -88,10 +89,7 @@ function BookPage() {
         return a.id.localeCompare(b.id, undefined, { numeric: true });
       });
     } else if (activeCategory === "all") {
-      for (let i = items.length - 1; i > 0; i--) {
-        const j = Math.floor(randomRef.current() * (i + 1));
-        [items[i], items[j]] = [items[j], items[i]];
-      }
+      items = pinLatestPublished(items, randomRef.current);
     }
 
     return items;
