@@ -679,6 +679,50 @@
       "width": 4024,
       "height": 6048,
       "palette": "color"
+    },
+    {
+      "id": "085",
+      "src": "/assets/book/Mariage%20Percey/DSC_4121.webp",
+      "category": "portrait",
+      "photographer": "ngkshoot",
+      "date": "2026-10-11",
+      "type": "photo",
+      "width": 3882,
+      "height": 6048,
+      "palette": "color"
+    },
+    {
+      "id": "086",
+      "src": "/assets/book/Mariage%20Percey/DSC_4122.webp",
+      "category": "portrait",
+      "photographer": "ngkshoot",
+      "date": "2026-10-11",
+      "type": "photo",
+      "width": 4032,
+      "height": 6048,
+      "palette": "color"
+    },
+    {
+      "id": "087",
+      "src": "/assets/book/Mariage%20Percey/DSC_4124.webp",
+      "category": "portrait",
+      "photographer": "ngkshoot",
+      "date": "2026-10-11",
+      "type": "photo",
+      "width": 4032,
+      "height": 6048,
+      "palette": "color"
+    },
+    {
+      "id": "088",
+      "src": "/assets/book/Mariage%20Percey/DSC_4128.webp",
+      "category": "portrait",
+      "photographer": "ngkshoot",
+      "date": "2026-10-11",
+      "type": "photo",
+      "width": 4033,
+      "height": 6048,
+      "palette": "bw"
     }
   ]
 }
